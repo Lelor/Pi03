@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.view.NewProductScreenController">
    <children>
       <Label layoutX="43.0" layoutY="29.0" text="Produto Novo" textFill="#59176b" AnchorPane.topAnchor="29.0">
          <font>
@@ -147,7 +147,7 @@
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="435.0" fitWidth="325.0" layoutX="488.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/guitar_shape.gif" />
+            <Image url="@../../images/guitar_shape.gif" />
          </image>
       </ImageView>
       <Button layoutX="527.0" layoutY="518.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="248.0" text="+ Carrinho">
@@ -155,7 +155,7 @@
             <Font name="Dubai Bold" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="662.0" layoutY="14.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="137.0" text="Voltar">
+      <Button layoutX="638.0" layoutY="12.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Voltar">
          <font>
             <Font name="Dubai Bold" size="14.0" />
          </font>

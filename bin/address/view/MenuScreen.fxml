@@ -17,12 +17,12 @@
                      <children>
                         <TableView layoutX="45.0" prefHeight="261.0" prefWidth="760.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn prefWidth="46.0" text="ID" />
-                            <TableColumn prefWidth="334.0" text="Nome" />
-                              <TableColumn minWidth="0.0" prefWidth="108.0" text="Marca" />
-                              <TableColumn prefWidth="84.0" text="Tipo" />
-                              <TableColumn prefWidth="87.0" text="Cor" />
-                              <TableColumn prefWidth="100.0" text="Valor" />
+                            <TableColumn fx:id="newProductID" prefWidth="46.0" text="ID" />
+                            <TableColumn fx:id="newProductName" prefWidth="334.0" text="Nome" />
+                              <TableColumn fx:id="newProductBrand" minWidth="0.0" prefWidth="108.0" text="Marca" />
+                              <TableColumn fx:id="newProductType" prefWidth="84.0" text="Tipo" />
+                              <TableColumn fx:id="newProductColor" prefWidth="87.0" text="Cor" />
+                              <TableColumn fx:id="newProductPrice" prefWidth="100.0" text="Valor" />
                           </columns>
                         </TableView>
                         <Button layoutX="677.0" layoutY="273.0" mnemonicParsing="false" onAction="#addProductHandler" prefHeight="33.0" prefWidth="83.0" text="+ Produto" AnchorPane.rightAnchor="0.0" />
@@ -69,7 +69,7 @@
                   <Font name="Dubai Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="703.0" layoutY="45.0" text=" Sair" textFill="RED">
+            <Label fx:id="lbExit" layoutX="703.0" layoutY="45.0" onMouseClicked="#lbExitHandler" text=" Sair" textFill="RED">
                <font>
                   <Font name="Dubai Bold" size="18.0" />
                </font>

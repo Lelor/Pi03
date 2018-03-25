@@ -6,18 +6,13 @@ import address.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
  
-public class MenuScreenController {
+public class NewProductScreenController {
 	
 	private MainApp mainApp;
 	
     @FXML
-    protected void addProductHandler(ActionEvent event) throws IOException {
-    	mainApp.showNewProductScreen();
-    }
-    
-    @FXML
-    protected void lbExitHandler() throws IOException {
-    	mainApp.showLoginScreen();
+    protected void goBackHandler(ActionEvent event) throws IOException {
+    	mainApp.showMainMenu();;
     }
     
     public void setMainApp(MainApp mainApp){

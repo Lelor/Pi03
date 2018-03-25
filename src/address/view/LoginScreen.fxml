@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.view.LoginController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="343.0" layoutY="59.0" text="Login" textAlignment="CENTER" textFill="#743a94">
+         <font>
+            <Font name="Dubai Bold" size="48.0" />
+         </font>
+      </Label>
+      <HBox layoutX="271.0" layoutY="227.0" spacing="7.0">
+         <children>
+            <Label layoutX="150.0" layoutY="174.0" text="Usuário">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField layoutX="208.0" layoutY="170.0" />
+         </children>
+      </HBox>
+      <HBox layoutX="284.0" layoutY="273.0" spacing="7.0">
+         <children>
+            <Label layoutX="150.0" layoutY="174.0" text="Senha">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <PasswordField />
+         </children>
+      </HBox>
+      <Button layoutX="363.0" layoutY="347.0" mnemonicParsing="false" onAction="#doLogin" text="Entrar">
+         <font>
+            <Font name="Dubai Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

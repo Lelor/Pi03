@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <TabPane layoutX="51.0" layoutY="254.0" prefHeight="339.0" prefWidth="760.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+        <tabs>
+          <Tab text="Produto Novo">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="324.0" prefWidth="760.0">
+                     <children>
+                        <TableView layoutX="45.0" prefHeight="261.0" prefWidth="760.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn prefWidth="46.0" text="ID" />
+                            <TableColumn prefWidth="334.0" text="Nome" />
+                              <TableColumn minWidth="0.0" prefWidth="108.0" text="Marca" />
+                              <TableColumn prefWidth="84.0" text="Tipo" />
+                              <TableColumn prefWidth="87.0" text="Cor" />
+                              <TableColumn prefWidth="100.0" text="Valor" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="677.0" layoutY="273.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="83.0" text="+ Produto" AnchorPane.rightAnchor="0.0" />
+                        <Label layoutX="62.0" layoutY="281.0" text="Duplo click para ver os detalhes no produto" textFill="#806e6e" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Produto Usado">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <HBox layoutX="53.0" layoutY="544.0" spacing="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="544.0">
+         <children>
+            <Button layoutX="53.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="299.0" text="Clientes / Fornecedores / Usuários" />
+            <Button layoutX="330.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Carrinho" />
+            <Button layoutX="419.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="87.0" text="Devolução" />
+            <Button layoutX="519.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="98.0" text="Manutenção" />
+            <Button layoutX="647.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="83.0" text="Serviços" />
+         </children>
+      </HBox>
+      <HBox layoutX="20.0" layoutY="104.0">
+         <children>
+            <TextField layoutX="19.0" layoutY="104.0" prefHeight="25.0" prefWidth="707.0" AnchorPane.leftAnchor="20.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TextField>
+            <Button layoutX="563.0" layoutY="104.0" mnemonicParsing="false" text="Button" />
+         </children>
+      </HBox>
+      <Label alignment="CENTER" layoutX="20.0" layoutY="21.0" prefHeight="46.0" prefWidth="194.0" text="HOME" textAlignment="CENTER" textFill="#9e1111" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="21.0">
+         <font>
+            <Font name="Dubai Bold" size="36.0" />
+         </font>
+      </Label>
+      <HBox layoutX="648.0" layoutY="45.0">
+         <children>
+            <Label layoutX="648.0" layoutY="45.0" text="User  |">
+               <font>
+                  <Font name="Dubai Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="703.0" layoutY="45.0" text=" Sair" textFill="RED">
+               <font>
+                  <Font name="Dubai Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

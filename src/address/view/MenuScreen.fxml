@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.view.MenuScreenController">
    <children>
       <TabPane layoutX="51.0" layoutY="254.0" prefHeight="339.0" prefWidth="760.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
         <tabs>
@@ -26,7 +25,7 @@
                               <TableColumn prefWidth="100.0" text="Valor" />
                           </columns>
                         </TableView>
-                        <Button layoutX="677.0" layoutY="273.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="83.0" text="+ Produto" AnchorPane.rightAnchor="0.0" />
+                        <Button layoutX="677.0" layoutY="273.0" mnemonicParsing="false" onAction="#addProductHandler" prefHeight="33.0" prefWidth="83.0" text="+ Produto" AnchorPane.rightAnchor="0.0" />
                         <Label layoutX="62.0" layoutY="281.0" text="Duplo click para ver os detalhes no produto" textFill="#806e6e" />
                      </children>
                   </AnchorPane>

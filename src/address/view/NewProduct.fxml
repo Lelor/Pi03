@@ -147,7 +147,7 @@
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="435.0" fitWidth="325.0" layoutX="488.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/guitar_shape.gif" />
+            <Image url="@../../../images/guitar_shape.gif" />
          </image>
       </ImageView>
       <Button layoutX="527.0" layoutY="518.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="248.0" text="+ Carrinho">

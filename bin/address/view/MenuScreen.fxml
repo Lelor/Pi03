@@ -48,24 +48,14 @@
             <Button layoutX="647.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="83.0" text="Serviços" />
          </children>
       </HBox>
-      <HBox layoutX="20.0" layoutY="104.0">
+      <HBox layoutX="20.0" layoutY="104.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <children>
-            <TextField layoutX="19.0" layoutY="104.0" prefHeight="25.0" prefWidth="727.0" AnchorPane.leftAnchor="20.0">
+            <TextField layoutX="19.0" layoutY="104.0" prefHeight="25.0" prefWidth="714.0" AnchorPane.leftAnchor="20.0">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </TextField>
-            <Button layoutX="563.0" layoutY="104.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="28.0" style="-fx-background-image: url=@..\\..\\images\\search_icon.png; -fx-background-color: #6e5aaa;">
-               <graphic>
-                  <ImageView fitHeight="18.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/search_icon.png" />
-                     </image>
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                  </ImageView>
-               </graphic></Button>
+            <Button layoutX="563.0" layoutY="104.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="56.0" text="Buscar" />
          </children>
       </HBox>
       <Label alignment="CENTER" layoutX="20.0" layoutY="21.0" prefHeight="46.0" prefWidth="194.0" text="HOME" textAlignment="CENTER" textFill="#9e1111" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="21.0">

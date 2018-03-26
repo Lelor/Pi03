@@ -55,7 +55,7 @@
                   <Insets />
                </HBox.margin>
             </TextField>
-            <Button layoutX="563.0" layoutY="104.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="56.0" style="-fx-background-image: url=@..\\..\\images\\search_icon.png; -fx-background-color: #6e5aaa;" text="Buscar" />
+            <Button layoutX="563.0" layoutY="104.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="56.0" text="Buscar" />
          </children>
       </HBox>
       <Label alignment="CENTER" layoutX="20.0" layoutY="21.0" prefHeight="46.0" prefWidth="194.0" text="HOME" textAlignment="CENTER" textFill="#9e1111" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="21.0">

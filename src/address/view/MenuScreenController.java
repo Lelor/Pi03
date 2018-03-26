@@ -17,7 +17,7 @@ public class MenuScreenController {
     
     @FXML
     protected void lbExitHandler() throws IOException {
-    	mainApp.showLoginScreen();
+    	mainApp.showLoginScreen();;
     }
     
     public void setMainApp(MainApp mainApp){

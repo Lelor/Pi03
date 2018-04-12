@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.layout.Layer?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="470.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
+      <children>
+        <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+            <Layer layoutX="30.0" layoutY="31.0" />
+            <AnchorPane layoutX="30.0" layoutY="93.0" prefHeight="351.0" prefWidth="511.0">
+               <children>
+                  <Label fx:id="lbNomeProduto" layoutX="15.0" layoutY="20.0" text="Nome:" />
+                  <Label fx:id="lbCor" layoutX="15.0" layoutY="60.0" text="Cor:" />
+                  <Label fx:id="lbForn" layoutX="15.0" layoutY="100.0" text="Fornecedor:" />
+                  <Label fx:id="lbAno" layoutX="15.0" layoutY="140.0" text="Ano:" />
+                  <Label fx:id="lbTipo" layoutX="310.0" layoutY="60.0" text="Tipo:" />
+                  <Label fx:id="lbMarca" layoutX="310.0" layoutY="100.0" text="Marca:" />
+                  <Label fx:id="lbDescricaoProduto" layoutX="16.0" layoutY="190.0" text="Descrição:" />
+                  <TextArea fx:id="txtDescricao" layoutX="19.0" layoutY="213.0" prefHeight="119.0" prefWidth="480.0" />
+                  <ComboBox fx:id="cbCor" layoutX="85.0" layoutY="60.0" prefWidth="150.0" />
+                  <ComboBox layoutX="85.0" layoutY="100.0" prefWidth="150.0" />
+                  <ComboBox fx:id="cbTipo" layoutX="350.0" layoutY="60.0" prefWidth="150.0" />
+                  <ComboBox fx:id="cbMarca" layoutX="350.0" layoutY="100.0" prefWidth="150.0" />
+                  <TextField fx:id="txtNomeProduto" layoutX="85.0" layoutY="20.0" prefHeight="25.0" prefWidth="411.0" />
+                  <TextField fx:id="txtAnoProduto" layoutX="85.0" layoutY="140.0" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="40.0" layoutY="31.0" text="Cadastro de Produto">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="50.0" layoutY="460.0" text="Valor de locação p/ dia:" />
+            <TextField fx:id="txtValorLoc" layoutX="185.0" layoutY="460.0" />
+            <ImageView fitHeight="320.0" fitWidth="220.0" layoutX="550.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="imgProduto" />
+               </image>
+            </ImageView>
+            <Button fx:id="btBuscarFoto" layoutX="550.0" layoutY="450.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="220.0" text="Buscar Foto" />
+            <Button fx:id="btSalvarProduto" layoutX="50.0" layoutY="540.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="138.0" text="Cadastrar" />
+            <Button fx:id="btBuscar" layoutX="250.0" layoutY="540.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="138.0" text="Buscar" />
+            <Button fx:id="btLimpar" layoutX="450.0" layoutY="540.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="138.0" text="Limpar" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

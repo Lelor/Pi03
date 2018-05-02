@@ -2,9 +2,10 @@ package address;
 
 import java.io.IOException;
 
+import address.view.AddProductScreenController;
 import address.view.LoginController;
 import address.view.MenuScreenController;
-import address.view.NewProductScreenController;
+import address.view.ProductDetailScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -58,13 +59,13 @@ public class MainApp extends Application{
 	
 	public void showNewProductScreen() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("view\\NewProduct.fxml"));
+        loader.setLocation(MainApp.class.getResource("view\\ProductDetailScreen.fxml"));
         AnchorPane newProductScreen = (AnchorPane) loader.load();
 
         // puts the new product screen inside the root layout.
         rootLayout.setCenter(newProductScreen);
         
-        NewProductScreenController controller = loader.getController();
+        ProductDetailScreenController controller = loader.getController();
         controller.setMainApp(this);
 	}
 	
@@ -77,6 +78,17 @@ public class MainApp extends Application{
         rootLayout.setCenter(loginScreen);
         
         LoginController controller = loader.getController();
+        controller.setMainApp(this);
+	}
+	public void showAddProductScreen() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("view\\AddProductScreen.fxml"));
+        AnchorPane loginScreen = (AnchorPane) loader.load();
+
+        // puts the new product screen inside the root layout.
+        rootLayout.setCenter(loginScreen);
+        
+        AddProductScreenController controller = loader.getController();
         controller.setMainApp(this);
 	}
 }

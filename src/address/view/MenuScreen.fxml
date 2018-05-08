@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.view.MenuScreenController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.view.MenuScreenController">
    <children>
       <TabPane layoutX="51.0" layoutY="254.0" prefHeight="339.0" prefWidth="760.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
         <tabs>
-          <Tab text="Produto Novo">
+          <Tab text="Produto">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="324.0" prefWidth="760.0">
                      <children>
@@ -27,24 +31,21 @@
                           </columns>
                         </TableView>
                         <Button layoutX="677.0" layoutY="273.0" mnemonicParsing="false" onAction="#addProductHandler" prefHeight="33.0" prefWidth="83.0" text="+ Produto" AnchorPane.rightAnchor="0.0" />
-                        <Label layoutX="62.0" layoutY="281.0" text="Duplo click para ver os detalhes no produto" textFill="#806e6e" />
+                        <Label layoutX="60.0" layoutY="280.0" text="Duplo click para ver os detalhes no produto" textFill="#806e6e" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Produto Usado">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
         </tabs>
       </TabPane>
-      <HBox layoutX="53.0" layoutY="544.0" spacing="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="544.0">
+      <HBox layoutX="69.0" layoutY="536.0" prefHeight="40.0" prefWidth="664.0" spacing="20.0" AnchorPane.rightAnchor="67.0" AnchorPane.topAnchor="536.0">
          <children>
-            <Button layoutX="53.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="299.0" text="Clientes / Fornecedores / Usuários" />
-            <Button layoutX="419.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="87.0" text="Devolução" />
-            <Button layoutX="519.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="98.0" text="Manutenção" />
-            <Button layoutX="647.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="83.0" text="Serviços" />
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Clientes" />
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Fornecedores" />
+            <Button layoutX="419.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Devolução" />
+            <Button layoutX="519.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Manutenção" />
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Usuários" />
+            <Button layoutX="647.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Relatórios" />
          </children>
       </HBox>
       <HBox layoutX="20.0" layoutY="104.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">

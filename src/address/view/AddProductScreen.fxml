@@ -16,9 +16,9 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="40.0" layoutY="30.0" prefHeight="42.0" prefWidth="226.0" text="Cadastro de Produto" textFill="#59176b" AnchorPane.topAnchor="30.0">
+      <Label layoutX="40.0" layoutY="30.0" prefHeight="42.0" prefWidth="241.0" text="Cadastro de Produto" textFill="#59176b" AnchorPane.topAnchor="30.0">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
       <Pane layoutX="40.0" layoutY="80.0" prefHeight="365.0" prefWidth="430.0" style="-fx-border-color: black; -fx-background-color: #eeeeee;">
@@ -103,6 +103,11 @@
       </Label>
       <TextField fx:id="txtMarca1" layoutX="190.0" layoutY="465.0" />
       <Button fx:id="btCadastrar" layoutX="40.0" layoutY="540.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Cadastrar">
+         <font>
+            <Font name="Dubai Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btLimpar" layoutX="210.0" layoutY="540.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Limpar">
          <font>
             <Font name="Dubai Bold" size="14.0" />
          </font>

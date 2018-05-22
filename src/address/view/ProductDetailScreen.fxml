@@ -23,64 +23,71 @@
       </Label>
       <Pane layoutX="40.0" layoutY="80.0" prefHeight="365.0" prefWidth="430.0" style="-fx-border-color: black; -fx-background-color: #eeeeee;">
          <children>
-            <GridPane layoutX="10.0" layoutY="15.0" prefHeight="326.0" prefWidth="378.0">
+            <GridPane layoutX="10.0" layoutY="15.0" prefHeight="349.0" prefWidth="378.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="85.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="160.0" />
               </columnConstraints>
               <rowConstraints>
+                  <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="lbNome" text="Nome:">
+                  <Label fx:id="lbNome" text="Nome:" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbCor" text="Cor:" GridPane.rowIndex="1">
+                  <Label fx:id="lbCor" text="Cor:" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbForn" text="Fornecedor:" GridPane.rowIndex="2">
+                  <Label fx:id="lbForn" text="Fornecedor:" GridPane.rowIndex="3">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtNome" editable="false" GridPane.columnIndex="1" />
-                  <TextField fx:id="txtCor" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="cbFornecedor" prefHeight="25.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="lbAno" text="Ano:" GridPane.rowIndex="3">
+                  <TextField fx:id="txtNome" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtCor" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="cbFornecedor" prefHeight="25.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="lbAno" text="Ano:" GridPane.rowIndex="4">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtAno" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label fx:id="lbTipo" text="Tipo:" GridPane.rowIndex="4">
+                  <TextField fx:id="txtAno" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="lbTipo" text="Tipo:" GridPane.rowIndex="5">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtTipo" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label fx:id="lbMarca" text="Marca:" GridPane.rowIndex="5">
+                  <TextField fx:id="txtTipo" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="lbMarca" text="Marca:" GridPane.rowIndex="6">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtMarca" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Label fx:id="lbDescricao" text="Descrição:" GridPane.rowIndex="6">
+                  <TextField fx:id="txtMarca" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="lbDescricao" text="Descrição:" GridPane.rowIndex="7">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="txtDescricao" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <ScrollBar orientation="VERTICAL" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextArea fx:id="txtDescricao" editable="false" prefHeight="50.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <ScrollBar orientation="VERTICAL" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label fx:id="lbNumSerie" text="Nº de serie:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtNumSerie" editable="false" GridPane.columnIndex="1" />
                </children>
             </GridPane>
          </children>

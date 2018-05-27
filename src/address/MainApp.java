@@ -57,18 +57,6 @@ public class MainApp extends Application{
         menuScreenController.setMainApp(this);
 	}
 	
-	public void showNewProductScreen() throws IOException{
-		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("view\\ProductDetailScreen.fxml"));
-        AnchorPane newProductScreen = (AnchorPane) loader.load();
-
-        // puts the new product screen inside the root layout.
-        rootLayout.setCenter(newProductScreen);
-        
-        ProductDetailScreenController controller = loader.getController();
-        controller.setMainApp(this);
-	}
-	
 	public void showLoginScreen() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("view\\LoginScreen.fxml"));
@@ -89,6 +77,18 @@ public class MainApp extends Application{
         rootLayout.setCenter(loginScreen);
         
         AddProductScreenController controller = loader.getController();
+        controller.setMainApp(this);
+	}
+	
+	public void showProductDetailScreen(int id) throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("view\\ProductDetailScreen.fxml"));
+        AnchorPane loginScreen = (AnchorPane) loader.load();
+
+        // puts the new product screen inside the root layout.
+        rootLayout.setCenter(loginScreen);
+        
+        ProductDetailScreenController controller = loader.getController();
         controller.setMainApp(this);
 	}
 }

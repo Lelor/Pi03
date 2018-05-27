@@ -134,21 +134,7 @@ public class AddProductScreenController implements Initializable {
         		
         		JOptionPane.showMessageDialog(null, inDAO.insertInstrument(in));
         		
-        		// reseta campos
-        		txtNome.clear();
-        		txtNumSerie.clear();
-        		txtValorCompra.clear();
-        		txtValorLocacao.clear();
-        		txtAno.clear();
-        		cbCor.setValue("");
-        		cbTipo.setValue("");
-        		cbMarca.setValue("");
-        		cbFornecedor.setValue("");
-        		
-        		// seta imagem default ------
-        		File fileDefault = new File("src/images/instruments/guitar_shape.jpg");
-                Image imageDefault = new Image(fileDefault.toURI().toString());
-                imgInstrument.setImage(imageDefault);
+        		clearFields(event);
 
         		
 			} catch (Exception e) {
@@ -163,6 +149,25 @@ public class AddProductScreenController implements Initializable {
     @FXML
     protected void goBackHandler(ActionEvent event) throws IOException {
     	mainApp.showMainMenu();
+    }
+    
+    @FXML
+    protected void clearFields(ActionEvent event) throws IOException {
+    	// reseta campos
+		txtNome.clear();
+		txtNumSerie.clear();
+		txtValorCompra.clear();
+		txtValorLocacao.clear();
+		txtAno.clear();
+		cbCor.setValue("");
+		cbTipo.setValue("");
+		cbMarca.setValue("");
+		cbFornecedor.setValue("");
+		
+		// seta imagem default ------
+		File fileDefault = new File("src/images/instruments/guitar_shape.jpg");
+        Image imageDefault = new Image(fileDefault.toURI().toString());
+        imgInstrument.setImage(imageDefault);
     }
     
     public void setMainApp(MainApp mainApp){

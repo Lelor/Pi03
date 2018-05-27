@@ -112,7 +112,7 @@
             <Font name="Dubai Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btLimpar" layoutX="41.0" layoutY="499.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Limpar">
+      <Button fx:id="btLimpar" layoutX="41.0" layoutY="499.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="0.0" prefWidth="137.0" text="Limpar">
          <font>
             <Font name="Dubai Bold" size="14.0" />
          </font>

@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="40.0" layoutY="30.0" prefHeight="42.0" prefWidth="242.0" text="Detalhes de Cliente" textFill="#59176b" AnchorPane.topAnchor="30.0">
+      <Label layoutX="40.0" layoutY="30.0" prefHeight="42.0" prefWidth="273.0" text="Detalhes de Fornecedor" textFill="#59176b" AnchorPane.topAnchor="30.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -40,7 +40,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbCpf" text="CPF:" GridPane.rowIndex="1">
+                  <Label fx:id="lbCnpj" text="CNPJ:" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -51,7 +51,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="txtNome" editable="false" GridPane.columnIndex="1" />
-                  <TextField fx:id="txtCpf" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtCnpj" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label fx:id="lbEmail" text="E-mail:" GridPane.rowIndex="3">
                      <font>
                         <Font size="14.0" />

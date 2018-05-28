@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="40.0" layoutY="30.0" prefHeight="42.0" prefWidth="242.0" text="Detalhes de Cliente" textFill="#59176b" AnchorPane.topAnchor="30.0">
+      <Label layoutX="40.0" layoutY="30.0" prefHeight="42.0" prefWidth="292.0" text="Cadastro de Fornecedor" textFill="#59176b" AnchorPane.topAnchor="30.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -40,7 +40,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbCpf" text="CPF:" GridPane.rowIndex="1">
+                  <Label fx:id="lbCnpj" text="CNPJ:" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -50,28 +50,28 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtNome" editable="false" GridPane.columnIndex="1" />
-                  <TextField fx:id="txtCpf" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtNome" GridPane.columnIndex="1" />
+                  <TextField fx:id="txtCnpj" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label fx:id="lbEmail" text="E-mail:" GridPane.rowIndex="3">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtEmail" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label fx:id="lbCidade" text="Cidade:" GridPane.rowIndex="4">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtCidade" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="txtCidade" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label fx:id="lbEndereco" text="Endereço:" GridPane.rowIndex="5">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="txtEndereco" editable="false" prefHeight="49.0" prefWidth="226.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextArea fx:id="txtEndereco" prefHeight="49.0" prefWidth="226.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <ScrollBar orientation="VERTICAL" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="txtTelefone" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="txtTelefone" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>
@@ -81,22 +81,12 @@
             <Font name="Dubai Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btEditar" layoutX="40.0" layoutY="475.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Editar">
+      <Button fx:id="btCadastrar" layoutX="127.0" layoutY="549.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Cadastrar">
          <font>
             <Font name="Dubai Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btSalvar" disable="true" layoutX="40.0" layoutY="510.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Salvar">
-         <font>
-            <Font name="Dubai Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="btExcluir" layoutX="210.0" layoutY="545.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Excluir">
-         <font>
-            <Font name="Dubai Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="btCancelar" disable="true" layoutX="40.0" layoutY="545.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Cancelar">
+      <Button fx:id="btLimpar" layoutX="297.0" layoutY="549.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Limpar">
          <font>
             <Font name="Dubai Bold" size="14.0" />
          </font>

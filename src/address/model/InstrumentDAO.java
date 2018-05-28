@@ -65,5 +65,13 @@ public class InstrumentDAO {
 		
 		return msg;
 	} 
-
+	
+	public Instrument listInstruments() {
+		
+		Instrument in = new Instrument();
+		
+		
+		
+		return in;
+	}
 }

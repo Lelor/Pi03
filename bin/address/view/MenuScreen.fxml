@@ -60,6 +60,10 @@
             <TableColumn fx:id="availableInstrument" prefWidth="124.0" text="Disponibilidade" />
         </columns>
       </TableView>
-      <Button layoutX="683.0" layoutY="442.0" mnemonicParsing="false" onAction="#showAddProductSceen" prefHeight="25.0" prefWidth="100.0" text="+ Instrumento" />
+      <Button layoutX="643.0" layoutY="442.0" mnemonicParsing="false" onAction="#showAddProductSceen" prefHeight="40.0" prefWidth="136.0" style="-fx-background-color: green;" text="Locar" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+      <Button layoutX="504.0" layoutY="442.0" mnemonicParsing="false" onAction="#showAddProductSceen" prefHeight="40.0" prefWidth="124.0" text="+ Instrumento" />
    </children>
 </AnchorPane>

@@ -51,6 +51,11 @@ public class AddProductScreenController implements Initializable {
 	File fileImage;
 	Path from, to;
 	
+	/**
+	 * Recupera imagem do windows
+	 * @param event
+	 * @throws IOException
+	 */
     @FXML
     protected void getImage(ActionEvent event) throws IOException {
     	
@@ -66,6 +71,7 @@ public class AddProductScreenController implements Initializable {
 
     	try {
     		
+    		// carega imagem no quadrado ------
     		BufferedImage bufferedImage = ImageIO.read(fileImage);
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			imgInstrument.setImage(image);
@@ -87,7 +93,12 @@ public class AddProductScreenController implements Initializable {
 		}
 
     }
-
+    
+    /**
+     * Registra produtos
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void registerProduct(ActionEvent event) throws IOException {
     	
@@ -146,11 +157,21 @@ public class AddProductScreenController implements Initializable {
     	}
     }
     
+    /**
+     * Volta para home
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void goBackHandler(ActionEvent event) throws IOException {
     	mainApp.showMainMenu();
     }
     
+    /**
+     * Limpa campos
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void clearFields(ActionEvent event) throws IOException {
     	// reseta campos

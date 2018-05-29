@@ -3,6 +3,7 @@ package address.view;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 import com.sun.glass.events.MouseEvent;
@@ -10,6 +11,7 @@ import com.sun.glass.ui.Accessible.EventHandler;
 
 import address.MainApp;
 import address.model.Instrument;
+import address.services.ObsLists;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,14 +53,16 @@ public class MenuScreenController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		ObsLists ol = new ObsLists();
+		
 		// configurando as colunas na tabela -----
 		idInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, Integer>("id"));
 		nameInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, String>("nome"));
 		brandInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, String>("marca"));
 		priceInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, BigDecimal>("valorLocacao"));
-		availableInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, String>("ativo"));
+		availableInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, String>("status"));
 		
-		tableView.setItems(getInstrument());
+		tableView.setItems(ol.getListInstrument());
 		
 		// evento de double click na linha
 		tableView.setRowFactory( tv -> {

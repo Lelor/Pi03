@@ -4,21 +4,25 @@ import java.math.BigDecimal;
 
 public class Instrument {
 	
+	/*
+	 * Status 1 = disponivel
+	 * Status 2 = locado
+	 * Status 3 = manutencao
+	 */
 	private int id, numSerie, idFornecedor, idTipo, idMarca, idCor;
-	private String nome, nomeFornecedor, ano, foto, tipo, cor, marca, ativo;
+	private String nome, nomeFornecedor, ano, foto, tipo, cor, marca, ativo, status;
 	private BigDecimal valorCompra, valorLocacao;
 	
 	public Instrument() {
 	}
 	
-	public Instrument(Integer id, String nome, String marca, BigDecimal valorLocacao, String ativo) {
+	public Instrument(Integer id, String nome, String marca, BigDecimal valorLocacao, String status) {
 		this.id = id;
 		this.nome = nome;
 		this.marca = marca;
 		this.valorLocacao = valorLocacao;
-		this.ativo = ativo;
+		this.status = status;
 	}
-	
 	
 	// construtor para cadastrar instrumentos ----
 	public Instrument(int numSerie, String nome, String nomeFornecedor, String ano, String foto, String tipo,
@@ -86,6 +90,22 @@ public class Instrument {
 
 	public String getNome() {
 		return nome;
+	}
+
+	public void setStatus(int status) {
+		
+		if(status == 1) {
+			this.status = "Disponível";
+		}else if(status == 2){
+			this.status = "Locado";
+		}else {
+			this.status = "Manutenção";
+		}
+		
+	}
+	
+	public String getStatus() {
+		return status;
 	}
 
 	public void setNome(String nome) {

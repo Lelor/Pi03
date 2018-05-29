@@ -15,6 +15,37 @@ public class InstrumentDAO {
 	}
 	
 	/**
+	 * Conta numero de linhas que a tabela instrumento possui.
+	 * @return - retorna o total de linhas.
+	 */
+	private int countNumInstrument() {
+		
+		String sql2 = "SELECT COUNT(idInstrumento) AS total FROM instrumento";
+		int countRow = 0;
+		
+		try {
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql2);
+			bd.rs = bd.st.executeQuery();
+			
+			if(bd.rs.next()){
+				countRow = bd.rs.getInt("total");
+			}
+			
+		} catch (SQLException e) {
+			
+			msg = "Falha ao recuperar lista! =[";
+			System.out.println(e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return countRow;
+	}
+	
+	/**
 	 * Insere instrumento no banco.
 	 * @param in - Instrumento a ser inserido.
 	 * @return - Mensagem de erro ou sucesso.
@@ -64,6 +95,63 @@ public class InstrumentDAO {
 		}
 		
 		return msg;
-	} 
+	}
+	
+	/**
+	 * Retorna uma array contendo todos os intrumentos listados.
+	 * @return in - array de instrumentos.
+	 */
+	public Instrument[] listInstrument() {
+		
+		sql = "SELECT idInstrumento, numSerie, i.nome as nomeI, valorCompra, valorLocacao, ano, statusIn as status,"
+				+ " f.nome as nomeF, c.nome AS nomeC, t.nome as nomeT, m.nome as nomeM"
+				+ " FROM instrumento i, cor c, tipo t, marca m, fornecedor f"
+				+ " WHERE i.idCor = c.id AND i.idTipo = t.id AND i.idMarca = m.id AND i.idFornecedor = f.idFornecedor AND i.ativo = 1";
+		
+		int i = 0;
+		int numRow = countNumInstrument();
+		Instrument[] in = new Instrument[5];
+		
+		try {
+			
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.rs = bd.st.executeQuery();
+			
+			while(bd.rs.next()) {
+				
+				//table consult columns -----
+				//idInstrumento, numSerie, nomeI, valorCompra, valorLocacao, ano, status, nomeF, nomeC, nomeT, nomeM
+				in[i] = new Instrument();
+				in[i].setId(bd.rs.getInt("idInstrumento"));
+				in[i].setNumSerie(bd.rs.getInt("numSerie"));
+				in[i].setNome(bd.rs.getString("nomeI"));
+				in[i].setvalorCompra(bd.rs.getBigDecimal("valorCompra"));
+				in[i].setValorLocacao(bd.rs.getBigDecimal("valorLocacao"));
+				in[i].setAno(bd.rs.getString("ano"));
+				in[i].setStatus(bd.rs.getInt("status"));
+				in[i].setNomeFornecedor(bd.rs.getString("nomeF"));
+				in[i].setCor(bd.rs.getString("nomeC"));
+				in[i].setTipo(bd.rs.getString("nomeT"));
+				in[i].setMarca(bd.rs.getString("nomeM"));
+				
+//				System.out.println(in[inCount].getId());
+				i++;
+			}
+
+			
+		} catch (SQLException e) {
+			
+			msg = "Falha ao recuperar lista! =[";
+			System.out.println(e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return in;
+		
+	}
 
 }

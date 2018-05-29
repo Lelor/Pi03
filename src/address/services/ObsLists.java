@@ -1,7 +1,10 @@
 package address.services;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
+import address.model.Instrument;
+import address.model.InstrumentDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,7 +15,6 @@ public class ObsLists {
 	private BD bd;
 	
 	public ObsLists() {
-		bd = new BD();
 	}
 	
 	/**
@@ -27,7 +29,7 @@ public class ObsLists {
 		String sql = "SELECT nome FROM " + table;
 		
 		try {
-			
+			bd = new BD();
 			bd.getConnection();
 			bd.stmt = bd.con.createStatement();
 			
@@ -49,4 +51,19 @@ public class ObsLists {
 		return item;
 	}
 
+	public ObservableList<Instrument> getListInstrument(){
+		
+		ObservableList<Instrument> inOBS = FXCollections.observableArrayList();
+		
+		InstrumentDAO inDAO = new InstrumentDAO();
+		
+		Instrument[] in = inDAO.listInstrument();
+		
+		for(int i = 0; i < in.length;i++) {
+			inOBS.add(new Instrument(in[i].getId(), in[i].getNome(), in[i].getMarca(), in[i].getValorLocacao(), in[i].getStatus()));
+		}
+	
+		return inOBS;
+		
+	}
 }

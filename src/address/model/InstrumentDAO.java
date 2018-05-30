@@ -18,9 +18,9 @@ public class InstrumentDAO {
 	 * Conta numero de linhas que a tabela instrumento possui.
 	 * @return - retorna o total de linhas.
 	 */
-	private int countNumInstrument() {
+	public int countNumInstrument() {
 		
-		String sql2 = "SELECT COUNT(idInstrumento) AS total FROM instrumento";
+		String sql2 = "SELECT COUNT(idInstrumento) AS total FROM instrumento WHERE ativo = 1";
 		int countRow = 0;
 		
 		try {
@@ -110,7 +110,7 @@ public class InstrumentDAO {
 		
 		int i = 0;
 		int numRow = countNumInstrument();
-		Instrument[] in = new Instrument[5];
+		Instrument[] in = new Instrument[numRow];
 		
 		try {
 			

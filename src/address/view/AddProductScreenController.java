@@ -95,7 +95,7 @@ public class AddProductScreenController implements Initializable {
     		txtAno.getText() == null || cbTipo.getValue() == null || cbMarca.getValue() == null || txtValorLocacao.getText() == null || 
     		txtValorCompra.getText() == null)
     	{
-    		JOptionPane.showMessageDialog(null, "Preencha todos os campos, por favor");
+    		JOptionPane.showMessageDialog(null, "Preencha todos os campos, por favor", "Erro", 0);
     		
     	} else {
     		
@@ -132,7 +132,7 @@ public class AddProductScreenController implements Initializable {
         		
         		InstrumentDAO inDAO = new InstrumentDAO();
         		
-        		JOptionPane.showMessageDialog(null, inDAO.insertInstrument(in));
+        		JOptionPane.showMessageDialog(null, inDAO.insertInstrument(in), "Sucesso", 1);
         		
         		// reseta campos
         		txtNome.clear();

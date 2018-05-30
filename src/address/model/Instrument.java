@@ -2,6 +2,10 @@ package address.model;
 
 import java.math.BigDecimal;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
 public class Instrument {
 	
 	/*
@@ -12,34 +16,29 @@ public class Instrument {
 	private int id, numSerie, idFornecedor, idTipo, idMarca, idCor;
 	private String nome, nomeFornecedor, ano, foto, tipo, cor, marca, ativo, status;
 	private BigDecimal valorCompra, valorLocacao;
-	
+	private BooleanProperty selected;
+
 	public Instrument() {
 	}
 	
-	public Instrument(Integer id, String nome, String marca, BigDecimal valorLocacao, String status) {
+	// contrutor para listar instrumentos
+	public Instrument(Integer id, String nome, String marca, BigDecimal valorLocacao, String status, BooleanProperty selected) {
 		this.id = id;
 		this.nome = nome;
 		this.marca = marca;
 		this.valorLocacao = valorLocacao;
 		this.status = status;
+		this.selected = selected;
 	}
 	
-	// construtor para cadastrar instrumentos ----
-	public Instrument(int numSerie, String nome, String nomeFornecedor, String ano, String foto, String tipo,
-			String cor, String marca, BigDecimal valorCompra, BigDecimal valorLocacao) {
-		super();
-		this.numSerie = numSerie;
-		this.nome = nome;
-		this.nomeFornecedor = nomeFornecedor;
-		this.ano = ano;
-		this.foto = foto;
-		this.tipo = tipo;
-		this.cor = cor;
-		this.marca = marca;
-		this.valorCompra = valorCompra;
-		this.valorLocacao = valorLocacao;
+	public BooleanProperty getSelected() {
+		return selected;
 	}
 
+	public void setSelected(BooleanProperty selected) {
+		this.selected = selected;
+	}
+	
 	public int getId() {
 		return id;
 	}

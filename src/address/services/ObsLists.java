@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import address.model.Instrument;
 import address.model.InstrumentDAO;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -60,7 +61,7 @@ public class ObsLists {
 		Instrument[] in = inDAO.listInstrument();
 		
 		for(int i = 0; i < in.length;i++) {
-			inOBS.add(new Instrument(in[i].getId(), in[i].getNome(), in[i].getMarca(), in[i].getValorLocacao(), in[i].getStatus()));
+			inOBS.add(new Instrument(in[i].getId(), in[i].getNome(), in[i].getMarca(), in[i].getValorLocacao(), in[i].getStatus(), new SimpleBooleanProperty(false)));
 		}
 	
 		return inOBS;

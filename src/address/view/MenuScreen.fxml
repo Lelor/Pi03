@@ -34,7 +34,7 @@
       </HBox>
       <Label alignment="CENTER" layoutX="20.0" layoutY="21.0" prefHeight="46.0" prefWidth="194.0" text="HOME" textAlignment="CENTER" textFill="#9e1111" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="21.0">
          <font>
-            <Font name="Dubai Bold" size="36.0" />
+            <Font size="36.0" />
          </font>
       </Label>
       <HBox layoutX="648.0" layoutY="45.0">
@@ -51,17 +51,18 @@
             </Label>
          </children>
       </HBox>
-      <TableView fx:id="tableView" accessibleRole="IMAGE_VIEW" layoutX="20.0" layoutY="152.0" prefHeight="282.0" prefWidth="760.0" AnchorPane.bottomAnchor="166.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="152.0">
+      <TableView fx:id="tableView" accessibleRole="IMAGE_VIEW" editable="true" layoutX="20.0" layoutY="152.0" prefHeight="282.0" prefWidth="760.0" AnchorPane.bottomAnchor="166.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="152.0">
         <columns>
-          <TableColumn fx:id="idInstrument" prefWidth="46.0" text="#" />
-          <TableColumn fx:id="nameInstrument" prefWidth="275.0" text="Nome" />
-            <TableColumn fx:id="brandInstrument" minWidth="0.0" prefWidth="173.0" text="Marca" />
-            <TableColumn fx:id="priceInstrument" prefWidth="141.0" text="Valor" />
-            <TableColumn fx:id="availableInstrument" prefWidth="124.0" text="Disponibilidade" />
+            <TableColumn fx:id="selectRow" prefWidth="50.0" resizable="false" sortable="false" />
+          <TableColumn fx:id="idInstrument" editable="false" minWidth="20.0" prefWidth="40.0" resizable="false" text="#" visible="false" />
+          <TableColumn fx:id="nameInstrument" editable="false" prefWidth="335.0" text="Nome" />
+            <TableColumn fx:id="brandInstrument" editable="false" minWidth="0.0" prefWidth="129.0" text="Marca" />
+            <TableColumn fx:id="priceInstrument" editable="false" prefWidth="98.0" text="Valor" />
+            <TableColumn fx:id="availableInstrument" editable="false" maxWidth="1.7976931348623157E308" prefWidth="147.0" text="Status" />
         </columns>
       </TableView>
-      <Button layoutX="680.0" layoutY="445.0" mnemonicParsing="false" onAction="#showAddProductSceen" prefHeight="25.0" prefWidth="100.0" text="+ Instrumento" />
-      <Button disable="true" layoutX="333.0" layoutY="451.0" mnemonicParsing="false" onAction="#showAddProductSceen" prefHeight="39.0" prefWidth="134.0" style="-fx-background-color: purple;" text="+ Locar" textFill="WHITE">
+      <Button layoutX="652.0" layoutY="445.0" mnemonicParsing="false" onAction="#showAddProductSceen" prefHeight="39.0" prefWidth="128.0" text="+ Instrumento" />
+      <Button layoutX="310.0" layoutY="458.0" mnemonicParsing="false" onAction="#rentInstrument" prefHeight="46.0" prefWidth="181.0" style="-fx-background-color: purple;" text=":: Locação ::" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

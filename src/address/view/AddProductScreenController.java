@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -18,6 +17,7 @@ import address.MainApp;
 import address.model.Instrument;
 import address.model.InstrumentDAO;
 import address.services.ObsLists;
+import address.services.Utilities;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,7 +50,7 @@ public class AddProductScreenController implements Initializable {
 	BigDecimal valorLocacao, valorCompra;
 	File fileImage;
 	Path from, to;
-	
+
     @FXML
     protected void getImage(ActionEvent event) throws IOException {
     	
@@ -65,12 +65,28 @@ public class AddProductScreenController implements Initializable {
         fileImage = fileChooser.showOpenDialog(null);
 
     	try {
-    		
+    	
     		BufferedImage bufferedImage = ImageIO.read(fileImage);
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			imgInstrument.setImage(image);
 			
-			imgName = fileImage.getName();
+			// pega o nome do arquivo carregado
+			String bufferedImageName = fileImage.getName();
+			
+			// pega extensao do arquivo carregado
+			String extension = "";
+
+			int i = bufferedImageName.lastIndexOf('.');
+			if (i > 0) {
+			    extension = bufferedImageName.substring(i+1);
+			}
+			
+			//cria um nome randomico
+			Utilities ut = new Utilities();
+			String rdName = ut.randomName();
+			
+			//gera novo nome
+			imgName = rdName + "." + extension;
 			
 	    	from = Paths.get(fileImage.toURI());
 	    	to 	= Paths.get("src/images/instruments/" + imgName);
@@ -90,7 +106,7 @@ public class AddProductScreenController implements Initializable {
 
     @FXML
     protected void registerProduct(ActionEvent event) throws IOException {
-    	
+    
     	if (txtNumSerie.getText() == null || txtNome.getText() == null || cbCor.getValue() == null || cbFornecedor.getValue() == null || 
     		txtAno.getText() == null || cbTipo.getValue() == null || cbMarca.getValue() == null || txtValorLocacao.getText() == null || 
     		txtValorCompra.getText() == null)
@@ -113,6 +129,7 @@ public class AddProductScreenController implements Initializable {
         	try {
         		
         		if(imgName != "guitar_shape.jpg") {
+        			
         			// move imagem
             		Files.copy(from, to);
         		}
@@ -134,21 +151,8 @@ public class AddProductScreenController implements Initializable {
         		
         		JOptionPane.showMessageDialog(null, inDAO.insertInstrument(in), "Sucesso", 1);
         		
-        		// reseta campos
-        		txtNome.clear();
-        		txtNumSerie.clear();
-        		txtValorCompra.clear();
-        		txtValorLocacao.clear();
-        		txtAno.clear();
-        		cbCor.setValue("");
-        		cbTipo.setValue("");
-        		cbMarca.setValue("");
-        		cbFornecedor.setValue("");
-        		
-        		// seta imagem default ------
-        		File fileDefault = new File("src/images/instruments/guitar_shape.jpg");
-                Image imageDefault = new Image(fileDefault.toURI().toString());
-                imgInstrument.setImage(imageDefault);
+        		//resta campos
+        		restFields();
 
         		
 			} catch (Exception e) {
@@ -162,7 +166,30 @@ public class AddProductScreenController implements Initializable {
     
     @FXML
     protected void goBackHandler(ActionEvent event) throws IOException {
-    	mainApp.showMainMenu();
+    	mainApp.showMainMenu(0, null);
+    }
+    
+    @FXML
+    protected void btRestFields(ActionEvent event) throws IOException {
+    	restFields();
+    }
+    
+    public void restFields() {
+    	// reseta campos
+		txtNome.clear();
+		txtNumSerie.clear();
+		txtValorCompra.clear();
+		txtValorLocacao.clear();
+		txtAno.clear();
+		cbCor.setValue("");
+		cbTipo.setValue("");
+		cbMarca.setValue("");
+		cbFornecedor.setValue("");
+		
+		// seta imagem default ------
+		File fileDefault = new File("src/images/instruments/guitar_shape.jpg");
+        Image imageDefault = new Image(fileDefault.toURI().toString());
+        imgInstrument.setImage(imageDefault);
     }
     
     public void setMainApp(MainApp mainApp){

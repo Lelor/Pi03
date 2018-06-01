@@ -1,6 +1,5 @@
 package address.services;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import address.model.Instrument;
@@ -61,7 +60,7 @@ public class ObsLists {
 		Instrument[] in = inDAO.listInstrument();
 		
 		for(int i = 0; i < in.length;i++) {
-			inOBS.add(new Instrument(in[i].getId(), in[i].getNome(), in[i].getMarca(), in[i].getValorLocacao(), in[i].getStatus(), new SimpleBooleanProperty(false)));
+			inOBS.add(new Instrument(in[i].getId(), in[i].getNome(), in[i].getMarca(), in[i].getValorLocacao(), in[i].getStatus(), in[i].getStatusId(), new SimpleBooleanProperty(false)));
 		}
 	
 		return inOBS;

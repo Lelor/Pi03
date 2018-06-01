@@ -6,11 +6,13 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.view.MenuScreenController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="69.0" layoutY="536.0" prefHeight="40.0" prefWidth="664.0" spacing="20.0" AnchorPane.rightAnchor="67.0" AnchorPane.topAnchor="536.0">
          <children>
@@ -32,11 +34,6 @@
             <Button layoutX="563.0" layoutY="104.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="56.0" text="Buscar" />
          </children>
       </HBox>
-      <Label alignment="CENTER" layoutX="20.0" layoutY="21.0" prefHeight="46.0" prefWidth="194.0" text="HOME" textAlignment="CENTER" textFill="#9e1111" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="21.0">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
       <HBox layoutX="648.0" layoutY="45.0">
          <children>
             <Label layoutX="648.0" layoutY="45.0" text="User  |">
@@ -55,17 +52,23 @@
         <columns>
             <TableColumn fx:id="selectRow" prefWidth="50.0" resizable="false" sortable="false" />
           <TableColumn fx:id="idInstrument" editable="false" minWidth="20.0" prefWidth="40.0" resizable="false" text="#" visible="false" />
-          <TableColumn fx:id="nameInstrument" editable="false" prefWidth="335.0" text="Nome" />
-            <TableColumn fx:id="brandInstrument" editable="false" minWidth="0.0" prefWidth="129.0" text="Marca" />
-            <TableColumn fx:id="priceInstrument" editable="false" prefWidth="98.0" text="Valor" />
-            <TableColumn fx:id="availableInstrument" editable="false" maxWidth="1.7976931348623157E308" prefWidth="147.0" text="Status" />
+          <TableColumn fx:id="nameInstrument" editable="false" prefWidth="373.0" text="Nome" />
+            <TableColumn fx:id="brandInstrument" editable="false" minWidth="0.0" prefWidth="112.0" text="Marca" />
+            <TableColumn fx:id="priceInstrument" editable="false" prefWidth="112.0" text="Valor" />
+            <TableColumn fx:id="availableInstrument" editable="false" prefWidth="112.0" text="Status" />
+            <TableColumn fx:id="availableInstrumentId" editable="false" maxWidth="1.7976931348623157E308" prefWidth="61.0" text="Status ID" visible="false" />
         </columns>
       </TableView>
       <Button layoutX="652.0" layoutY="445.0" mnemonicParsing="false" onAction="#showAddProductSceen" prefHeight="39.0" prefWidth="128.0" text="+ Instrumento" />
-      <Button layoutX="310.0" layoutY="458.0" mnemonicParsing="false" onAction="#rentInstrument" prefHeight="46.0" prefWidth="181.0" style="-fx-background-color: purple;" text=":: Locação ::" textFill="WHITE">
+      <Button layoutX="310.0" layoutY="458.0" mnemonicParsing="false" onAction="#rentInstrument" prefHeight="46.0" prefWidth="181.0" style="-fx-font-weight: bold;" styleClass="bt-action" text=":: Locação ::" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
+      <ImageView fx:id="logoImg" fitHeight="46.0" fitWidth="221.0" layoutX="20.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/system/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

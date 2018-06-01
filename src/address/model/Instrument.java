@@ -3,8 +3,6 @@ package address.model;
 import java.math.BigDecimal;
 
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
 public class Instrument {
 	
@@ -13,7 +11,7 @@ public class Instrument {
 	 * Status 2 = locado
 	 * Status 3 = manutencao
 	 */
-	private int id, numSerie, idFornecedor, idTipo, idMarca, idCor;
+	private int id, numSerie, idFornecedor, idTipo, idMarca, idCor, statusId;
 	private String nome, nomeFornecedor, ano, foto, tipo, cor, marca, ativo, status;
 	private BigDecimal valorCompra, valorLocacao;
 	private BooleanProperty selected;
@@ -22,12 +20,13 @@ public class Instrument {
 	}
 	
 	// contrutor para listar instrumentos
-	public Instrument(Integer id, String nome, String marca, BigDecimal valorLocacao, String status, BooleanProperty selected) {
+	public Instrument(Integer id, String nome, String marca, BigDecimal valorLocacao, String status, int statusId, BooleanProperty selected) {
 		this.id = id;
 		this.nome = nome;
 		this.marca = marca;
 		this.valorLocacao = valorLocacao;
 		this.status = status;
+		this.statusId = statusId;
 		this.selected = selected;
 	}
 	
@@ -91,16 +90,22 @@ public class Instrument {
 		return nome;
 	}
 
-	public void setStatus(int status) {
+	public void setStatusId(int statusId) {
 		
-		if(status == 1) {
+		this.statusId = statusId;
+		
+		if(statusId == 1) {
 			this.status = "Disponível";
-		}else if(status == 2){
+		}else if(statusId == 2){
 			this.status = "Locado";
 		}else {
 			this.status = "Manutenção";
 		}
 		
+	}
+	
+	public int getStatusId() {
+		return statusId;
 	}
 	
 	public String getStatus() {

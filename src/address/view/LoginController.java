@@ -14,7 +14,7 @@ private MainApp mainApp;
     	/**
     	 * Implement the login handler properly.
     	 */
-    	mainApp.showMainMenu();
+    	mainApp.showMainMenu(0, null);
     }
     
     public void setMainApp(MainApp mainApp){

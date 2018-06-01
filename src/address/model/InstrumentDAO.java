@@ -2,12 +2,15 @@ package address.model;
 
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import address.services.BD;
 import address.services.Dependences;
 
 public class InstrumentDAO {
 	
 	private String sql, msg;
+	private int decision;
 	private BD bd;
 	
 	public InstrumentDAO() {
@@ -103,7 +106,7 @@ public class InstrumentDAO {
 	 */
 	public Instrument[] listInstrument() {
 		
-		sql = "SELECT idInstrumento, numSerie, i.nome as nomeI, valorCompra, valorLocacao, ano, statusIn as status,"
+		sql = "SELECT idInstrumento, numSerie, i.nome as nomeI, valorCompra, valorLocacao, ano, foto, statusIn as status,"
 				+ " f.nome as nomeF, c.nome AS nomeC, t.nome as nomeT, m.nome as nomeM"
 				+ " FROM instrumento i, cor c, tipo t, marca m, fornecedor f"
 				+ " WHERE i.idCor = c.id AND i.idTipo = t.id AND i.idMarca = m.id AND i.idFornecedor = f.idFornecedor AND i.ativo = 1";
@@ -129,13 +132,13 @@ public class InstrumentDAO {
 				in[i].setvalorCompra(bd.rs.getBigDecimal("valorCompra"));
 				in[i].setValorLocacao(bd.rs.getBigDecimal("valorLocacao"));
 				in[i].setAno(bd.rs.getString("ano"));
-				in[i].setStatus(bd.rs.getInt("status"));
+				in[i].setFoto(bd.rs.getString("foto"));
+				in[i].setStatusId(bd.rs.getInt("status"));
 				in[i].setNomeFornecedor(bd.rs.getString("nomeF"));
 				in[i].setCor(bd.rs.getString("nomeC"));
 				in[i].setTipo(bd.rs.getString("nomeT"));
 				in[i].setMarca(bd.rs.getString("nomeM"));
 				
-//				System.out.println(in[inCount].getId());
 				i++;
 			}
 
@@ -151,6 +154,146 @@ public class InstrumentDAO {
 		}
 		
 		return in;
+		
+	}
+	
+	/**
+	 * Retorna um instrumento com um id especifico.
+	 * @param idInstrument - id do instrumento
+	 * @return - retorna um instrumento.
+	 */
+	public Instrument getInstrument(int idInstrument) {
+		
+		sql = "SELECT idInstrumento, numSerie, i.nome as nomeI, valorCompra, valorLocacao, ano, foto, statusIn as status,"
+				+ " f.nome as nomeF, c.nome AS nomeC, t.nome as nomeT, m.nome as nomeM"
+				+ " FROM instrumento i, cor c, tipo t, marca m, fornecedor f"
+				+ " WHERE i.idCor = c.id AND i.idTipo = t.id AND i.idMarca = m.id AND i.idFornecedor = f.idFornecedor AND i.idInstrumento = ?";
+		
+		Instrument in = new Instrument();
+		
+		try {
+			
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setInt(1, idInstrument);
+			bd.rs = bd.st.executeQuery();
+			
+			if(bd.rs.next()) {
+
+				//table consult columns -----
+				//idInstrumento, numSerie, nomeI, valorCompra, valorLocacao, ano, status, nomeF, nomeC, nomeT, nomeM
+				in.setId(bd.rs.getInt("idInstrumento"));
+				in.setNumSerie(bd.rs.getInt("numSerie"));
+				in.setNome(bd.rs.getString("nomeI"));
+				in.setvalorCompra(bd.rs.getBigDecimal("valorCompra"));
+				in.setValorLocacao(bd.rs.getBigDecimal("valorLocacao"));
+				in.setAno(bd.rs.getString("ano"));
+				in.setFoto(bd.rs.getString("foto"));
+				in.setStatusId(bd.rs.getInt("status"));
+				in.setNomeFornecedor(bd.rs.getString("nomeF"));
+				in.setCor(bd.rs.getString("nomeC"));
+				in.setTipo(bd.rs.getString("nomeT"));
+				in.setMarca(bd.rs.getString("nomeM"));
+				
+			}
+
+			
+		} catch (SQLException e) {
+			
+			msg = "Falha ao recuperar lista! =[";
+			System.out.println(e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return in;
+		
+	}
+	
+	/**
+	 * Atualiza instrumento no banco de dados.
+	 * @param in - Objeto Instruemento para ser atualizado.
+	 * @return - Retorna mensagem de erro ou sucesso.
+	 */
+	public String updateInstrument(Instrument in) {
+		
+		Dependences dp = new Dependences();
+		
+		// retorna id para salvar no banco ------
+		int idCorIn   	 = dp.propInstrument(in.getCor(), "cor");
+		int idTipoIn  	 = dp.propInstrument(in.getTipo(), "tipo");
+		int idMarcaIn 	 = dp.propInstrument(in.getMarca(), "marca");
+		int idFornecedor = dp.idFornecFromName(in.getNomeFornecedor());
+		
+		sql = "UPDATE instrumento SET nome = ?, valorCompra = ?, valorLocacao = ?, ano = ?, "
+				+ "foto = ?, idFornecedor = ?, idCor = ?, idTipo = ?, idMarca = ? "
+				+ "WHERE idInstrumento = ?";
+		
+		try {
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setString(1, in.getNome());
+			bd.st.setBigDecimal(2, in.getvalorCompra());
+			bd.st.setBigDecimal(3, in.getValorLocacao());
+			bd.st.setString(4, in.getAno());
+			bd.st.setString(5, in.getFoto());
+			bd.st.setInt(6, idFornecedor);
+			bd.st.setInt(7, idCorIn);
+			bd.st.setInt(8, idTipoIn);
+			bd.st.setInt(9, idMarcaIn);
+			bd.st.setInt(10, in.getId());
+			
+			bd.st.executeUpdate();
+			msg = "Instrumento atualizado! =]";
+			
+		} catch (SQLException  e) {
+			
+			msg = "Falha no cadastro! =[";
+			System.out.println("Erro DAO: insersao de dados " + e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return msg;
+		
+	}
+
+	public int excludeInstrument(int id) {
+		
+		sql = "UPDATE instrumento SET ativo = ? WHERE idInstrumento = ?";
+		
+		try {
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setBoolean(1, false);
+			bd.st.setInt(2, id);
+			
+			int dialogButton = JOptionPane.YES_NO_OPTION;
+			int dialogResult = JOptionPane.showConfirmDialog (
+					null, "Essa ação é irreversível!\nDeseja mesmo excluir este instrumento?","Alerta!", dialogButton
+			);
+			if(dialogResult == JOptionPane.YES_OPTION){
+				decision = 1;
+				bd.st.executeUpdate();
+			}else {
+				decision = 0;
+			}
+			
+		} catch (SQLException  e) {
+			
+			msg = "Falha ao excluir! =[";
+			System.out.println("Erro DAO: exclusao do instrumento " + e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return decision;
 		
 	}
 

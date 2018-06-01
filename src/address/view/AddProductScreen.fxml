@@ -6,20 +6,21 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.view.AddProductScreenController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.view.AddProductScreenController">
    <children>
-      <Label layoutX="40.0" layoutY="30.0" prefHeight="42.0" prefWidth="241.0" text="Cadastro de Produto" textFill="#59176b" AnchorPane.topAnchor="30.0">
+      <Label layoutX="41.0" layoutY="13.0" prefHeight="42.0" prefWidth="241.0" styleClass="tts-head" text="Cadastro de Produto" textFill="#8a1000" AnchorPane.topAnchor="13.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Pane fx:id="pane" layoutX="40.0" layoutY="80.0" prefHeight="394.0" prefWidth="430.0" style="-fx-border-color: black; -fx-background-color: #eeeeee;">
+      <Pane fx:id="pane" layoutX="41.0" layoutY="67.0" prefHeight="394.0" prefWidth="430.0" style="-fx-border-color: black; -fx-background-color: #eeeeee;">
          <children>
             <GridPane fx:id="gridPane" layoutX="14.0" layoutY="14.0" prefHeight="365.0" prefWidth="396.0">
               <columnConstraints>
@@ -38,6 +39,15 @@
                 <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
+                  <TextField fx:id="txtNumSerie" layoutX="162.0" layoutY="291.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="txtNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cbMarca" editable="true" prefHeight="25.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="cbTipo" editable="true" prefHeight="25.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="cbCor" editable="true" prefHeight="25.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="txtAno" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="txtValorLocacao" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="txtValorCompra" layoutX="162.0" layoutY="205.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <ComboBox fx:id="cbFornecedor" prefHeight="25.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                   <Label text="Nome:" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
@@ -53,14 +63,11 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="cbFornecedor" prefHeight="25.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                   <Label text="Ano:" GridPane.rowIndex="5">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtAno" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label text="Tipo:" GridPane.rowIndex="3">
                      <font>
                         <Font size="14.0" />
@@ -76,46 +83,44 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtValorLocacao" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Label layoutX="10.0" layoutY="208.0" text="Valor compra:" GridPane.rowIndex="7">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtValorCompra" layoutX="162.0" layoutY="205.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                   <Label layoutX="10.0" layoutY="293.0" text="Número de série:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtNumSerie" layoutX="162.0" layoutY="291.0" GridPane.columnIndex="1" />
-                  <ComboBox fx:id="cbCor" editable="true" prefHeight="25.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <ComboBox fx:id="cbTipo" editable="true" prefHeight="25.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <ComboBox fx:id="cbMarca" editable="true" prefHeight="25.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>
       </Pane>
-      <Button fx:id="btVoltar" layoutX="640.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Voltar">
+      <Button fx:id="btCadastrar" layoutX="301.0" layoutY="479.0" mnemonicParsing="false" onAction="#registerProduct" prefHeight="42.0" prefWidth="159.0" style="-fx-background-color: #8a1000;" styleClass="bt-action" text=":: Cadastrar ::" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btVoltar" layoutX="640.0" layoutY="15.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Voltar">
          <font>
             <Font name="Dubai Bold" size="14.0" />
          </font>
       </Button>
-      <ImageView fx:id="imgInstrument" fitHeight="365.0" fitWidth="268.0" layoutX="510.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btBuscarFoto" layoutX="570.0" layoutY="460.0" mnemonicParsing="false" onAction="#getImage" prefHeight="0.0" prefWidth="137.0" text="Buscar Foto">
+      <Button fx:id="btBuscarFoto" layoutX="577.0" layoutY="484.0" mnemonicParsing="false" onAction="#getImage" prefHeight="30.0" prefWidth="127.0" text="Buscar Foto">
          <font>
             <Font name="Dubai Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btCadastrar" layoutX="333.0" layoutY="499.0" mnemonicParsing="false" onAction="#registerProduct" prefHeight="0.0" prefWidth="137.0" text="Cadastrar">
+      <Button layoutX="41.0" layoutY="484.0" mnemonicParsing="false" onAction="#restFields" prefHeight="25.0" prefWidth="96.0" text="Limpar">
          <font>
             <Font name="Dubai Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btLimpar" layoutX="41.0" layoutY="499.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Limpar">
-         <font>
-            <Font name="Dubai Bold" size="14.0" />
-         </font>
-      </Button>
+      <BorderPane layoutX="510.0" layoutY="68.0" prefHeight="394.0" prefWidth="262.0">
+         <center>
+            <ImageView fx:id="imgInstrument" fitHeight="394.0" fitWidth="262.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

@@ -1,14 +1,12 @@
 package address.test;
 
-import java.math.BigDecimal;
+import java.io.IOException;
 
-import address.model.Instrument;
-import address.model.InstrumentDAO;
-import address.services.Dependences;
+import address.services.Utilities;
 
 public class TestaInstrument {
-
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws IOException {
 		
 //		Metodo que retorna id das propriedades do instrumento -----------
 //		DependencesDAO dp = new DependencesDAO();
@@ -36,17 +34,20 @@ public class TestaInstrument {
 //		System.out.println(inDAO.insertInstrument(in));
 		
 //		Lista Instrumentos ------------------------------
-		
-		InstrumentDAO inDAO = new InstrumentDAO();
-		Instrument[] in = inDAO.listInstrument();
-		
-//		System.out.println(in.length);
-		
-		for(int i = 0; i < in.length;i++) {
-//			System.out.println(i);
-			System.out.println(in[i].getStatus());
-		}
 //		
+//		InstrumentDAO inDAO = new InstrumentDAO();
+//		Instrument[] in = inDAO.listInstrument();
+//		
+////		System.out.println(in.length);
+//		
+//		for(int i = 0; i < in.length;i++) {
+////			System.out.println(i);
+//			System.out.println(in[i].getStatus());
+//		}
+		
+		//nome randomicos
+//		Utilities ut = new Utilities();
+
 	}
 
 }

@@ -8,6 +8,7 @@ import address.view.AddProductScreenController;
 import address.view.LoginController;
 import address.view.MenuScreenController;
 import address.view.ProductDetailScreenController;
+import address.view.RentScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -96,32 +97,26 @@ public class MainApp extends Application{
 	
 	public void showProductDetailScreen(int id, ArrayList<Integer> state_selected) throws IOException{
 		
-//		FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(getClass().getResource("view\\\\ProductDetailScreen.fxml"));
-//        
-//        ProductDetailScreenController controller = new ProductDetailScreenController(id);
-//        loader.setController(controller);
-//        /* 
-//         * if "fx:controller" is not set in fxml
-//         * fxmlLoader.setController(NewWindowController);
-//         */
-//        Scene scene = new Scene(loader.load(), 800, 600);
-//        Stage stage = new Stage();
-//        stage.setTitle("Rent MI");
-//        
-//		File file = new File("src/images/system/icon.png");
-//        Image image = new Image(file.toURI().toString());
-//        stage.getIcons().add(image);
-//        stage.setTitle("Rent MI");
-//        
-//        stage.setScene(scene);
-//        stage.show();
-		
-		
 		ProductDetailScreenController controller = new ProductDetailScreenController(id, state_selected);
 		
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("view\\ProductDetailScreen.fxml"));
+        
+        controller.setMainApp(this);
+        loader.setController(controller);
+        
+        AnchorPane anchor = (AnchorPane) loader.load();
+
+        rootLayout.setCenter(anchor);
+	}
+	
+	
+	public void showRentScreen(ArrayList<Integer> idsInstruments) throws IOException{
+		
+		RentScreenController controller = new RentScreenController(idsInstruments);
+		
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("view\\RentScreen.fxml"));
         
         controller.setMainApp(this);
         loader.setController(controller);

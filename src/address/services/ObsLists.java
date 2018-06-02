@@ -1,10 +1,17 @@
 package address.services;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 
+import address.model.Client;
+import address.model.ClientDAO;
 import address.model.Instrument;
 import address.model.InstrumentDAO;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -18,11 +25,11 @@ public class ObsLists {
 	}
 	
 	/**
-	 * Cria uma ObservableList generica para cadastro de instrumeto.
+	 * Observable list para listar nome de fornecedores, cores, marcar e tipos de instrumentos.
 	 * @param table - tabela do banco para pegar nomes (fornecedor, cor, tipo, marca).
-	 * @return - ObservableList para cadastro de instrumentos.
+	 * @return - ObservableList com nome do respectivo parametro.
 	 */
-	public ObservableList<String> getObsListInstrument(String table){
+	public ObservableList<String> getMarcaTipoCorFornecInstrument(String table){
 		
 		ObservableList<String> item = FXCollections.observableArrayList();
 		
@@ -41,7 +48,7 @@ public class ObsLists {
 			
 		} catch (SQLException  e) {
 			
-			System.out.println("Falha ao carregar Fornecedores! =[");
+			System.out.println("Falha ao carregar! =[");
 
 		}
 		finally {
@@ -51,19 +58,59 @@ public class ObsLists {
 		return item;
 	}
 
+	/**
+	 * Lista instrumentos na tela principal.
+	 * @return - Observable list com lista de instrumentos.
+	 */
 	public ObservableList<Instrument> getListInstrument(){
 		
-		ObservableList<Instrument> inOBS = FXCollections.observableArrayList();
+		ObservableList<Instrument> obsList = FXCollections.observableArrayList();
 		
-		InstrumentDAO inDAO = new InstrumentDAO();
+		InstrumentDAO objDAO = new InstrumentDAO();
 		
-		Instrument[] in = inDAO.listInstrument();
+		Instrument[] obj = objDAO.listInstrument();
 		
-		for(int i = 0; i < in.length;i++) {
-			inOBS.add(new Instrument(in[i].getId(), in[i].getNome(), in[i].getMarca(), in[i].getValorLocacao(), in[i].getStatus(), in[i].getStatusId(), new SimpleBooleanProperty(false)));
+		for(int i = 0; i < obj.length;i++) {
+			obsList.add(new Instrument(obj[i].getId(), obj[i].getNome(), obj[i].getMarca(), obj[i].getValorLocacao(), obj[i].getStatus(), obj[i].getStatusId(), new SimpleBooleanProperty(false)));
 		}
 	
-		return inOBS;
+		return obsList;
 		
 	}
+	
+	/**
+	 * Observable list para listar clientes na tela de locação.
+	 * @return - lista de clientes.
+	 */
+	public ObservableList<Client> getListClientRent(){
+		
+		ObservableList<Client> obsList = FXCollections.observableArrayList();
+		
+		ClientDAO objDAO = new ClientDAO();
+		
+		Client[] obj = objDAO.listCliente();
+		
+		for(int i = 0; i < obj.length;i++) {
+			obsList.add(new Client(obj[i].getId(), obj[i].getNome(), obj[i].getCpf()));
+		}
+	
+		return obsList;
+	}
+	
+	public ObservableList<Instrument> getListInstrumentRent(ArrayList<Integer> idsInstrumentsRent){
+		
+		ObservableList<Instrument> obsList = FXCollections.observableArrayList();
+		
+		InstrumentDAO objDAO = new InstrumentDAO();
+		
+		for(int i = 0; i < idsInstrumentsRent.size(); i++) {
+			
+			Instrument obj = objDAO.getInstrument(idsInstrumentsRent.get(i));
+			
+			obsList.add(new Instrument(obj.getId(), obj.getNome(), new SimpleStringProperty("0"), obj.getValorLocacao()));
+    	}
+	
+		return obsList;
+	}
+	
 }

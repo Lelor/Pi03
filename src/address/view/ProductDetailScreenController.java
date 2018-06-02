@@ -143,11 +143,11 @@ public class ProductDetailScreenController implements Initializable {
     	} catch (IllegalArgumentException ex) {
     		
     		// seta imagem default ------
-    		File fileDefault = new File(rootPathImage + "guitar_shape.jpg");
+    		File fileDefault = new File(rootPathImage + "shape.png");
             Image imageDefault = new Image(fileDefault.toURI().toString());
             imgInstrument.setImage(imageDefault);
             
-            imgName = "guitar_shape.jpg";
+            imgName = "shape.png";
 
 		}
 
@@ -179,7 +179,7 @@ public class ProductDetailScreenController implements Initializable {
             		
             		//se a imagem da imgView for diferente da original e
             		//diferente di guitar_shape, deleta arquivo original e sobe outro
-            		if(imgName != originalImgName && imgName != "guitar_shape.jpg") {
+            		if(imgName != originalImgName && imgName != "shape.png") {
             			try {
             				
             				//apaga arquivo
@@ -262,12 +262,12 @@ public class ProductDetailScreenController implements Initializable {
         
         ObsLists obs = new ObsLists();
         // preecnhe Combobox de fornecedores ----
-        cbFornecedor.setItems(obs.getObsListInstrument("fornecedor"));
+        cbFornecedor.setItems(obs.getMarcaTipoCorFornecInstrument("fornecedor"));
         // preecnhe Combobox de Cor ----
-        cbCor.setItems(obs.getObsListInstrument("cor"));
+        cbCor.setItems(obs.getMarcaTipoCorFornecInstrument("cor"));
         // preecnhe Combobox de Marca ----
-        cbMarca.setItems(obs.getObsListInstrument("marca"));
+        cbMarca.setItems(obs.getMarcaTipoCorFornecInstrument("marca"));
         // preecnhe Combobox de Tipo ----
-        cbTipo.setItems(obs.getObsListInstrument("tipo"));
+        cbTipo.setItems(obs.getMarcaTipoCorFornecInstrument("tipo"));
 	}
 }

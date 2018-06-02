@@ -1,8 +1,11 @@
 package address.model;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Instrument {
 	
@@ -15,6 +18,7 @@ public class Instrument {
 	private String nome, nomeFornecedor, ano, foto, tipo, cor, marca, ativo, status;
 	private BigDecimal valorCompra, valorLocacao;
 	private BooleanProperty selected;
+	private SimpleStringProperty dataDevolucao;
 
 	public Instrument() {
 	}
@@ -28,6 +32,22 @@ public class Instrument {
 		this.status = status;
 		this.statusId = statusId;
 		this.selected = selected;
+	}
+	
+	// contrutor para listar instrumentos na tela de locaçao
+	public Instrument(Integer id, String nome, SimpleStringProperty dataDevolucao, BigDecimal valorLocacao) {
+		this.id = id;
+		this.nome = nome;
+		this.dataDevolucao = dataDevolucao;
+		this.valorLocacao = valorLocacao;
+	}
+	
+	public SimpleStringProperty getDataDevolucao() {
+		return dataDevolucao;
+	}
+
+	public void setDataDevolucao(SimpleStringProperty dataDevolucao) {
+		this.dataDevolucao = dataDevolucao;
 	}
 	
 	public BooleanProperty getSelected() {

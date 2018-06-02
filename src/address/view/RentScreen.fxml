@@ -2,101 +2,42 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: ffffff;" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="40.0" layoutY="30.0" text="Locação" textFill="#59176b">
+      <Label layoutX="40.0" layoutY="30.0" styleClass="tts-head" text="Locação" textFill="#59176b">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TabPane layoutX="40.0" layoutY="140.0" prefHeight="250.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Clientes">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="183.0" prefWidth="445.0">
-                     <children>
-                        <TableView layoutY="-2.0" prefHeight="220.0" prefWidth="450.0">
-                          <columns>
-                            <TableColumn prefWidth="277.0" text="Nome" />
-                              <TableColumn prefWidth="178.0" text="CPF" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-      <Button fx:id="btCadastrarCliente" layoutX="40.0" layoutY="400.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="+ Clientes" />
-      <TextField layoutX="40.0" layoutY="90.0" prefHeight="25.0" prefWidth="365.0" />
-      <Button fx:id="btBuscar" layoutX="405.0" layoutY="90.0" mnemonicParsing="false" text="Buscar" />
-      <Label layoutX="515.0" layoutY="140.0" prefHeight="25.0" prefWidth="143.0" text="Descrição de locação:">
+      <Button fx:id="btCadastrarCliente" layoutX="40.0" layoutY="400.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" text="+ Clientes" />
+      <TextField layoutX="40.0" layoutY="103.0" prefHeight="25.0" prefWidth="293.0" />
+      <Button fx:id="btBuscar" layoutX="345.0" layoutY="103.0" mnemonicParsing="false" text="Buscar" />
+      <Label layoutX="324.0" layoutY="413.0" prefHeight="25.0" prefWidth="76.0" text="Descrição:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextArea fx:id="txtDescricaoLoc" layoutX="515.0" layoutY="175.0" prefHeight="212.0" prefWidth="231.0" />
-      <Label layoutX="250.0" layoutY="420.0" text="Desconto:">
+      <TextArea fx:id="txtDescricao" layoutX="40.0" layoutY="443.0" prefHeight="130.0" prefWidth="356.0" />
+      <Label layoutX="569.0" layoutY="407.0" text="Desconto:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtDesconto" layoutX="370.0" layoutY="420.0" prefHeight="25.0" prefWidth="119.0" />
-      <Label layoutX="250.0" layoutY="460.0" text="Acrescimo:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtAcrescimo" layoutX="370.0" layoutY="460.0" prefHeight="25.0" prefWidth="119.0" />
-      <Label layoutX="350.0" layoutY="420.0" text="R$">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="350.0" layoutY="460.0" text="R$">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="250.0" layoutY="500.0" text="Parcelas:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="cbParcelas" layoutX="370.0" layoutY="500.0" prefHeight="25.0" prefWidth="119.0" />
-      <Label fx:id="lbValorParcela" layoutX="370.0" layoutY="540.0" text="valor parcela" />
-      <CheckBox fx:id="ckPago" layoutX="520.0" layoutY="420.0" mnemonicParsing="false" text="Pago">
+      <TextField fx:id="txtDesconto" layoutX="643.0" layoutY="404.0" onAction="#onEnter" prefHeight="25.0" prefWidth="117.0" promptText="R$" text="0" />
+      <CheckBox fx:id="cbPago" layoutX="703.0" layoutY="493.0" mnemonicParsing="false" text="Pago">
          <font>
             <Font size="14.0" />
          </font>
       </CheckBox>
-      <Pane layoutX="520.0" layoutY="458.0" prefHeight="50.0" prefWidth="250.0" style="-fx-border-color: black; -fx-background-color: #eeeeee;">
-         <children>
-            <Label layoutX="10.0" layoutY="15.0" text="Valor total:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtAcrescimo1" layoutX="110.0" layoutY="15.0" prefHeight="25.0" prefWidth="119.0" />
-            <Label layoutX="90.0" layoutY="15.0" text="R$">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children></Pane>
-      <Button fx:id="btCadastrarCliente1" layoutX="520.0" layoutY="520.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="250.0" text="Efetuar Locação">
+      <Button layoutX="511.0" layoutY="529.0" mnemonicParsing="false" onAction="#doRent" prefHeight="40.0" prefWidth="250.0" styleClass="bt-action" text=":: Efetuar Locação ::">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -106,5 +47,40 @@
             <Font name="Dubai Bold" size="14.0" />
          </font>
       </Button>
+      <TableView fx:id="tableViewClient" layoutX="40.0" layoutY="171.0" prefHeight="220.0" prefWidth="356.0">
+        <columns>
+            <TableColumn fx:id="idClient" prefWidth="72.0" text="Id" visible="false" />
+          <TableColumn fx:id="nameClient" prefWidth="220.0" text="Nome" />
+            <TableColumn fx:id="cpfClient" prefWidth="135.0" text="CPF" />
+        </columns>
+      </TableView>
+      <Label layoutX="40.0" layoutY="144.0" text="Selecione o cliente:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableViewInstrument" editable="true" layoutX="412.0" layoutY="171.0" prefHeight="220.0" prefWidth="348.0">
+         <columns>
+            <TableColumn fx:id="idInstrument" prefWidth="72.0" text="Id" visible="false" />
+            <TableColumn fx:id="nomeInstrument" editable="false" prefWidth="223.0" text="Instrumento" />
+            <TableColumn fx:id="dateInstrumentDevo" prefWidth="123.0" sortable="false" text="Data devolução" />
+            <TableColumn fx:id="valorInstrumentoLoca" editable="false" minWidth="1.0" prefWidth="1.0" text="Valor" visible="false" />
+         </columns>
+      </TableView>
+      <Label layoutX="412.0" layoutY="144.0" text="Informe a data de devolução:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="587.0" layoutY="443.0" text="Total:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtTotal" editable="false" layoutX="643.0" layoutY="437.0" prefHeight="39.0" prefWidth="117.0" promptText="R$" text="R$ 0.0">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

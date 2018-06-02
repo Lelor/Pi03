@@ -46,7 +46,7 @@ public class AddProductScreenController implements Initializable {
 	
 	// variaveis  --------
 	int numSerie;
-	private String nome, cor, fornecedor, ano, tipo, marca, imgName = "guitar_shape.jpg";
+	private String nome, cor, fornecedor, ano, tipo, marca, imgName = "shape.png";
 	BigDecimal valorLocacao, valorCompra;
 	File fileImage;
 	Path from, to;
@@ -94,11 +94,11 @@ public class AddProductScreenController implements Initializable {
     	} catch (IllegalArgumentException ex) {
     		
     		// seta imagem default ------
-    		File fileDefault = new File("src/images/instruments/guitar_shape.jpg");
+    		File fileDefault = new File("src/images/instruments/shape.png");
             Image imageDefault = new Image(fileDefault.toURI().toString());
             imgInstrument.setImage(imageDefault);
             
-            imgName = "guitar_shape.jpg";
+            imgName = "shape.png";
 
 		}
 
@@ -128,7 +128,7 @@ public class AddProductScreenController implements Initializable {
         	
         	try {
         		
-        		if(imgName != "guitar_shape.jpg") {
+        		if(imgName != "shape.png") {
         			
         			// move imagem
             		Files.copy(from, to);
@@ -187,7 +187,7 @@ public class AddProductScreenController implements Initializable {
 		cbFornecedor.setValue("");
 		
 		// seta imagem default ------
-		File fileDefault = new File("src/images/instruments/guitar_shape.jpg");
+		File fileDefault = new File("src/images/instruments/shape.png");
         Image imageDefault = new Image(fileDefault.toURI().toString());
         imgInstrument.setImage(imageDefault);
     }
@@ -200,23 +200,23 @@ public class AddProductScreenController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		// seta imagem default ------
-		File file = new File("src/images/instruments/guitar_shape.jpg");
+		File file = new File("src/images/instruments/shape.png");
         Image image = new Image(file.toURI().toString());
         imgInstrument.setImage(image);
         
         ObsLists obs = new ObsLists();
         
         // preecnhe Combobox de fornecedores ----
-        cbFornecedor.setItems(obs.getObsListInstrument("fornecedor"));
+        cbFornecedor.setItems(obs.getMarcaTipoCorFornecInstrument("fornecedor"));
 
         // preecnhe Combobox de Cor ----
-        cbCor.setItems(obs.getObsListInstrument("cor"));
+        cbCor.setItems(obs.getMarcaTipoCorFornecInstrument("cor"));
         
         // preecnhe Combobox de Marca ----
-        cbMarca.setItems(obs.getObsListInstrument("marca"));
+        cbMarca.setItems(obs.getMarcaTipoCorFornecInstrument("marca"));
 
         // preecnhe Combobox de Tipo ----
-        cbTipo.setItems(obs.getObsListInstrument("tipo"));
+        cbTipo.setItems(obs.getMarcaTipoCorFornecInstrument("tipo"));
 
 	}
 	

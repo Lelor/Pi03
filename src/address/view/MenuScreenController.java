@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
-import javax.swing.event.ChangeEvent;
 
 import address.MainApp;
 import address.model.Instrument;
@@ -23,12 +22,10 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
  
 public class MenuScreenController implements Initializable{
 	
@@ -77,8 +74,7 @@ public class MenuScreenController implements Initializable{
 		if(ids_selecteds.isEmpty()){
 			JOptionPane.showMessageDialog(null, "Escolha ao menos um produto", "Alerta!", 2);
 		}else{
-			//TODO Implements new screen
-			JOptionPane.showMessageDialog(null, "Abre tela de locação");
+			mainApp.showRentScreen(ids_selecteds);
 		}
     	
     }
@@ -97,8 +93,6 @@ public class MenuScreenController implements Initializable{
 		File file = new File("src/images/system/logo.png");
         Image image = new Image(file.toURI().toString());
         logoImg.setImage(image);
-		
-		ObsLists ol = new ObsLists();
 		
 		// configurando as colunas na tabela -----
 		selectRow.setCellValueFactory(new PropertyValueFactory<Instrument, SimpleBooleanProperty>("selected"));
@@ -181,6 +175,8 @@ public class MenuScreenController implements Initializable{
 
 	        };
 		});
+		
+		ObsLists ol = new ObsLists();
 		
 		tableView.setItems(ol.getListInstrument());
 				

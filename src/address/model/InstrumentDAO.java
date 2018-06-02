@@ -1,6 +1,7 @@
 package address.model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -261,7 +262,12 @@ public class InstrumentDAO {
 		return msg;
 		
 	}
-
+	
+	/**
+	 * Exclui instrumento mudando sua flag 'ativo' para false.
+	 * @param id - Id do instrumento que será excluído.
+	 * @return - retorna a decisão do usuário através de um JOptionPane.showConfirmDialog.
+	 */
 	public int excludeInstrument(int id) {
 		
 		sql = "UPDATE instrumento SET ativo = ? WHERE idInstrumento = ?";
@@ -294,7 +300,38 @@ public class InstrumentDAO {
 		}
 		
 		return decision;
-		
 	}
-
+	
+	/**
+	 * Muda o status do instrumento.
+	 * @param status - 1: Disponível | 2: Locado | 3: Manutenção.
+	 * @param idsInstruments - ArrayList contendo os Ids dos instrumentos que mudaram o status.
+	 * @return retorna true ou false para tratar erro.
+	 */
+	public boolean changeStatus(int status, ArrayList<Integer> idsInstruments) {
+		
+		// muda status do instrumento para Locado
+		sql = "UPDATE instrumento SET statusIn = ? WHERE idInstrumento = ?";
+		
+		try {
+			
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			
+			// roda loop para mudar status do instrumento para locado
+			for(int i = 0; i < idsInstruments.size(); i++) {
+				
+				bd.st.setInt(1, status);
+				bd.st.setInt(2, idsInstruments.get(i));
+				
+				bd.st.executeUpdate();
+        	}
+			
+			return true;
+			
+		} catch (SQLException e) {
+			System.out.println("ERRO3: Falha ao mudar status do instrumento Instrumentos: " + e.toString());
+			return false;
+		}
+	}
 }

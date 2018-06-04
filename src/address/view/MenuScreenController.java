@@ -30,6 +30,10 @@ import javafx.scene.input.MouseEvent;
 public class MenuScreenController implements Initializable{
 	
 	private MainApp mainApp;
+    
+    public void setMainApp(MainApp mainApp){
+    	this.mainApp = mainApp;
+    }
 	
 	int id_slc_view;
 	ArrayList<Integer> ids_selected = new ArrayList<Integer>();
@@ -52,6 +56,11 @@ public class MenuScreenController implements Initializable{
     @FXML
     protected void showAddProductSceen(ActionEvent event) throws IOException {
     	mainApp.showAddProductScreen();
+    }
+    
+    @FXML
+    protected void showReturnScreen(ActionEvent event) throws IOException {
+    	mainApp.showReturnScreen();
     }
     
     @FXML
@@ -78,10 +87,7 @@ public class MenuScreenController implements Initializable{
 		}
     	
     }
-    
-    public void setMainApp(MainApp mainApp){
-    	this.mainApp = mainApp;
-    }
+
     
     /**
      * Inicializa classe de controle

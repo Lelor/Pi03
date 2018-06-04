@@ -1,10 +1,15 @@
 package address.model;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import address.services.BD;
+import address.services.Utilities;
+import javafx.util.converter.LocalDateStringConverter;
 
 public class RentDAO {
 	
@@ -14,6 +19,72 @@ public class RentDAO {
 	
 	public RentDAO() {
 		bd = new BD();
+	}
+	
+	/**
+	 * Conta numero de locações ativas ou inativas.
+	 * @param ativo - Boolean que define qual tipo de locação que será contado.
+	 * @return - Retorna numero de locações.
+	 */
+	public int countNumRent(boolean ativo) {
+		
+		String sql2 = "SELECT COUNT(idLocacao) AS total FROM locacao WHERE ativo = ?";
+		int countRow = 0;
+		
+		try {
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql2);
+			bd.st.setBoolean(1, ativo);
+			bd.rs = bd.st.executeQuery();
+			
+			if(bd.rs.next()){
+				countRow = bd.rs.getInt("total");
+			}
+			
+		} catch (SQLException e) {
+			
+			msg = "Falha ao recuperar lista! =[";
+			System.out.println(e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return countRow;
+	}
+	
+	/**
+	 * Conta o numero de instrumentos que tem em determinada locação.
+	 * @param idRent - Id da locação.
+	 * @return Retorna a quantidade de instrumentos locados
+	 */
+	public int countNumInstrumentInRent(int idRent) {
+		
+		String sql2 = "SELECT COUNT(idInstrumentoLocacao) AS total FROM locado WHERE idLocacao = ?";
+		int countRow = 0;
+		
+		try {
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql2);
+			bd.st.setInt(1, idRent);
+			bd.rs = bd.st.executeQuery();
+			
+			if(bd.rs.next()){
+				countRow = bd.rs.getInt("total");
+			}
+			
+		} catch (SQLException e) {
+			
+			msg = "Falha ao recuperar lista! =[";
+			System.out.println(e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return countRow;
 	}
 	
 	/**
@@ -56,13 +127,13 @@ public class RentDAO {
 				bd.st = bd.con.prepareStatement(sql);
 				
 				// roda loop para cadastrar os instrumentos com suas respectivas datas
-				for(int i = 0; i < rt.getIdInstrument().size(); i++) {
+				for(int i = 0; i < rt.getIdInstrumentList().size(); i++) {
 
 					//convert LocalDate to date sql
-					Date date = Date.valueOf(rt.getDataDevolucao().get(i));
+					Date date = Date.valueOf(rt.getDataDevolucaoList().get(i));
 					
 					bd.st.setDate(1, date);
-					bd.st.setInt(2, rt.getIdInstrument().get(i));
+					bd.st.setInt(2, rt.getIdInstrumentList().get(i));
 					bd.st.setInt(3, idLocacao);
 					
 					bd.st.executeUpdate();
@@ -71,7 +142,7 @@ public class RentDAO {
 				//muda status dos instrumentos locados
 				InstrumentDAO in = new InstrumentDAO();
 				
-				if(in.changeStatus(2, rt.idInstrument)) {
+				if(in.changeStatus(2, rt.idInstrumentList)) {
 					msg = "Locação efetuada com sucesso! =]";
 				}else{
 					msg = "Falha na locação! =[";
@@ -93,4 +164,340 @@ public class RentDAO {
 		
 		return msg;
 	}
+	
+	/**
+	 * Lista locações em aberto e fechadas.
+	 * @param ativo - se a locação está ativa ou nao.
+	 * @return - ArrayList de locações.
+	 */
+	public Rent[] listRent(boolean ativo) {
+		
+		sql = "SELECT l.idLocacao, l.dataRealizacao, l.dataTermino, l.desconto, l.descricao, l.pago, " + 
+				"l.idFuncionario, l.idCliente, c.nome as nomeCliente, f.nome as nomeFuncionario " + 
+				"FROM locacao l, cliente c, funcionario f " + 
+				"WHERE l.idCliente = c.idCliente AND l.idFuncionario = f.idFuncionario AND l.ativo = ?";
+		
+		int i = 0;
+		int numRow = countNumRent(ativo);
+		Rent[] rt = new Rent[numRow];
+//		int active = 1;
+//		
+//		if(!ativo) {
+//			active = 0;
+//		}
+		
+		try {
+			
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setBoolean(1, ativo);
+			bd.rs = bd.st.executeQuery();
+			
+			while(bd.rs.next()) {
+				
+				//table consult columns -----
+				// idLocacao, dataRealizacao, dataTermino, desconto, descricao, pago, idFuncionario, idCliente, 
+				//nomeCliente, nomeFuncionario
+				rt[i] = new Rent();
+				rt[i].setIdLocacao(bd.rs.getInt("idLocacao"));
+				rt[i].setDataRealizacao(bd.rs.getString("dataRealizacao"));
+				rt[i].setDataTermino(bd.rs.getString("dataTermino"));
+				rt[i].setDesconto(bd.rs.getBigDecimal("desconto"));
+				rt[i].setDescricao(bd.rs.getString("descricao"));
+				rt[i].setPago(bd.rs.getBoolean("pago"));
+				rt[i].setIdFuncionario(bd.rs.getInt("idFuncionario"));
+				rt[i].setIdCliente(bd.rs.getInt("idCliente"));
+				rt[i].setNomeCliente(bd.rs.getString("nomeCliente"));
+				rt[i].setNomeFuncionario(bd.rs.getString("nomeFuncionario"));
+				
+				i++;
+			}
+
+			
+		} catch (SQLException e) {
+			
+			msg = "Falha ao recuperar lista! =[";
+			System.out.println(e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return rt;
+		
+	}
+	
+	/**
+	 * Pega dados de uma locação.
+	 * @param idRent - Id da locação.
+	 * @return - Objeto Rent.
+	 */
+	public Rent getRent(int idRent) {
+		
+		sql = "SELECT l.idLocacao, l.dataRealizacao, l.dataTermino, l.desconto, l.descricao, l.pago, " + 
+				"l.idFuncionario, l.idCliente, c.nome as nomeCliente, f.nome as nomeFuncionario " + 
+				"FROM locacao l, cliente c, funcionario f " + 
+				"WHERE l.idCliente = c.idCliente AND l.idFuncionario = f.idFuncionario AND l.idLocacao = ?";
+		
+		Rent rt = new Rent();
+		
+		try {
+			
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setInt(1, idRent);
+			bd.rs = bd.st.executeQuery();
+			bd.rs.next();
+			
+			// idLocacao, dataRealizacao, dataTermino, desconto, descricao, pago, idFuncionario, idCliente, 
+			//nomeCliente, nomeFuncionario
+			rt = new Rent();
+			rt.setIdLocacao(bd.rs.getInt("idLocacao"));
+			rt.setDataRealizacao(bd.rs.getString("dataRealizacao"));
+			rt.setDataTermino(bd.rs.getString("dataTermino"));
+			rt.setDesconto(bd.rs.getBigDecimal("desconto"));
+			rt.setDescricao(bd.rs.getString("descricao"));
+			rt.setPago(bd.rs.getBoolean("pago"));
+			rt.setIdFuncionario(bd.rs.getInt("idFuncionario"));
+			rt.setIdCliente(bd.rs.getInt("idCliente"));
+			rt.setNomeCliente(bd.rs.getString("nomeCliente"));
+			rt.setNomeFuncionario(bd.rs.getString("nomeFuncionario"));
+			
+		} catch (SQLException e) {
+			
+			System.out.println(e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return rt;
+	}
+	
+	/**
+	 * Lista Instrumentos de determinada locação.
+	 * @param idRent - Id da locação.
+	 * @return - Retrona um array do objeto Rent.
+	 */
+	public Rent[] listInstrumentsRent(int idRent) {
+		
+		//seleciona instrumentos atrelados a locação 
+		sql = "SELECT l.idInstrumento, i.nome as instrumento, l.dataDevolucao, i.valorLocacao, l.multa " + 
+				"FROM locado l,instrumento i " + 
+				"WHERE l.idInstrumento = i.idInstrumento AND l.idLocacao = ?";
+		
+		int i = 0;
+		int numRow = countNumInstrumentInRent(idRent);
+		Rent[] rt = new Rent[numRow];
+		
+		try {
+			
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setInt(1, idRent);
+			bd.rs = bd.st.executeQuery();
+			
+			while(bd.rs.next()) {
+				
+				//table consult columns -----
+				//idInstrumento, instrumento, dataDevolucao, valorLocacao, multa
+				rt[i] = new Rent();
+				rt[i].setIdInstrument(bd.rs.getInt("idInstrumento"));
+				rt[i].setNomeInstrumento(bd.rs.getString("instrumento"));
+				rt[i].setDataDevolucao(bd.rs.getString("dataDevolucao"));
+				rt[i].setValorLocacao(bd.rs.getBigDecimal("valorLocacao"));
+				rt[i].setMulta(bd.rs.getBigDecimal("multa"));
+				
+				i++;
+			}
+
+			
+		} catch (SQLException e) {
+			
+			System.out.println("ERRO: SQL: " + e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return rt;
+	}
+	
+	/**
+	 * Pega dados dos instruementos atrelados a uma locação.
+	 * @param idRent - Id da locação.
+	 * @param idInstrument - Id do instrumento.
+	 * @return - Dados do instrumento.
+	 */
+	public Rent getInstrumentRent(int idRent, int idInstrument) {
+		
+		sql = "SELECT l.idInstrumento, l.dataDevolucao, l.dataDevolucaoEfetiva, l.observacao, l.multa, i.valorLocacao " + 
+				"FROM locado l,instrumento i " + 
+				"WHERE l.idInstrumento = i.idInstrumento AND l.idLocacao = ? AND l.idInstrumento = ?";
+		
+		Rent rt = new Rent();
+		
+		try {
+			
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setInt(1, idRent);
+			bd.st.setInt(2, idInstrument);
+			bd.rs = bd.st.executeQuery();
+			bd.rs.next();
+			
+			// idInstrumento, dataDevolucao, dataDevolucaoEfetiva, observacao, multa, valorLocacao
+			rt = new Rent();
+			rt.setIdInstrument(bd.rs.getInt("idInstrumento"));
+			rt.setDataDevolucao(bd.rs.getString("dataDevolucao"));
+			rt.setDataDevolucaoEfetiva(bd.rs.getString("dataDevolucaoEfetiva"));
+			rt.setObservacao(bd.rs.getString("observacao"));
+			rt.setMulta(bd.rs.getBigDecimal("multa"));
+			rt.setValorLocacao(bd.rs.getBigDecimal("valorLocacao"));
+			
+		} catch (SQLException e) {
+			
+			System.out.println(e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return rt;
+	}
+	
+	/**
+	 * Verifica se ainda há instrumentos para serem devolvidos.
+	 * @param idRent - Id da locação.
+	 * @return Verdaeiro ou falso.
+	 */
+	public boolean verifyInstrumentsReturn(int idRent) {
+		
+		sql = "SELECT dataDevolucaoEfetiva " + 
+				"FROM locacao, locado " + 
+				"WHERE locacao.idLocacao = locado.idLocacao AND locacao.idLocacao = ? AND locado.dataDevolucaoEfetiva IS NULL";
+		
+		boolean have = false;
+		
+		try {
+			
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setInt(1, idRent);
+			bd.rs = bd.st.executeQuery();
+			
+			if(bd.rs.next()) {
+				have = true;
+			}
+			
+		} catch (SQLException e) {
+			
+			System.out.println(e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return have;
+	}
+	
+	/**
+	 * Realiza a devolução do instrumento.
+	 * @param rt - Objeto locação.
+	 * @param manutencao - Se o instrumento irá para manutenção ou não.
+	 * @return - Mensaegm.
+	 */
+	public String updateInstrumentsRent(Rent rt, boolean manutencao) {
+		
+		InstrumentDAO inDAO = new InstrumentDAO();
+		
+		sql = "UPDATE locado SET dataDevolucaoEfetiva = getdate(), observacao = ?, multa = ? " + 
+				"WHERE idLocacao = ? AND idInstrumento = ?";
+		
+		try {
+			
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setString(1, rt.getObservacao());
+			bd.st.setBigDecimal(2, rt.getMulta());
+			bd.st.setInt(3, rt.getIdLocacao());
+			bd.st.setInt(4, rt.getIdInstrument());
+			
+			bd.st.executeUpdate();
+
+			if(manutencao) {
+				
+				sql = "INSERT INTO manutencao(tipo, dataEntrada, idInstrumento) " + 
+						"VALUES (?, getdate(), ?)";
+				
+				try {
+					
+					bd.st = bd.con.prepareStatement(sql);
+					
+					bd.st.setString(1, "Periódico");
+					bd.st.setInt(2, rt.getIdInstrument());
+					bd.st.executeUpdate();
+					
+					inDAO.changeStatusUnico(3, rt.getIdInstrument());
+					
+					msg = "Instrumento devolvido com sucesso! =]";
+					
+				} catch (Exception e) {
+					msg = "Ocorreu algum erro! =[";
+					System.out.println("ERRO2 manutenção" + e.toString());
+				}
+				
+			}else {
+				
+				inDAO.changeStatusUnico(1, rt.getIdInstrument());
+				msg = "Instrumento devolvido com sucesso! =]";
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			msg = "Erro ao devolver o instrumento! =[";
+			System.out.println("ERRO1: UPDATE: " + e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return msg;
+	}
+	
+	public String updateRent(int idRent) {
+		
+		sql = "UPDATE locacao set dataTermino = GETDATE(), pago = 1, ativo = 0 " + 
+				"WHERE idLocacao = ?";
+		
+		try {
+			
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setInt(1, idRent);
+			
+			bd.st.executeUpdate();
+				
+			msg = "Locação fechada com sucesso! =]";
+			
+		} catch (SQLException e) {
+			
+			msg = "Erro ao fechar locação o instrumento! =[";
+			System.out.println("ERRO1: UPDATE: " + e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return msg;
+	}
+	
 }

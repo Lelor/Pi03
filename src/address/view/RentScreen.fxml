@@ -17,15 +17,14 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btCadastrarCliente" layoutX="40.0" layoutY="400.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" text="+ Clientes" />
       <TextField layoutX="40.0" layoutY="103.0" prefHeight="25.0" prefWidth="293.0" />
       <Button fx:id="btBuscar" layoutX="345.0" layoutY="103.0" mnemonicParsing="false" text="Buscar" />
-      <Label layoutX="324.0" layoutY="413.0" prefHeight="25.0" prefWidth="76.0" text="Descrição:">
+      <Label layoutX="40.0" layoutY="404.0" prefHeight="25.0" prefWidth="76.0" text="Descrição:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextArea fx:id="txtDescricao" layoutX="40.0" layoutY="443.0" prefHeight="130.0" prefWidth="356.0" />
+      <TextArea fx:id="txtDescricao" layoutX="40.0" layoutY="430.0" prefHeight="143.0" prefWidth="356.0" wrapText="true" />
       <Label layoutX="569.0" layoutY="407.0" text="Desconto:">
          <font>
             <Font name="System Bold" size="14.0" />

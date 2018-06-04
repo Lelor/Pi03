@@ -303,7 +303,7 @@ public class InstrumentDAO {
 	}
 	
 	/**
-	 * Muda o status do instrumento.
+	 * Muda o status de varios instrumentos.
 	 * @param status - 1: Disponível | 2: Locado | 3: Manutenção.
 	 * @param idsInstruments - ArrayList contendo os Ids dos instrumentos que mudaram o status.
 	 * @return retorna true ou false para tratar erro.
@@ -326,6 +326,33 @@ public class InstrumentDAO {
 				
 				bd.st.executeUpdate();
         	}
+			
+			return true;
+			
+		} catch (SQLException e) {
+			System.out.println("ERRO3: Falha ao mudar status do instrumento Instrumentos: " + e.toString());
+			return false;
+		}
+	}
+	
+	/**
+	 * Muda o status de um unico instrumento.
+	 * @param status - 1: Disponível | 2: Locado | 3: Manutenção.
+	 * @param idsInstruments - Id do instrumento que mudara o status.
+	 * @return retorna true ou false para tratar erro.
+	 */
+	public boolean changeStatusUnico(int status, int idInstrument) {
+		
+		// muda status do instrumento para Locado
+		sql = "UPDATE instrumento SET statusIn = ? WHERE idInstrumento = ?";
+		
+		try {
+			
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setInt(1, status);
+			bd.st.setInt(2, idInstrument);
+			bd.st.executeUpdate();
 			
 			return true;
 			

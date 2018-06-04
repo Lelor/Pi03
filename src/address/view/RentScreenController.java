@@ -88,7 +88,7 @@ public class RentScreenController implements Initializable{
     	//variables ----
     	int idClient = 0;
     	ArrayList<Integer> idsInstruments = new ArrayList<Integer>();
-		ArrayList<LocalDate> datesDev = new ArrayList<LocalDate>();
+		ArrayList<String> datesDev = new ArrayList<String>();
 		BigDecimal desconto;
 		String descricao;
 		boolean pago;
@@ -109,10 +109,10 @@ public class RentScreenController implements Initializable{
 			for (Instrument in : tableViewInstrument.getItems()) {
 					
 				//pega a data de devolucao da tabela
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				LocalDate dateDevolucao = LocalDate.parse(in.getDataDevolucao().getValue(), dtf);
+//				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//				LocalDate dateDevolucao = LocalDate.parse(in.getDataDevolucao().getValue(), dtf);
 				
-				datesDev.add(dateDevolucao);
+				datesDev.add(in.getDataDevolucao().getValue());
 				idsInstruments.add(in.getId());
 				
 			}
@@ -136,8 +136,8 @@ public class RentScreenController implements Initializable{
 			//TODO : Informar id correto do funcionario quando houver login
 			rt.setIdFuncionario(1);
 			rt.setIdCliente(idClient);
-			rt.setIdInstrument(idsInstruments);
-			rt.setDataDevolucao(datesDev);
+			rt.setIdInstrumentList(idsInstruments);
+			rt.setDataDevolucaoList(datesDev);
 			rt.setDesconto(desconto);
 			rt.setDescricao(descricao);
 			rt.setPago(pago);
@@ -213,6 +213,7 @@ public class RentScreenController implements Initializable{
 		nameClient.setCellValueFactory(new PropertyValueFactory<Client, String>("nome"));
 		cpfClient.setCellValueFactory(new PropertyValueFactory<Client, String>("cpf"));
 		
+		// configura tabela de intrumentos
 		idInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, Integer>("id"));
 		nomeInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, String>("nome"));
 		dateInstrumentDevo.setCellValueFactory(new PropertyValueFactory<Instrument, SimpleStringProperty>("dataDevolucao"));

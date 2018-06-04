@@ -9,6 +9,7 @@ import address.view.LoginController;
 import address.view.MenuScreenController;
 import address.view.ProductDetailScreenController;
 import address.view.RentScreenController;
+import address.view.ReturnScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -92,6 +93,18 @@ public class MainApp extends Application{
         rootLayout.setCenter(loginScreen);
         
         AddProductScreenController controller = loader.getController();
+        controller.setMainApp(this);
+	}
+	
+	public void showReturnScreen() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("view\\ReturnScreen.fxml"));
+        AnchorPane screen = (AnchorPane) loader.load();
+
+        // puts the new product screen inside the root layout.
+        rootLayout.setCenter(screen);
+        
+        ReturnScreenController controller = loader.getController();
         controller.setMainApp(this);
 	}
 	

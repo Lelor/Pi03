@@ -7,6 +7,15 @@
 	-fx-font-weight: bold;
 	-fx-border-color:  #610a02;
 }
+.bt-action-2{
+	-fx-background-color: #b55a0e;
+	-fx-text-fill: #FFFFFF;
+	-fx-min-width: 150px;
+	-fx-pref-height: 40px;
+	-fx-font-size: 16px;
+	-fx-font-weight: bold;
+	-fx-border-color: #9e4a04;
+}
 .tts-head{
 	-fx-font-size: 20px;
 	-fx-font-weight: bold;

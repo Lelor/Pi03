@@ -10,65 +10,100 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox layoutX="69.0" layoutY="536.0" prefHeight="40.0" prefWidth="664.0" spacing="20.0" AnchorPane.rightAnchor="67.0" AnchorPane.topAnchor="536.0">
+      <VBox layoutY="-2.0" prefHeight="600.0" prefWidth="800.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Clientes" />
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Fornecedores" />
-            <Button layoutX="419.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Devolução" />
-            <Button layoutX="519.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Manutenção" />
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Usuários" />
-            <Button layoutX="647.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Relatórios" />
+            <HBox prefHeight="76.0" prefWidth="740.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="409.0">
+                     <children>
+                        <ImageView fx:id="logoImg" fitHeight="46.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/system/logo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="102.0" prefWidth="349.0">
+                     <children>
+                        <Label text="User  |">
+                           <font>
+                              <Font name="Dubai Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbExit" onMouseClicked="#lbExitHandler" text=" Sair" textFill="RED">
+                           <font>
+                              <Font name="Dubai Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="740.0">
+               <children>
+                  <TextField prefHeight="25.0" prefWidth="678.0" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Buscar" />
+               </children>
+            </HBox>
+            <HBox />
+            <HBox prefHeight="282.0" prefWidth="740.0">
+               <children>
+                  <TableView fx:id="tableView" accessibleRole="IMAGE_VIEW" editable="true" prefHeight="282.0" prefWidth="760.0">
+                    <columns>
+                        <TableColumn fx:id="selectRow" prefWidth="50.0" resizable="false" sortable="false" />
+                      <TableColumn fx:id="idInstrument" editable="false" minWidth="20.0" prefWidth="40.0" resizable="false" text="#" visible="false" />
+                      <TableColumn fx:id="nameInstrument" editable="false" prefWidth="373.0" text="Nome" />
+                        <TableColumn fx:id="brandInstrument" editable="false" minWidth="0.0" prefWidth="104.0" text="Marca" />
+                        <TableColumn fx:id="priceInstrument" editable="false" prefWidth="105.0" text="Valor" />
+                        <TableColumn fx:id="availableInstrument" editable="false" prefWidth="106.0" text="Status" />
+                        <TableColumn fx:id="availableInstrumentId" editable="false" maxWidth="1.7976931348623157E308" prefWidth="61.0" text="Status ID" visible="false" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="740.0" style="-fx-background-color: #FFF; -fx-border-color: #CCC;">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#showAddProductSceen" prefHeight="25.0" prefWidth="140.0" text="+ Instrumento">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="63.0" prefWidth="740.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#rentInstrument" prefHeight="41.0" prefWidth="338.0" style="-fx-font-weight: bold;" styleClass="bt-action" text=":: Locar selecionados ::" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#showReturnScreen" prefHeight="40.0" prefWidth="179.0" styleClass="bt-action-2" text="Ver locações" textFill="#b55a0e" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="68.0" prefWidth="740.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Clientes" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Fornecedores" />
+                  <Button layoutX="519.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Manutenção" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Usuários" />
+                  <Button layoutX="647.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Relatórios" />
+               </children>
+            </HBox>
          </children>
-      </HBox>
-      <HBox layoutX="20.0" layoutY="104.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
-         <children>
-            <TextField layoutX="19.0" layoutY="104.0" prefHeight="25.0" prefWidth="714.0" AnchorPane.leftAnchor="20.0">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </TextField>
-            <Button layoutX="563.0" layoutY="104.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="56.0" text="Buscar" />
-         </children>
-      </HBox>
-      <HBox layoutX="648.0" layoutY="45.0">
-         <children>
-            <Label layoutX="648.0" layoutY="45.0" text="User  |">
-               <font>
-                  <Font name="Dubai Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbExit" layoutX="703.0" layoutY="45.0" onMouseClicked="#lbExitHandler" text=" Sair" textFill="RED">
-               <font>
-                  <Font name="Dubai Bold" size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-      <TableView fx:id="tableView" accessibleRole="IMAGE_VIEW" editable="true" layoutX="20.0" layoutY="152.0" prefHeight="282.0" prefWidth="760.0" AnchorPane.bottomAnchor="166.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="152.0">
-        <columns>
-            <TableColumn fx:id="selectRow" prefWidth="50.0" resizable="false" sortable="false" />
-          <TableColumn fx:id="idInstrument" editable="false" minWidth="20.0" prefWidth="40.0" resizable="false" text="#" visible="false" />
-          <TableColumn fx:id="nameInstrument" editable="false" prefWidth="373.0" text="Nome" />
-            <TableColumn fx:id="brandInstrument" editable="false" minWidth="0.0" prefWidth="112.0" text="Marca" />
-            <TableColumn fx:id="priceInstrument" editable="false" prefWidth="112.0" text="Valor" />
-            <TableColumn fx:id="availableInstrument" editable="false" prefWidth="112.0" text="Status" />
-            <TableColumn fx:id="availableInstrumentId" editable="false" maxWidth="1.7976931348623157E308" prefWidth="61.0" text="Status ID" visible="false" />
-        </columns>
-      </TableView>
-      <Button layoutX="652.0" layoutY="445.0" mnemonicParsing="false" onAction="#showAddProductSceen" prefHeight="39.0" prefWidth="128.0" text="+ Instrumento" />
-      <Button layoutX="310.0" layoutY="458.0" mnemonicParsing="false" onAction="#rentInstrument" prefHeight="46.0" prefWidth="181.0" style="-fx-font-weight: bold;" styleClass="bt-action" text=":: Locação ::" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <ImageView fx:id="logoImg" fitHeight="46.0" fitWidth="221.0" layoutX="20.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../images/system/logo.png" />
-         </image>
-      </ImageView>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>

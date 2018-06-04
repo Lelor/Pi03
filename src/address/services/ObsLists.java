@@ -3,6 +3,7 @@ package address.services;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,6 +11,8 @@ import address.model.Client;
 import address.model.ClientDAO;
 import address.model.Instrument;
 import address.model.InstrumentDAO;
+import address.model.Rent;
+import address.model.RentDAO;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -20,6 +23,8 @@ public class ObsLists {
 	private String sql, msg;
 	private int id;
 	private BD bd;
+	String dateView;
+	Utilities ut;
 	
 	public ObsLists() {
 	}
@@ -97,6 +102,11 @@ public class ObsLists {
 		return obsList;
 	}
 	
+	/**
+	 * Observable list para listar instrumentos na tela de locação.
+	 * @param idsInstrumentsRent - Ids dos Instrumentos que seram listados.
+	 * @return - Retorna uma Observable list dos instrumentos.
+	 */
 	public ObservableList<Instrument> getListInstrumentRent(ArrayList<Integer> idsInstrumentsRent){
 		
 		ObservableList<Instrument> obsList = FXCollections.observableArrayList();
@@ -113,4 +123,53 @@ public class ObsLists {
 		return obsList;
 	}
 	
+	/**
+	 * Lista locações ativas e inativas.
+	 * @param ativo - variavel que determina se a locação esta ativa ou inativa.
+	 * @return - retorna lista de locações.
+	 */
+	public ObservableList<Rent> getListRent(boolean ativo){
+		
+		ObservableList<Rent> obsList = FXCollections.observableArrayList();
+		
+		RentDAO objDAO = new RentDAO();
+		
+		Rent[] obj = objDAO.listRent(ativo);
+		
+		ut = new Utilities();
+		
+		for(int i = 0; i < obj.length;i++) {
+			
+			// formata data para exibição
+			dateView = ut.dateFormatView(obj[i].getDataRealizacao());
+			obsList.add(new Rent(obj[i].getIdLocacao(), obj[i].getNomeCliente(), dateView));
+		}
+	
+		return obsList;
+	}
+	
+	/**
+	 * Pega lista de instrumentos locados referente a uma locação.
+	 * @param idRent - Id da locação.
+	 * @return - Retora uma observable list dos instrumentos.
+	 */
+	public ObservableList<Rent> getListInstrumentRent(int idRent){
+		
+		ObservableList<Rent> obsList = FXCollections.observableArrayList();
+		
+		RentDAO objDAO = new RentDAO();
+		
+		Rent[] obj = objDAO.listInstrumentsRent(idRent);
+		
+		ut = new Utilities();
+		
+		for(int i = 0; i < obj.length;i++) {
+			
+			// formata data para exibição
+			dateView = ut.dateFormatView(obj[i].getDataDevolucao());
+			obsList.add(new Rent(obj[i].getIdInstrument(), obj[i].getNomeInstrumento(), dateView, obj[i].getValorLocacao(), obj[i].getMulta()));
+		}
+	
+		return obsList;
+	}
 }

@@ -6,12 +6,12 @@ import address.services.BD;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class FornecedorDAO {
+public class ProviderDAO {
 
 	private String sql, msg;
 	private BD bd;
 	
-	public FornecedorDAO() {
+	public ProviderDAO() {
 		bd = new BD();
 	}
 }

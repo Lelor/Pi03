@@ -1,4 +1,4 @@
-package address.view;
+package address.controller;
 
 import java.awt.PageAttributes.OriginType;
 import java.awt.image.BufferedImage;

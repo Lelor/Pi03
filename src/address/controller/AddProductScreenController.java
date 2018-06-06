@@ -1,4 +1,4 @@
-package address.view;
+package address.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

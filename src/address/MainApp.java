@@ -4,12 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import address.view.AddProductScreenController;
-import address.view.LoginController;
-import address.view.MenuScreenController;
-import address.view.ProductDetailScreenController;
-import address.view.RentScreenController;
-import address.view.ReturnScreenController;
+import address.controller.AddProductScreenController;
+import address.controller.LoginController;
+import address.controller.MenuScreenController;
+import address.controller.ProductDetailScreenController;
+import address.controller.RentScreenController;
+import address.controller.ReturnScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

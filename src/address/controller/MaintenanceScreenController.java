@@ -1,4 +1,4 @@
-package address.view;
+package address.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;

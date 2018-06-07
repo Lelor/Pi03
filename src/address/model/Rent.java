@@ -27,7 +27,7 @@ public class Rent {
 		this.dataRealizacao = dataRealizacao;
 	}
 
-	// Construtoe para listagem de instrumentos locados
+	// Construtor para listagem de instrumentos locados
 	public Rent(int idInstrument, String nomeInstrumento, String dataDevolucao, BigDecimal valorLocacao, BigDecimal multa) {
 		this.idInstrument = idInstrument;
 		this.valorLocacao = valorLocacao;

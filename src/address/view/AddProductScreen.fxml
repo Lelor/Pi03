@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="579.0" prefWidth="800.0" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.view.AddProductScreenController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.controller.AddProductScreenController">
    <children>
       <VBox prefHeight="579.0" prefWidth="800.0" styleClass="full-container">
          <children>

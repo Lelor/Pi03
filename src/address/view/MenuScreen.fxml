@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutY="-2.0" prefHeight="600.0" prefWidth="800.0">
+      <VBox layoutY="-2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="full-container">
          <children>
             <HBox prefHeight="76.0" prefWidth="740.0">
                <children>
@@ -30,12 +30,17 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="102.0" prefWidth="349.0">
                      <children>
-                        <Label text="User  |">
+                        <Label styleClass="user" text="User " textFill="#38a9da">
                            <font>
                               <Font name="Dubai Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbExit" onMouseClicked="#lbExitHandler" text=" Sair" textFill="RED">
+                        <Label text="|" textFill="WHITE">
+                           <font>
+                              <Font name="Dubai Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbExit" onMouseClicked="#lbExitHandler" styleClass="sair" text=" Sair" textFill="RED">
                            <font>
                               <Font name="Dubai Bold" size="18.0" />
                            </font>
@@ -44,35 +49,52 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="740.0">
+            <HBox alignment="CENTER" prefHeight="59.0" prefWidth="740.0">
                <children>
-                  <TextField prefHeight="25.0" prefWidth="678.0" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Buscar" />
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="740.0" styleClass="wrap-search">
+                     <children>
+                        <TextField maxHeight="-Infinity" prefHeight="84.0" prefWidth="689.0" styleClass="input-search" />
+                        <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" styleClass="bt-search" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
             <HBox />
-            <HBox prefHeight="282.0" prefWidth="740.0">
+            <HBox prefHeight="247.0" prefWidth="740.0">
                <children>
-                  <TableView fx:id="tableView" accessibleRole="IMAGE_VIEW" editable="true" prefHeight="282.0" prefWidth="760.0">
+                  <TableView fx:id="tableView" accessibleRole="IMAGE_VIEW" editable="true" focusTraversable="false" prefHeight="242.0" prefWidth="740.0">
                     <columns>
                         <TableColumn fx:id="selectRow" prefWidth="50.0" resizable="false" sortable="false" />
                       <TableColumn fx:id="idInstrument" editable="false" minWidth="20.0" prefWidth="40.0" resizable="false" text="#" visible="false" />
-                      <TableColumn fx:id="nameInstrument" editable="false" prefWidth="373.0" text="Nome" />
-                        <TableColumn fx:id="brandInstrument" editable="false" minWidth="0.0" prefWidth="104.0" text="Marca" />
-                        <TableColumn fx:id="priceInstrument" editable="false" prefWidth="105.0" text="Valor" />
-                        <TableColumn fx:id="availableInstrument" editable="false" prefWidth="106.0" text="Status" />
+                      <TableColumn fx:id="nameInstrument" editable="false" prefWidth="373.0" resizable="false" text="Nome" />
+                        <TableColumn fx:id="brandInstrument" editable="false" minWidth="0.0" prefWidth="104.0" resizable="false" text="Marca" />
+                        <TableColumn fx:id="priceInstrument" editable="false" prefWidth="105.0" resizable="false" text="Valor" />
+                        <TableColumn fx:id="availableInstrument" editable="false" prefWidth="106.0" resizable="false" text="Status" />
                         <TableColumn fx:id="availableInstrumentId" editable="false" maxWidth="1.7976931348623157E308" prefWidth="61.0" text="Status ID" visible="false" />
                     </columns>
                   </TableView>
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="740.0" style="-fx-background-color: #FFF; -fx-border-color: #CCC;">
+            <HBox alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="740.0" style="-fx-background-color: #4b4b4b;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#showAddProductSceen" prefHeight="25.0" prefWidth="140.0" text="+ Instrumento">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="405.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#maintenenceInstrument" prefHeight="31.0" prefWidth="188.0" styleClass="bt" text="Mover para manutenção">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="400.0" style="-fx-background-color: #4b4b4b;">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#showAddProductSceen" prefHeight="25.0" prefWidth="140.0" styleClass="bt" text="+ Instrumento">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -80,21 +102,21 @@
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="63.0" prefWidth="740.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#rentInstrument" prefHeight="41.0" prefWidth="338.0" style="-fx-font-weight: bold;" styleClass="bt-action" text=":: Locar selecionados ::" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#rentInstrument" prefHeight="41.0" prefWidth="228.0" styleClass="bt-action" text=":: Realizar locação ::" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#showReturnScreen" prefHeight="40.0" prefWidth="179.0" styleClass="bt-action-2" text="Ver locações" textFill="#b55a0e" />
+                  <Button mnemonicParsing="false" onAction="#showReturnScreen" prefHeight="40.0" prefWidth="179.0" style="-fx-background-color: #02802e;" styleClass="bt-action-2" text="Ver locações" textFill="#b55a0e" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="68.0" prefWidth="740.0" spacing="20.0">
+            <HBox alignment="BOTTOM_CENTER" prefHeight="55.0" prefWidth="740.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Clientes" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Fornecedores" />
-                  <Button layoutX="519.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Manutenção" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Usuários" />
-                  <Button layoutX="647.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Relatórios" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="bt" text="Clientes" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="bt" text="Fornecedores" />
+                  <Button layoutX="519.0" layoutY="544.0" mnemonicParsing="false" onAction="#showMaintenanceScreen" prefHeight="40.0" prefWidth="90.0" styleClass="bt" text="Manutenção" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="bt" text="Usuários" />
+                  <Button layoutX="647.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="bt" text="Relatórios" />
                </children>
             </HBox>
          </children>

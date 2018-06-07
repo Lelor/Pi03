@@ -1,16 +1,14 @@
 package address.services;
 
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 import address.model.Client;
 import address.model.ClientDAO;
 import address.model.Instrument;
 import address.model.InstrumentDAO;
+import address.model.Maintenance;
+import address.model.MaintenanceDAO;
 import address.model.Rent;
 import address.model.RentDAO;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -171,5 +169,34 @@ public class ObsLists {
 		}
 	
 		return obsList;
+	}
+	
+	public ObservableList<Maintenance> getListMaintenance(boolean ativo){
+		
+		ObservableList<Maintenance> obsList = FXCollections.observableArrayList();
+		
+		MaintenanceDAO objDAO = new MaintenanceDAO();
+		
+		Maintenance[] obj = objDAO.listMaintenance(ativo);
+		
+		ut = new Utilities();
+		
+		String dateEntrada, dateSaida;
+		
+		for(int i = 0; i < obj.length;i++) {
+			
+			dateEntrada = ut.dateFormatView(obj[i].getDataEntrada());
+			
+			try {
+				dateSaida  = ut.dateFormatView(obj[i].getDataSaida());
+			}catch (Exception e) {
+				dateSaida  = "--------------";
+			} 
+			
+			obsList.add(new Maintenance(obj[i].getIdManutencao(), obj[i].getIdInstrumento(), obj[i].getNomeinstrumento(), dateEntrada, dateSaida));
+		}
+	
+		return obsList;
+		
 	}
 }

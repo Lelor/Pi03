@@ -32,6 +32,10 @@ public class AddProductScreenController implements Initializable {
 	
 	private MainApp mainApp;
 	
+    public void setMainApp(MainApp mainApp){
+    	this.mainApp = mainApp;
+    }
+	
 	// create fields -----------
 	@FXML private TextField txtNumSerie;
 	@FXML private TextField txtNome;
@@ -50,7 +54,7 @@ public class AddProductScreenController implements Initializable {
 	BigDecimal valorLocacao, valorCompra;
 	File fileImage;
 	Path from, to;
-
+	
     @FXML
     protected void getImage(ActionEvent event) throws IOException {
     	
@@ -103,7 +107,7 @@ public class AddProductScreenController implements Initializable {
 		}
 
     }
-
+    
     @FXML
     protected void registerProduct(ActionEvent event) throws IOException {
     
@@ -192,10 +196,6 @@ public class AddProductScreenController implements Initializable {
         imgInstrument.setImage(imageDefault);
     }
     
-    public void setMainApp(MainApp mainApp){
-    	this.mainApp = mainApp;
-    }
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		

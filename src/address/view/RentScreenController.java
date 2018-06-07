@@ -108,10 +108,6 @@ public class RentScreenController implements Initializable{
 			
 			for (Instrument in : tableViewInstrument.getItems()) {
 					
-				//pega a data de devolucao da tabela
-//				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//				LocalDate dateDevolucao = LocalDate.parse(in.getDataDevolucao().getValue(), dtf);
-				
 				datesDev.add(in.getDataDevolucao().getValue());
 				idsInstruments.add(in.getId());
 				
@@ -146,19 +142,15 @@ public class RentScreenController implements Initializable{
 			JOptionPane.showMessageDialog(null, rtDAO.insertRent(rt), "Alert!", 2);
 			mainApp.showMainMenu(0, null);
 			
-			//testa o que ta vindo
-//			System.out.println("Instrument id: " + idsInstruments.toString());
-//			System.out.println("Datas: " + datesDev.toString());
-//			System.out.println("Desconto: " + desconto.toString());
-//			System.out.println("Descrição: " + descricao);
-//			System.out.println("Pago: " + pago);
-			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Informe a(s) data(s) de devolução", "Alerta!", 2);
 		}
 		
     }
     
+    /**
+     * Atualiza os campos referentes ao valor total da locação.
+     */
     public void updateTotal() {
 
     	BigDecimal valorTotal = new BigDecimal(0);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -8,78 +9,180 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: ffffff;" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="40.0" layoutY="30.0" styleClass="tts-head" text="Locação" textFill="#59176b">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <TextField layoutX="40.0" layoutY="103.0" prefHeight="25.0" prefWidth="293.0" />
-      <Button fx:id="btBuscar" layoutX="345.0" layoutY="103.0" mnemonicParsing="false" text="Buscar" />
-      <Label layoutX="40.0" layoutY="404.0" prefHeight="25.0" prefWidth="76.0" text="Descrição:">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <TextArea fx:id="txtDescricao" layoutX="40.0" layoutY="430.0" prefHeight="143.0" prefWidth="356.0" wrapText="true" />
-      <Label layoutX="569.0" layoutY="407.0" text="Desconto:">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtDesconto" layoutX="643.0" layoutY="404.0" onAction="#onEnter" prefHeight="25.0" prefWidth="117.0" promptText="R$" text="0" />
-      <CheckBox fx:id="cbPago" layoutX="703.0" layoutY="493.0" mnemonicParsing="false" text="Pago">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </CheckBox>
-      <Button layoutX="511.0" layoutY="529.0" mnemonicParsing="false" onAction="#doRent" prefHeight="40.0" prefWidth="250.0" styleClass="bt-action" text=":: Efetuar Locação ::">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="btVoltar" layoutX="640.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Voltar">
-         <font>
-            <Font name="Dubai Bold" size="14.0" />
-         </font>
-      </Button>
-      <TableView fx:id="tableViewClient" layoutX="40.0" layoutY="171.0" prefHeight="220.0" prefWidth="356.0">
-        <columns>
-            <TableColumn fx:id="idClient" prefWidth="72.0" text="Id" visible="false" />
-          <TableColumn fx:id="nameClient" prefWidth="220.0" text="Nome" />
-            <TableColumn fx:id="cpfClient" prefWidth="135.0" text="CPF" />
-        </columns>
-      </TableView>
-      <Label layoutX="40.0" layoutY="144.0" text="Selecione o cliente:">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <TableView fx:id="tableViewInstrument" editable="true" layoutX="412.0" layoutY="171.0" prefHeight="220.0" prefWidth="348.0">
-         <columns>
-            <TableColumn fx:id="idInstrument" prefWidth="72.0" text="Id" visible="false" />
-            <TableColumn fx:id="nomeInstrument" editable="false" prefWidth="223.0" text="Instrumento" />
-            <TableColumn fx:id="dateInstrumentDevo" prefWidth="123.0" sortable="false" text="Data devolução" />
-            <TableColumn fx:id="valorInstrumentoLoca" editable="false" minWidth="1.0" prefWidth="1.0" text="Valor" visible="false" />
-         </columns>
-      </TableView>
-      <Label layoutX="412.0" layoutY="144.0" text="Informe a data de devolução:">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="587.0" layoutY="443.0" text="Total:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtTotal" editable="false" layoutX="643.0" layoutY="437.0" prefHeight="39.0" prefWidth="117.0" promptText="R$" text="R$ 0.0">
-         <font>
-            <Font name="System Bold Italic" size="18.0" />
-         </font>
-      </TextField>
+      <VBox layoutY="-1.0" prefHeight="200.0" prefWidth="100.0" styleClass="full-container">
+         <children>
+            <HBox prefHeight="58.0" prefWidth="740.0">
+               <children>
+                  <HBox prefHeight="38.0" prefWidth="640.0">
+                     <children>
+                        <Label styleClass="tts-head" text="Locação" textFill="#59176b">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="122.0">
+                     <children>
+                        <Button fx:id="btVoltar" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" styleClass="bt-voltar" text="&lt;- voltar">
+                           <font>
+                              <Font name="Dubai Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="39.0" prefWidth="740.0">
+               <children>
+                  <HBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="357.0" styleClass="wrap-search">
+                     <children>
+                        <TextField prefHeight="33.0" prefWidth="349.0" styleClass="input-search" />
+                        <Button fx:id="btBuscar" maxWidth="72.0" mnemonicParsing="false" prefWidth="72.0" styleClass="bt-search" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="241.0" prefWidth="800.0">
+               <children>
+                  <VBox prefHeight="241.0" prefWidth="361.0">
+                     <children>
+                        <Label text="Selecione o cliente:">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tableViewClient" prefHeight="220.0" prefWidth="356.0">
+                          <columns>
+                              <TableColumn fx:id="idClient" prefWidth="72.0" text="Id" visible="false" />
+                            <TableColumn fx:id="nameClient" prefWidth="220.0" text="Nome" />
+                              <TableColumn fx:id="cpfClient" prefWidth="135.0" text="CPF" />
+                          </columns>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="241.0" prefWidth="39.0" />
+                  <VBox prefHeight="241.0" prefWidth="352.0">
+                     <children>
+                        <Label text="Informe a data de devolução:">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tableViewInstrument" editable="true" prefHeight="220.0" prefWidth="348.0">
+                           <columns>
+                              <TableColumn fx:id="idInstrument" prefWidth="72.0" text="Id" visible="false" />
+                              <TableColumn fx:id="nomeInstrument" editable="false" prefWidth="211.0" text="Instrumento" />
+                              <TableColumn fx:id="dateInstrumentDevo" prefWidth="135.0" sortable="false" text="Data devolução" />
+                              <TableColumn fx:id="valorInstrumentoLoca" editable="false" minWidth="1.0" prefWidth="1.0" text="Valor" visible="false" />
+                           </columns>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="155.0" prefWidth="740.0">
+               <children>
+                  <VBox prefHeight="155.0" prefWidth="370.0">
+                     <children>
+                        <Label prefHeight="25.0" prefWidth="76.0" text="Descrição:">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextArea fx:id="txtDescricao" prefHeight="143.0" prefWidth="356.0" style="-: #000;" wrapText="true" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="128.0" prefWidth="54.0" />
+                  <VBox alignment="CENTER_LEFT" prefHeight="111.0" prefWidth="111.0">
+                     <children>
+                        <CheckBox fx:id="cbPago" mnemonicParsing="false" text="Pago">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="258.0">
+                     <children>
+                        <HBox prefHeight="55.0" prefWidth="248.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="128.0">
+                                 <children>
+                                    <Label prefHeight="20.0" prefWidth="98.0" text="Desconto:">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="49.0" prefWidth="197.0">
+                                 <children>
+                                    <TextField fx:id="txtDesconto" onAction="#onEnter" prefHeight="25.0" prefWidth="175.0" promptText="R$" text="0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="52.0" prefWidth="236.0">
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="52.0" prefWidth="97.0">
+                                 <children>
+                                    <Label prefHeight="27.0" prefWidth="101.0" text="Total:">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="52.0" prefWidth="164.0">
+                                 <children>
+                                    <TextField fx:id="txtTotal" editable="false" prefHeight="41.0" prefWidth="175.0" promptText="R$" text="R$ 0.0">
+                                       <font>
+                                          <Font name="System Bold Italic" size="18.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="39.0" prefWidth="740.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#doRent" prefHeight="40.0" prefWidth="250.0" styleClass="bt-action" text=":: Efetuar Locação ::">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

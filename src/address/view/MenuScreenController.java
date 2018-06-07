@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import address.MainApp;
 import address.model.Instrument;
+import address.model.MaintenanceDAO;
 import address.services.ObsLists;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
@@ -18,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -64,10 +66,15 @@ public class MenuScreenController implements Initializable{
     }
     
     @FXML
+    protected void showMaintenanceScreen(ActionEvent event) throws IOException {
+    	mainApp.showMaintenanceScreen();
+    }
+    
+    @FXML
     protected void lbExitHandler() throws IOException {
     	mainApp.showLoginScreen();
     }
-    
+
     @FXML
     protected void rentInstrument(ActionEvent event) throws IOException {
     	// percorre table view
@@ -81,14 +88,43 @@ public class MenuScreenController implements Initializable{
 		}
 		
 		if(ids_selecteds.isEmpty()){
-			JOptionPane.showMessageDialog(null, "Escolha ao menos um produto", "Alerta!", 2);
+			JOptionPane.showMessageDialog(null, "Escolha ao menos um instrumento para locar", "Alerta!", 2);
 		}else{
 			mainApp.showRentScreen(ids_selecteds);
 		}
     	
     }
-
     
+    
+    @FXML
+    protected void maintenenceInstrument(ActionEvent event) throws IOException {
+    	// percorre table view
+    	
+    	ArrayList<Integer> ids_selecteds = new ArrayList<Integer>();
+		
+    	for (Instrument in : tableView.getItems()) {
+    		if( in.getSelected().getValue()) { // se checkbox estiver checado/true entao insere valor no array 
+    			ids_selecteds.add(in.getId());
+    		}
+		}
+		
+		if(ids_selecteds.isEmpty()){
+			JOptionPane.showMessageDialog(null, "Escolha ao menos um instrumento para mover para manutenção", "Alerta!", 2);
+		}else{
+			
+			MaintenanceDAO mnDAO = new MaintenanceDAO();
+			
+			if(mnDAO.insertMaintenance(ids_selecteds)) {
+				mainApp.showMaintenanceScreen();
+			}else {
+				JOptionPane.showMessageDialog(null, "Ops! Algo deu errado. =[", "Alerta!", 2);
+			}
+			
+			
+		}
+    	
+    }
+
     /**
      * Inicializa classe de controle
      */
@@ -109,17 +145,6 @@ public class MenuScreenController implements Initializable{
 		availableInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, String>("status"));
 		availableInstrumentId.setCellValueFactory(new PropertyValueFactory<Instrument, String>("statusId"));
 
-		// adiciona campo de checkbox à lista de instrumentos com callback para mudar o value de false para true
-//		selectRow.setCellFactory(CheckBoxTableCell.forTableColumn(
-//				
-//			new Callback<Integer, ObservableValue<Boolean>>() {
-//			    @Override
-//			    public ObservableValue<Boolean> call(Integer param) {
-//    				return tableView.getItems().get(param).getSelected();
-//			    }
-//			}
-//		));
-		
 		// Seta checkbox nas cols. Desabilita se instrumentos estiver indisponivel
 		selectRow.setCellFactory(column -> {
 	        return new TableCell<Instrument, SimpleBooleanProperty>() {

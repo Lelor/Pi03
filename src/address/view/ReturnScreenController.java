@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -143,7 +144,6 @@ public class ReturnScreenController implements Initializable{
 			} catch (Exception e) {
 				rt.setMulta(new BigDecimal(0));
 			}
-    		
     		
     		try {
     			
@@ -359,6 +359,8 @@ public class ReturnScreenController implements Initializable{
  	    rentViewActive.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
  	        if (newSelection != null) {
  	        	
+ 	        	rentViewDesactive.getSelectionModel().clearSelection();
+ 	        	
  	        	RentDAO rtDAO = new RentDAO();
  	        	
  	        	int idRent = newSelection.getIdLocacao();
@@ -390,6 +392,8 @@ public class ReturnScreenController implements Initializable{
  	    
  	   rentViewDesactive.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 	        if (newSelection != null) {
+	        	
+	        	rentViewActive.getSelectionModel().clearSelection();
 	        	
 	        	int idRent = newSelection.getIdLocacao();
 	        	lblIdRent.setText(String.valueOf(idRent));

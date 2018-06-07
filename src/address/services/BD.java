@@ -19,6 +19,10 @@ public class BD {
 	public Statement stmt = null;
 	public ResultSet rs = null;
 	
+	/**
+	 * Realiza conexão com o banco de dados.
+	 * @return - Retorna verdadeiro se conectar.
+	 */
 	public boolean getConnection() {
 		try {
 			Class.forName(DRIVER);
@@ -39,6 +43,9 @@ public class BD {
 		
 	}
 	
+	/**
+	 * Fecha conexão com o banco de dados.
+	 */
 	public void close() {
 		try { if(rs!=null) rs.close();} catch(SQLException erro) {}
 		try { if(st!=null) st.close();} catch(SQLException erro) {}

@@ -1,6 +1,5 @@
 package address.view;
 
-import java.awt.PageAttributes.OriginType;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +34,10 @@ import javafx.stage.FileChooser;
 public class ProductDetailScreenController implements Initializable {
 	
 	private MainApp mainApp;
+	
+    public void setMainApp(MainApp mainApp){
+    	this.mainApp = mainApp;
+    }
 	
 	//constante ID do instruemnto -----
 	final int ID;
@@ -221,10 +224,6 @@ public class ProductDetailScreenController implements Initializable {
     	
     }
     
-    public void setMainApp(MainApp mainApp){
-    	this.mainApp = mainApp;
-    }
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		

@@ -1,50 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.view.MaintenanceScreenController">
    <children>
-      <Label layoutX="50.0" layoutY="40.0" prefHeight="42.0" prefWidth="242.0" text="Manutenção" textFill="#59176b">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtBuscar" layoutX="30.0" layoutY="120.0" prefHeight="25.0" prefWidth="600.0" />
-      <Button fx:id="btBuscar" layoutX="630.0" layoutY="120.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="56.0" text="Buscar" />
-      <TabPane layoutX="31.0" layoutY="165.0" prefHeight="339.0" prefWidth="733.0" tabClosingPolicy="UNAVAILABLE">
-         <tabs>
-            <Tab text="Manutenção">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="324.0" prefWidth="760.0">
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="full-container">
+         <children>
+            <HBox prefHeight="23.0" prefWidth="740.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="450.0">
                      <children>
-                        <TableView layoutX="45.0" prefHeight="261.0" prefWidth="760.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <columns>
-                              <TableColumn prefWidth="46.0" text="ID" />
-                              <TableColumn prefWidth="334.0" text="Nome do Produdo" />
-                              <TableColumn minWidth="0.0" prefWidth="208.0" text="Ultimo Cliente" />
-                              <TableColumn prefWidth="144.0" text="Data de Entrada" />
-                           </columns>
-                        </TableView>
-                        <Button fx:id="btAddManutencao" layoutX="677.0" layoutY="273.0" mnemonicParsing="false" onAction="#addProductHandler" prefHeight="33.0" prefWidth="103.0" text="+ Manutenção" AnchorPane.rightAnchor="0.0" />
-                        <Label layoutX="60.0" layoutY="280.0" text="Duplo click para ver os detalhes de manutenção" textFill="#806e6e" />
+                        <Label prefHeight="42.0" prefWidth="169.0" styleClass="tts-head" text="Manutenção" textFill="#59176b">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
                      </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
-      <Button fx:id="btVoltar" layoutX="650.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" text="Voltar">
-         <font>
-            <Font name="Dubai Bold" size="14.0" />
-         </font>
-      </Button>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="299.0">
+                     <children>
+                        <Button fx:id="btVoltar" mnemonicParsing="false" onAction="#goBackHandler" prefHeight="0.0" prefWidth="137.0" styleClass="bt-voltar" text="&lt;- voltar">
+                           <font>
+                              <Font name="Dubai Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="740.0">
+               <children>
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="442.0" styleClass="wrap-search">
+                     <children>
+                        <TextField fx:id="txtBuscar" prefHeight="25.0" prefWidth="384.0" styleClass="input-search" />
+                        <Button fx:id="btBuscar" mnemonicParsing="false" prefHeight="0.0" prefWidth="56.0" styleClass="bt-search" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="445.0" prefWidth="740.0">
+               <children>
+                  <VBox prefHeight="445.0" prefWidth="440.0">
+                     <children>
+                        <TabPane prefHeight="447.0" prefWidth="445.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab text="Ativas">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="440.0">
+                                       <children>
+                                          <TableView fx:id="tableViewActive" layoutX="45.0" prefHeight="364.0" prefWidth="440.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columns>
+                                                <TableColumn fx:id="idManutencaoA" prefWidth="46.0" text="IdLocacao" visible="false" />
+                                                <TableColumn fx:id="idInstrumentoA" prefWidth="46.0" text="idInstrumento" visible="false" />
+                                                <TableColumn fx:id="nomeInstrumentA" prefWidth="218.0" text="Instrumento" />
+                                                <TableColumn fx:id="dataEntradaA" prefWidth="110.0" text="Data de Entrada" />
+                                                <TableColumn fx:id="dataSaidaA" prefWidth="110.0" text="Data de saída" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Concluídas">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="352.0" prefWidth="440.0">
+                                       <children>
+                                          <TableView fx:id="tableViewClosed" layoutX="45.0" prefHeight="380.0" prefWidth="440.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columns>
+                                                <TableColumn fx:id="idManutencaoC" prefWidth="46.0" text="IdLocacao" visible="false" />
+                                                <TableColumn fx:id="idInstrumentoC" prefWidth="46.0" text="idInstrumento" visible="false" />
+                                                <TableColumn fx:id="nomeInstrumentC" prefWidth="218.0" text="Instrumento" />
+                                                <TableColumn fx:id="dataEntradaC" prefWidth="110.0" text="Data de Entrada" />
+                                                <TableColumn fx:id="dataSaidaC" prefWidth="110.0" text="Data de saída" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="445.0" prefWidth="301.0">
+                     <children>
+                        <HBox prefHeight="59.0" prefWidth="286.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="111.0">
+                                 <children>
+                                    <Label text="Tipo:">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="190.0">
+                                 <children>
+                                    <TextField fx:id="txtTipo" prefHeight="38.0" prefWidth="193.0" text="Periódica">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="70.0" prefHeight="52.0" prefWidth="286.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="111.0">
+                                 <children>
+                                    <Label text="Valor:">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="190.0">
+                                 <children>
+                                    <TextField fx:id="txtValor" prefHeight="38.0" prefWidth="193.0" promptText="R$" text="0.0">
+                                       <font>
+                                          <Font name="System Bold Italic" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox prefHeight="14.0" prefWidth="285.0">
+                           <children>
+                              <Label text="Descrição:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="196.0" prefWidth="286.0">
+                           <children>
+                              <TextArea fx:id="txaDesc" prefHeight="156.0" prefWidth="303.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="128.0" prefWidth="270.0">
+                           <children>
+                              <VBox alignment="BOTTOM_CENTER" prefHeight="128.0" prefWidth="322.0">
+                                 <children>
+                                    <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#updateData" prefHeight="41.0" prefWidth="300.0" styleClass="bt-action-2" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" text="Atualizar" />
+                                    <Button fx:id="btnClose" mnemonicParsing="false" onAction="#closeMaintenance" prefHeight="41.0" prefWidth="300.0" styleClass="bt-action" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" text=":: Ataulizar e concluir ::">
+                                       <VBox.margin>
+                                          <Insets top="15.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" top="30.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

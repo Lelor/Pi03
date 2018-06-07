@@ -45,6 +45,10 @@ public class ClientDAO {
 		return countRow;
 	}
 	
+	/**
+	 * Lista clientes.
+	 * @return - Objeto Cliente.
+	 */
 	public Client[] listCliente() {
 		
 		sql = "SELECT * from cliente WHERE ativo = 1";

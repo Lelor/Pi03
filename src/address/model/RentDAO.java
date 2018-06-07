@@ -472,6 +472,11 @@ public class RentDAO {
 		return msg;
 	}
 	
+	/**
+	 * Atualiza / encerra locação.
+	 * @param idRent - Id da locação
+	 * @return
+	 */
 	public String updateRent(int idRent) {
 		
 		sql = "UPDATE locacao set dataTermino = GETDATE(), pago = 1, ativo = 0 " + 

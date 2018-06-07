@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import address.view.AddProductScreenController;
 import address.view.LoginController;
+import address.view.MaintenanceScreenController;
 import address.view.MenuScreenController;
 import address.view.ProductDetailScreenController;
 import address.view.RentScreenController;
@@ -123,7 +124,6 @@ public class MainApp extends Application{
         rootLayout.setCenter(anchor);
 	}
 	
-	
 	public void showRentScreen(ArrayList<Integer> idsInstruments) throws IOException{
 		
 		RentScreenController controller = new RentScreenController(idsInstruments);
@@ -137,5 +137,17 @@ public class MainApp extends Application{
         AnchorPane anchor = (AnchorPane) loader.load();
 
         rootLayout.setCenter(anchor);
+	}
+	
+	public void showMaintenanceScreen() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("view\\MaintenanceScreen.fxml"));
+        AnchorPane screen = (AnchorPane) loader.load();
+
+        // puts the new product screen inside the root layout.
+        rootLayout.setCenter(screen);
+        
+        MaintenanceScreenController controller = loader.getController();
+        controller.setMainApp(this);
 	}
 }

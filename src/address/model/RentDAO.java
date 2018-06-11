@@ -26,15 +26,19 @@ public class RentDAO {
 	 * @param ativo - Boolean que define qual tipo de locação que será contado.
 	 * @return - Retorna numero de locações.
 	 */
-	public int countNumRent(boolean ativo) {
+	public int countNumRent(boolean ativo, String searchString) {
 		
-		String sql2 = "SELECT COUNT(idLocacao) AS total FROM locacao WHERE ativo = ?";
+		String sql2 = "SELECT COUNT(idLocacao) AS total FROM locacao l, cliente c " + 
+				"WHERE l.ativo = ? " + 
+				"AND l.idCliente = c.idCliente " + 
+				"AND c.nome LIKE ?";
 		int countRow = 0;
 		
 		try {
 			bd.getConnection();
 			bd.st = bd.con.prepareStatement(sql2);
 			bd.st.setBoolean(1, ativo);
+			bd.st.setString(2, "%" + searchString + "%");
 			bd.rs = bd.st.executeQuery();
 			
 			if(bd.rs.next()){
@@ -170,27 +174,23 @@ public class RentDAO {
 	 * @param ativo - se a locação está ativa ou nao.
 	 * @return - ArrayList de locações.
 	 */
-	public Rent[] listRent(boolean ativo) {
+	public Rent[] listRent(boolean ativo, String searchString) {
 		
 		sql = "SELECT l.idLocacao, l.dataRealizacao, l.dataTermino, l.desconto, l.descricao, l.pago, " + 
 				"l.idFuncionario, l.idCliente, c.nome as nomeCliente, f.nome as nomeFuncionario " + 
 				"FROM locacao l, cliente c, funcionario f " + 
-				"WHERE l.idCliente = c.idCliente AND l.idFuncionario = f.idFuncionario AND l.ativo = ?";
+				"WHERE l.idCliente = c.idCliente AND l.idFuncionario = f.idFuncionario AND l.ativo = ? AND c.nome LIKE ?";
 		
 		int i = 0;
-		int numRow = countNumRent(ativo);
+		int numRow = countNumRent(ativo, searchString);
 		Rent[] rt = new Rent[numRow];
-//		int active = 1;
-//		
-//		if(!ativo) {
-//			active = 0;
-//		}
 		
 		try {
 			
 			bd.getConnection();
 			bd.st = bd.con.prepareStatement(sql);
 			bd.st.setBoolean(1, ativo);
+			bd.st.setString(2, "%" + searchString + "%");
 			bd.rs = bd.st.executeQuery();
 			
 			while(bd.rs.next()) {

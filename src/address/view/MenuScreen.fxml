@@ -53,8 +53,8 @@
                <children>
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="740.0" styleClass="wrap-search">
                      <children>
-                        <TextField maxHeight="-Infinity" prefHeight="84.0" prefWidth="689.0" styleClass="input-search" />
-                        <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" styleClass="bt-search" />
+                        <TextField fx:id="txtSearch" maxHeight="-Infinity" onAction="#onEnter" prefHeight="84.0" prefWidth="689.0" styleClass="input-search" />
+                        <Button fx:id="btSearch" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#searchAction" prefHeight="25.0" prefWidth="81.0" styleClass="bt-search" />
                      </children>
                   </HBox>
                </children>
@@ -112,10 +112,8 @@
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="55.0" prefWidth="740.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="bt" text="Clientes" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="bt" text="Fornecedores" />
-                  <Button layoutX="519.0" layoutY="544.0" mnemonicParsing="false" onAction="#showMaintenanceScreen" prefHeight="40.0" prefWidth="90.0" styleClass="bt" text="Manutenção" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="bt" text="Usuários" />
+                  <Button mnemonicParsing="false" onAction="#showManagesPeapleScreen" prefHeight="40.0" prefWidth="165.0" styleClass="bt" text="Gerenciar pessoas" />
+                  <Button layoutX="519.0" layoutY="544.0" mnemonicParsing="false" onAction="#showMaintenanceScreen" prefHeight="40.0" prefWidth="90.0" styleClass="bt" text="Manutenções" />
                   <Button layoutX="647.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="bt" text="Relatórios" />
                </children>
             </HBox>

@@ -22,14 +22,15 @@ public class InstrumentDAO {
 	 * Conta numero de linhas que a tabela instrumento possui.
 	 * @return - retorna o total de linhas.
 	 */
-	public int countNumInstrument() {
+	public int countNumInstrument(String searchString) {
 		
-		String sql2 = "SELECT COUNT(idInstrumento) AS total FROM instrumento WHERE ativo = 1";
+		String sql2 = "SELECT COUNT(idInstrumento) AS total FROM instrumento WHERE ativo = 1 AND nome like ?";
 		int countRow = 0;
 		
 		try {
 			bd.getConnection();
 			bd.st = bd.con.prepareStatement(sql2);
+			bd.st.setString(1, "%" + searchString + "%");
 			bd.rs = bd.st.executeQuery();
 			
 			if(bd.rs.next()){
@@ -86,7 +87,7 @@ public class InstrumentDAO {
 			
 			bd.st.executeUpdate();
 			
-			msg = "Instrumento cadastrado! =]";
+			msg = "Instrumento cadastrado com sucesso! =]";
 			
 		} catch (SQLException  e) {
 			
@@ -105,21 +106,22 @@ public class InstrumentDAO {
 	 * Retorna uma array contendo todos os intrumentos listados.
 	 * @return in - array de instrumentos.
 	 */
-	public Instrument[] listInstrument() {
+	public Instrument[] listInstrument(String searchString) {
 		
 		sql = "SELECT idInstrumento, numSerie, i.nome as nomeI, valorCompra, valorLocacao, ano, foto, statusIn as status,"
 				+ " f.nome as nomeF, c.nome AS nomeC, t.nome as nomeT, m.nome as nomeM"
 				+ " FROM instrumento i, cor c, tipo t, marca m, fornecedor f"
-				+ " WHERE i.idCor = c.id AND i.idTipo = t.id AND i.idMarca = m.id AND i.idFornecedor = f.idFornecedor AND i.ativo = 1";
+				+ " WHERE i.idCor = c.id AND i.idTipo = t.id AND i.idMarca = m.id AND i.idFornecedor = f.idFornecedor AND i.ativo = 1 AND i.nome LIKE ?";
 		
 		int i = 0;
-		int numRow = countNumInstrument();
+		int numRow = countNumInstrument(searchString);
 		Instrument[] in = new Instrument[numRow];
 		
 		try {
 			
 			bd.getConnection();
 			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setString(1, "%" + searchString + "%");
 			bd.rs = bd.st.executeQuery();
 			
 			while(bd.rs.next()) {
@@ -260,7 +262,6 @@ public class InstrumentDAO {
 		}
 		
 		return msg;
-		
 	}
 	
 	/**
@@ -291,7 +292,6 @@ public class InstrumentDAO {
 			
 		} catch (SQLException  e) {
 			
-			msg = "Falha ao excluir! =[";
 			System.out.println("Erro DAO: exclusao do instrumento " + e.toString());
 
 		}

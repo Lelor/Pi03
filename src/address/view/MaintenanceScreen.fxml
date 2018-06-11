@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.view.MaintenanceScreenController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.controller.MaintenanceScreenController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="full-container">
          <children>
@@ -44,8 +44,8 @@
                <children>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="442.0" styleClass="wrap-search">
                      <children>
-                        <TextField fx:id="txtBuscar" prefHeight="25.0" prefWidth="384.0" styleClass="input-search" />
-                        <Button fx:id="btBuscar" mnemonicParsing="false" prefHeight="0.0" prefWidth="56.0" styleClass="bt-search" />
+                        <TextField fx:id="txtSearch" onAction="#onEnter" prefHeight="25.0" prefWidth="384.0" styleClass="input-search" />
+                        <Button fx:id="btBuscar" mnemonicParsing="false" onAction="#searchAction" prefHeight="0.0" prefWidth="56.0" styleClass="bt-search" />
                      </children>
                   </HBox>
                </children>

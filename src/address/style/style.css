@@ -186,12 +186,15 @@
 	-fx-text-fill: #FFFFFF;
 }
 .tab-pane .tab{
-	-fx-background-color: #4d4d4d;
+	-fx-background-color: #848484;
 	-fx-font-weight: bold;
 	-fx-padding: 2px 15px;
 	-fx-focus-color: transparent;
 }
 .tab-pane .tab:selected{
-	-fx-background-color: #262626;
+	-fx-background-color: #206e90;
 	-fx-focus-color: transparent;
+}
+.tab-pane .tab:selected .tab-label{
+	-fx-text-fill: #FFFFFF;
 }

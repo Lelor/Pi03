@@ -74,6 +74,7 @@ public class ReturnScreenController implements Initializable{
 	@FXML private TextField txtTotalMulta;
 	@FXML private TextField txtValorLocao;
 	@FXML private TextField txtTotal;
+	@FXML private TextField txtSearch;
 	@FXML private TextArea txaDescricao;
 	@FXML private TextArea txaObservacao;
 	@FXML private CheckBox ckbPago;
@@ -94,6 +95,16 @@ public class ReturnScreenController implements Initializable{
     }
     
     @FXML
+    protected void searchAction() throws IOException {
+    	seach();
+    }
+    
+    @FXML
+    public void onEnterSearch(ActionEvent ae){
+    	seach();
+    }
+    
+    @FXML
     protected void closeRent(ActionEvent event) throws IOException {
     	
     	RentDAO rtDAO = new RentDAO();
@@ -107,13 +118,13 @@ public class ReturnScreenController implements Initializable{
      		
      		// preenche table view de locações ativas se houver
      		try {
-     			rentViewActive.setItems(obList.getListRent(true));
+     			rentViewActive.setItems(obList.getListRent(true, ""));
     		} catch (Exception e) {
     			System.out.println(e.toString());
     		}
      		// preenche table view de locações inativas se houver
      		try {
-     	 		rentViewDesactive.setItems(obList.getListRent(false));
+     	 		rentViewDesactive.setItems(obList.getListRent(false, ""));
     		} catch (Exception e) {
     		}
      		
@@ -315,6 +326,38 @@ public class ReturnScreenController implements Initializable{
 		txtValorLocao.setText("R$ " + valInstrumento.toString());
     }
 	
+    /**
+     * Realiza busca.
+     */
+    protected void seach() {
+    	String search = txtSearch.getText();
+    	
+    	updateListSearch(search);
+    }
+    
+    /**
+     * Atualiza lista de Locações.
+     * @param search - String de busca.
+     */
+    protected void updateListSearch(String search) {
+    	
+		ObsLists obList = new ObsLists();
+		
+ 		// preenche table view de locações ativas se houver
+ 		try {
+ 			rentViewActive.setItems(obList.getListRent(true, search));
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+ 		
+ 		// preenche table view de locações inativas se houver
+ 		try {
+ 	 		rentViewDesactive.setItems(obList.getListRent(false, search));
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+    }
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -340,21 +383,8 @@ public class ReturnScreenController implements Initializable{
     	valLocacaoInstrument.setCellValueFactory(new PropertyValueFactory<Rent, BigDecimal>("valorLocacao"));
     	multaLocacaoInstrument.setCellValueFactory(new PropertyValueFactory<Rent, BigDecimal>("multa"));
  		
- 		ObsLists obList = new ObsLists();
- 		
- 		// preenche table view de locações ativas se houver
- 		try {
- 			rentViewActive.setItems(obList.getListRent(true));
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
- 		// preenche table view de locações inativas se houver
- 		try {
- 	 		rentViewDesactive.setItems(obList.getListRent(false));
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
- 		
+    	updateListSearch("");
+    	
  		//ao selecionar uma linha das locações, atualiza dados da locação e lista de instrumentos locados
  	    rentViewActive.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
  	        if (newSelection != null) {

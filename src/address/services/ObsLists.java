@@ -5,10 +5,15 @@ import java.util.ArrayList;
 
 import address.model.Client;
 import address.model.ClientDAO;
+import address.model.Employee;
+import address.model.EmployeeDAO;
 import address.model.Instrument;
 import address.model.InstrumentDAO;
 import address.model.Maintenance;
 import address.model.MaintenanceDAO;
+import address.model.Person;
+import address.model.Provider;
+import address.model.ProviderDAO;
 import address.model.Rent;
 import address.model.RentDAO;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -65,13 +70,13 @@ public class ObsLists {
 	 * Lista instrumentos na tela principal.
 	 * @return - Observable list com lista de instrumentos.
 	 */
-	public ObservableList<Instrument> getListInstrument(){
+	public ObservableList<Instrument> getListInstrument(String searchString){
 		
 		ObservableList<Instrument> obsList = FXCollections.observableArrayList();
 		
 		InstrumentDAO objDAO = new InstrumentDAO();
 		
-		Instrument[] obj = objDAO.listInstrument();
+		Instrument[] obj = objDAO.listInstrument(searchString);
 		
 		for(int i = 0; i < obj.length;i++) {
 			obsList.add(new Instrument(obj[i].getId(), obj[i].getNome(), obj[i].getMarca(), obj[i].getValorLocacao(), obj[i].getStatus(), obj[i].getStatusId(), new SimpleBooleanProperty(false)));
@@ -85,16 +90,16 @@ public class ObsLists {
 	 * Observable list para listar clientes na tela de locação.
 	 * @return - lista de clientes.
 	 */
-	public ObservableList<Client> getListClientRent(){
+	public ObservableList<Client> getListClientRent(String searchString, String tableName){
 		
 		ObservableList<Client> obsList = FXCollections.observableArrayList();
 		
 		ClientDAO objDAO = new ClientDAO();
 		
-		Client[] obj = objDAO.listCliente();
+		Person[] obj = objDAO.listPerson(searchString, tableName);
 		
 		for(int i = 0; i < obj.length;i++) {
-			obsList.add(new Client(obj[i].getId(), obj[i].getNome(), obj[i].getCpf()));
+			obsList.add(new Client(obj[i].getId(), obj[i].getNome(), obj[i].getDocumento()));
 		}
 	
 		return obsList;
@@ -126,13 +131,13 @@ public class ObsLists {
 	 * @param ativo - variavel que determina se a locação esta ativa ou inativa.
 	 * @return - retorna lista de locações.
 	 */
-	public ObservableList<Rent> getListRent(boolean ativo){
+	public ObservableList<Rent> getListRent(boolean ativo, String searchString){
 		
 		ObservableList<Rent> obsList = FXCollections.observableArrayList();
 		
 		RentDAO objDAO = new RentDAO();
 		
-		Rent[] obj = objDAO.listRent(ativo);
+		Rent[] obj = objDAO.listRent(ativo, searchString);
 		
 		ut = new Utilities();
 		
@@ -171,13 +176,13 @@ public class ObsLists {
 		return obsList;
 	}
 	
-	public ObservableList<Maintenance> getListMaintenance(boolean ativo){
+	public ObservableList<Maintenance> getListMaintenance(boolean ativo, String searchString){
 		
 		ObservableList<Maintenance> obsList = FXCollections.observableArrayList();
 		
 		MaintenanceDAO objDAO = new MaintenanceDAO();
 		
-		Maintenance[] obj = objDAO.listMaintenance(ativo);
+		Maintenance[] obj = objDAO.listMaintenance(ativo, searchString);
 		
 		ut = new Utilities();
 		
@@ -198,5 +203,65 @@ public class ObsLists {
 	
 		return obsList;
 		
+	}
+	
+	/**
+	 * Lista dados do clientes.
+	 * @param searchString - Texto para busca.
+	 * @return - Objeto cliente.
+	 */
+	public ObservableList<Client> getListClient(String searchString){
+		
+		ObservableList<Client> obsList = FXCollections.observableArrayList();
+		
+		ClientDAO objDAO = new ClientDAO();
+		
+		Person[] obj = objDAO.listPerson(searchString, "cliente");
+		
+		for(int i = 0; i < obj.length;i++) {
+			obsList.add(new Client(obj[i].getId(), obj[i].getNome(), obj[i].getDocumento(), obj[i].getEmail(), obj[i].getTelefone()));
+		}
+	
+		return obsList;
+	}
+	
+	/**
+	 * Lista dados do funcionário.
+	 * @param searchString - Texto para busca.
+	 * @return - Objeto funcionario.
+	 */
+	public ObservableList<Employee> getListEmployee(String searchString){
+		
+		ObservableList<Employee> obsList = FXCollections.observableArrayList();
+		
+		EmployeeDAO objDAO = new EmployeeDAO();
+		
+		Person[] obj = objDAO.listPerson(searchString, "funcionario");
+		
+		for(int i = 0; i < obj.length;i++) {
+			obsList.add(new Employee(obj[i].getId(), obj[i].getNome(), obj[i].getDocumento(), obj[i].getEmail(), obj[i].getTelefone()));
+		}
+	
+		return obsList;
+	}
+	
+	/**
+	 * Lista dados do fornecedor.
+	 * @param searchString - Texto para busca.
+	 * @return - Objeto fornecedor.
+	 */
+	public ObservableList<Provider> getListProvider(String searchString){
+		
+		ObservableList<Provider> obsList = FXCollections.observableArrayList();
+		
+		ProviderDAO objDAO = new ProviderDAO();
+		
+		Person[] obj = objDAO.listPerson(searchString, "fornecedor");
+		
+		for(int i = 0; i < obj.length;i++) {
+			obsList.add(new Provider(obj[i].getId(), obj[i].getNome(), obj[i].getDocumento(), obj[i].getEmail(), obj[i].getTelefone()));
+		}
+	
+		return obsList;
 	}
 }

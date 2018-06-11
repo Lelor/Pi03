@@ -2,9 +2,12 @@ package address.model;
 
 import java.sql.SQLException;
 
-import address.services.BD;
+import javax.swing.JOptionPane;
 
-public class ClientDAO {
+import address.services.BD;
+import address.services.Dependences;
+
+public class ClientDAO extends PersonDAO{
 	
 	private String sql, msg;
 	private int decision;
@@ -15,26 +18,33 @@ public class ClientDAO {
 	}
 	
 	/**
-	 * Conta total de clientes cadastrados no banco.
-	 * @return - Total de cliente.
+	 * Cadastra Cliente.
+	 * @param cl - Objeto Cliente.
+	 * @return
 	 */
-	public int countNumCliente() {
+	public String insertClient(Client cl) {
 		
-		String sql2 = "SELECT COUNT(idCliente) AS total FROM cliente WHERE ativo = 1";
-		int countRow = 0;
+		sql = "INSERT INTO cliente(nome, cpf, telefone, email, cidade, endereco) " + 
+				"VALUES(?, ?, ?, ?, ?, ?)";
 		
 		try {
+			
 			bd.getConnection();
-			bd.st = bd.con.prepareStatement(sql2);
-			bd.rs = bd.st.executeQuery();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setString(1, cl.getNome());
+			bd.st.setString(2, cl.getDocumento());
+			bd.st.setString(3, cl.getTelefone());
+			bd.st.setString(4, cl.getEmail());
+			bd.st.setString(5, cl.getCidade());
+			bd.st.setString(6, cl.getEndereco());
 			
-			if(bd.rs.next()){
-				countRow = bd.rs.getInt("total");
-			}
+			bd.st.executeUpdate();
 			
-		} catch (SQLException e) {
+			msg = "Cliente cadastrado com sucesso! =]";
 			
-			msg = "Falha ao recuperar lista! =[";
+		} catch (SQLException  e) {
+			
+			msg = "Falha no cadastro! =[";
 			System.out.println(e.toString());
 
 		}
@@ -42,47 +52,82 @@ public class ClientDAO {
 			bd.close();
 		}
 		
-		return countRow;
+		return msg;
 	}
 	
 	/**
-	 * Lista clientes.
-	 * @return - Objeto Cliente.
+	 * Realiza atualização de clientes.
+	 * @param cl - Objeto cliente.
+	 * @return - Retorna mensagem.
 	 */
-	public Client[] listCliente() {
+	public String updateClient(Client cl) {
 		
-		sql = "SELECT * from cliente WHERE ativo = 1";
-		
-		int i = 0;
-		int numRow = countNumCliente();
-		Client[] cl = new Client[numRow];
+		sql = "UPDATE cliente SET nome = ?, cpf = ?, telefone = ?, email = ?, cidade = ?, endereco = ? " + 
+				"WHERE idCliente = ?";
 		
 		try {
-			
 			bd.getConnection();
 			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setString(1, cl.getNome());
+			bd.st.setString(2, cl.getDocumento());
+			bd.st.setString(3, cl.getTelefone());
+			bd.st.setString(4, cl.getEmail());
+			bd.st.setString(5, cl.getCidade());
+			bd.st.setString(6, cl.getEndereco());
+			bd.st.setInt(7, cl.getId());
+			
+			bd.st.executeUpdate();
+			msg = "Cliente atualizado! =]";
+			
+		} catch (SQLException  e) {
+			
+			msg = "Falha no cadastro! =[";
+			System.out.println("Erro DAO: insersao de dados " + e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return msg;
+	}
+	
+	/**
+	 * Pega um cliente específico.
+	 * @param id - Id do cliente.
+	 * @return - Objeto Cliente.
+	 */
+	public Client getClient(int id) {
+		
+			sql = "SELECT * FROM cliente WHERE idCliente = ?";
+		
+		Client cl = null;
+
+		try {
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setInt(1, id);
+			
 			bd.rs = bd.st.executeQuery();
 			
-			while(bd.rs.next()) {
+			if(bd.rs.next()) {
 				
-				//table consult columns -----
-				//idCliente	nome	cpf	telefone	email	cidade	endereco	ativo
-				cl[i] = new Client();
-				cl[i].setId(bd.rs.getInt("idCliente"));
-				cl[i].setNome(bd.rs.getString("nome"));
-				cl[i].setCpf(bd.rs.getString("cpf"));
-				cl[i].setTelefone(bd.rs.getString("telefone"));
-				cl[i].setEmail(bd.rs.getString("email"));
-				cl[i].setCidade(bd.rs.getString("cidade"));
-				
-				i++;
+				//idFuncionario, cpf, nome, email, telefone, cidade, endereco
+				cl = new Client(
+						bd.rs.getInt("idCliente"),
+						bd.rs.getString("nome"),
+						bd.rs.getString("cpf"),
+						bd.rs.getString("email"),
+						bd.rs.getString("telefone"),
+						bd.rs.getString("cidade"),
+						bd.rs.getString("endereco")
+					);
 			}
-
 			
-		} catch (SQLException e) {
 			
-			msg = "Falha ao recuperar lista! =[";
-			System.out.println(e.toString());
+		} catch (SQLException  e) {
+			
+			System.out.println("Erro DAO: pegar dados " + e.toString());
 
 		}
 		finally {
@@ -90,6 +135,5 @@ public class ClientDAO {
 		}
 		
 		return cl;
-		
 	}
 }

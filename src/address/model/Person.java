@@ -3,9 +3,15 @@ package address.model;
 public abstract class Person {
 
 	protected int id;
-	protected String nome, telefone, email, cidade, endereco;
+	protected String nome, telefone, email, cidade, endereco, documento;
 	protected boolean ativo;
 	
+	public String getDocumento() {
+		return documento;
+	}
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
 	public Person() {
 	}
 

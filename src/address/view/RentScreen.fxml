@@ -43,8 +43,8 @@
                <children>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="357.0" styleClass="wrap-search">
                      <children>
-                        <TextField prefHeight="33.0" prefWidth="349.0" styleClass="input-search" />
-                        <Button fx:id="btBuscar" maxWidth="72.0" mnemonicParsing="false" prefWidth="72.0" styleClass="bt-search" />
+                        <TextField fx:id="txtSearch" onAction="#onEnter" prefHeight="33.0" prefWidth="349.0" styleClass="input-search" />
+                        <Button fx:id="btBuscar" maxWidth="72.0" mnemonicParsing="false" onAction="#searchAction" prefWidth="72.0" styleClass="bt-search" />
                      </children>
                   </HBox>
                </children>

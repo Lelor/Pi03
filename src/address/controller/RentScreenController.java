@@ -65,6 +65,7 @@ public class RentScreenController implements Initializable{
 	//campos
 	@FXML private TextField txtDesconto;
 	@FXML private TextField txtTotal;
+	@FXML private TextField txtSearch;
 	@FXML private TextArea txtDescricao;
 	@FXML private CheckBox cbPago;
 	
@@ -78,8 +79,13 @@ public class RentScreenController implements Initializable{
     }
     
     @FXML
+    protected void searchAction() throws IOException {
+    	seach();
+    }
+    
+    @FXML
     public void onEnter(ActionEvent ae){
-       updateTotal();
+    	seach();
     }
     
     @FXML
@@ -99,51 +105,51 @@ public class RentScreenController implements Initializable{
     		Client clRow = tableViewClient.getSelectionModel().getSelectedItem();
     		idClient = clRow.getId();
     		
+    		try {
+    			
+    			for (Instrument in : tableViewInstrument.getItems()) {
+    					
+    				datesDev.add(in.getDataDevolucao().getValue());
+    				idsInstruments.add(in.getId());
+    				
+    			}
+    			
+    			try {
+    				desconto = new BigDecimal(txtDesconto.getText());
+    			} catch (Exception e) {
+    				desconto = new BigDecimal(0);
+    			}
+    			
+    			descricao = txtDescricao.getText();
+    			pago = false;
+    			
+    			if(cbPago.isSelected()) {
+    				pago = true;
+    			}
+    			
+    			Rent rt = new Rent();
+    			RentDAO rtDAO = new RentDAO();
+    			
+    			//TODO : Informar id correto do funcionario quando houver login
+    			rt.setIdFuncionario(1);
+    			rt.setIdCliente(idClient);
+    			rt.setIdInstrumentList(idsInstruments);
+    			rt.setDataDevolucaoList(datesDev);
+    			rt.setDesconto(desconto);
+    			rt.setDescricao(descricao);
+    			rt.setPago(pago);
+    			
+    			// grava tudo sa merda
+    			JOptionPane.showMessageDialog(null, rtDAO.insertRent(rt), "Alert!", 2);
+    			mainApp.showMainMenu(0, null);
+    			
+    		} catch (Exception e) {
+    			JOptionPane.showMessageDialog(null, "Informe a(s) data(s) de devolução", "Alerta!", 2);
+    		}
+    		
 		} catch (Exception e) {
 			
 			JOptionPane.showMessageDialog(null, "Selecione um cliente", "Alerta!", 2);
-		}
-		
-		try {
-			
-			for (Instrument in : tableViewInstrument.getItems()) {
-					
-				datesDev.add(in.getDataDevolucao().getValue());
-				idsInstruments.add(in.getId());
-				
-			}
-			
-			try {
-				desconto = new BigDecimal(txtDesconto.getText());
-			} catch (Exception e) {
-				desconto = new BigDecimal(0);
-			}
-			
-			descricao = txtDescricao.getText();
-			pago = false;
-			
-			if(cbPago.isSelected()) {
-				pago = true;
-			}
-			
-			Rent rt = new Rent();
-			RentDAO rtDAO = new RentDAO();
-			
-			//TODO : Informar id correto do funcionario quando houver login
-			rt.setIdFuncionario(1);
-			rt.setIdCliente(idClient);
-			rt.setIdInstrumentList(idsInstruments);
-			rt.setDataDevolucaoList(datesDev);
-			rt.setDesconto(desconto);
-			rt.setDescricao(descricao);
-			rt.setPago(pago);
-			
-			// grava tudo sa merda
-			JOptionPane.showMessageDialog(null, rtDAO.insertRent(rt), "Alert!", 2);
-			mainApp.showMainMenu(0, null);
-			
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Informe a(s) data(s) de devolução", "Alerta!", 2);
 		}
 		
     }
@@ -196,6 +202,31 @@ public class RentScreenController implements Initializable{
 		txtTotal.setText("R$ " + String.valueOf(valorTotal));
 		
     }
+    
+    /**
+     * Realiza busca.
+     */
+    protected void seach() {
+    	String search = txtSearch.getText();
+    	
+    	updateListSearch(search);
+    }
+    
+    /**
+     * Atualiza lista de Clientes.
+     * @param search - String de busca.
+     */
+    protected void updateListSearch(String search) {
+    	
+		ObsLists ol = new ObsLists();
+		
+		try {
+			tableViewClient.setItems(ol.getListClientRent(search, "cliente"));
+		} catch (Exception e) {
+			System.out.println("Erro ao recuperar lista");
+		}
+		
+    }
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -203,7 +234,7 @@ public class RentScreenController implements Initializable{
 		// configurando as colunas na tabela Cliente -----
 		idClient.setCellValueFactory(new PropertyValueFactory<Client, Integer>("id"));
 		nameClient.setCellValueFactory(new PropertyValueFactory<Client, String>("nome"));
-		cpfClient.setCellValueFactory(new PropertyValueFactory<Client, String>("cpf"));
+		cpfClient.setCellValueFactory(new PropertyValueFactory<Client, String>("documento"));
 		
 		// configura tabela de intrumentos
 		idInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, Integer>("id"));
@@ -213,8 +244,13 @@ public class RentScreenController implements Initializable{
 		
 		ObsLists ol = new ObsLists();
 		
-		tableViewClient.setItems(ol.getListClientRent());
-		tableViewInstrument.setItems(ol.getListInstrumentRent(idsInstrumentsRent));
+		try {
+			tableViewInstrument.setItems(ol.getListInstrumentRent(idsInstrumentsRent));
+		} catch (Exception e) {
+			System.out.println("Erro ao recuperar lista");
+		}
+		
+		updateListSearch("");
 		
 		dateInstrumentDevo.setCellFactory(column -> {
 	        return new TableCell<Instrument, SimpleStringProperty>() {

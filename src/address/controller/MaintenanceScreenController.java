@@ -51,6 +51,7 @@ public class MaintenanceScreenController implements Initializable {
 	//campos
 	@FXML private TextField txtTipo;
 	@FXML private TextField txtValor;
+	@FXML private TextField txtSearch;
 	@FXML private TextArea txaDesc;
 	
 	//botões
@@ -60,6 +61,16 @@ public class MaintenanceScreenController implements Initializable {
 	@FXML
     protected void goBackHandler(ActionEvent event) throws IOException {
     	mainApp.showMainMenu(0, null);
+    }
+	
+    @FXML
+    protected void searchAction() throws IOException {
+    	seach();
+    }
+    
+    @FXML
+    public void onEnter(ActionEvent ae){
+    	seach();
     }
 	
 	@FXML
@@ -115,8 +126,7 @@ public class MaintenanceScreenController implements Initializable {
 					
 					JOptionPane.showMessageDialog(null, mnDAO.updateMaintenance(mn), "Alerta!", 2);
 					
-					updateListActive(true);
-					updateListClosed(false);
+					updateListMaintenance("");
 					
 				}else {
 					JOptionPane.showMessageDialog(null, "Preencha o campo TIPO", "Alerta!", 2);
@@ -132,35 +142,28 @@ public class MaintenanceScreenController implements Initializable {
 		}
 
 	}
-    
+	
+    /**
+     * Realiza busca.
+     */
+    protected void seach() {
+    	String search = txtSearch.getText();
+    	
+    	updateListMaintenance(search);
+    }
     /**
      * Atualiza lista de manutenções ativas
      * @param active 
      */
-    protected void updateListActive(boolean active) {
+    protected void updateListMaintenance(String search) {
 		
     	ObsLists ol = new ObsLists();
     	
     	try {
-    		tableViewActive.setItems(ol.getListMaintenance(true));
+    		tableViewActive.setItems(ol.getListMaintenance(true, search));
+    		tableViewClosed.setItems(ol.getListMaintenance(false, search));
 		} catch (Exception e) {
-			System.out.println("Erro listagem ATIVOS: " + e.toString());
-		}
-		
-    }
-    
-    /**
-     * Atualiza lista de manutenções inativas
-     * @param active
-     */
-    protected void updateListClosed(boolean active) {
-		
-    	ObsLists ol = new ObsLists();
-    	
-    	try {
-    		tableViewClosed.setItems(ol.getListMaintenance(false));
-		} catch (Exception e) {
-			System.out.println("Erro listagem FECHADOS: " + e.toString());
+			System.out.println("Erro listagem: " + e.toString());
 		}
 		
     }
@@ -209,8 +212,7 @@ public class MaintenanceScreenController implements Initializable {
 		dataEntradaC.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("dataEntrada"));
 		dataSaidaC.setCellValueFactory(new PropertyValueFactory<Maintenance, String>("dataSaida"));
 		
-		updateListActive(true);
-		updateListClosed(false);
+		updateListMaintenance("");
 		
 		//desabilita campos e botoes
 		btnUpdate.setDisable(true);

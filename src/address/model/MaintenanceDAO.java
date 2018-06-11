@@ -21,15 +21,19 @@ public class MaintenanceDAO {
 	 * @param ativo - Boolean que determina se esta aberta ou fechada.
 	 * @return - Quantidade de manutenções.
 	 */
-	public int countNumMaintenance(boolean ativo) {
+	public int countNumMaintenance(boolean ativo, String searchString) {
 		
-		String sql2 = "SELECT COUNT(idInstrumento) AS total FROM manutencao WHERE ativo = ?";
+		String sql2 = "SELECT COUNT(m.idInstrumento) AS total FROM manutencao m, instrumento i " + 
+				"WHERE m.ativo = ? " + 
+				"AND m.idInstrumento = i.idInstrumento " + 
+				"AND i.nome LIKE ?";
 		int countRow = 0;
 		
 		try {
 			bd.getConnection();
 			bd.st = bd.con.prepareStatement(sql2);
 			bd.st.setBoolean(1, ativo);
+			bd.st.setString(2, "%" + searchString + "%");
 			bd.rs = bd.st.executeQuery();
 			
 			if(bd.rs.next()){
@@ -96,15 +100,15 @@ public class MaintenanceDAO {
 	 * @param ativo - Boolean que determina se esta aberta ou fechada.
 	 * @return - Array do tipo Maintenance.
 	 */
-	public Maintenance[] listMaintenance(boolean ativo) {
+	public Maintenance[] listMaintenance(boolean ativo, String searchString) {
 		
 		sql = "SELECT m.idManutencao AS idM, i.idInstrumento AS idI, i.nome AS instrumento, m.dataEntrada, " + 
 				"m.dataSaida, m.tipo, m.valor, m.descricao " + 
 				"FROM manutencao m, instrumento i " + 
-				"WHERE m.idInstrumento = i.idInstrumento AND m.ativo = ?";
+				"WHERE m.idInstrumento = i.idInstrumento AND m.ativo = ? AND i.nome LIKE ?";
 		
 		int i = 0;
-		int numRow = countNumMaintenance(ativo);
+		int numRow = countNumMaintenance(ativo, searchString);
 		Maintenance[] mn = new Maintenance[numRow];
 		
 		try {
@@ -112,6 +116,7 @@ public class MaintenanceDAO {
 			bd.getConnection();
 			bd.st = bd.con.prepareStatement(sql);
 			bd.st.setBoolean(1, ativo);
+			bd.st.setString(2, "%" + searchString + "%");
 			bd.rs = bd.st.executeQuery();
 			
 			while(bd.rs.next()) {

@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import address.MainApp;
 import address.model.Instrument;
+import address.model.InstrumentDAO;
 import address.model.MaintenanceDAO;
 import address.services.ObsLists;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -18,12 +19,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,6 +42,7 @@ public class MenuScreenController implements Initializable{
 	
 	int id_slc_view;
 	ArrayList<Integer> ids_selected = new ArrayList<Integer>();
+	ArrayList<Integer> ids_selected_search = new ArrayList<Integer>();
 	
 	public MenuScreenController(int id_slc_view, ArrayList<Integer> ids_selected) {
 		this.id_slc_view = id_slc_view;
@@ -54,6 +58,9 @@ public class MenuScreenController implements Initializable{
 	@FXML private TableColumn<Instrument, String> availableInstrument;
 	@FXML private TableColumn<Instrument, String> availableInstrumentId;
 	@FXML private ImageView logoImg;
+	
+	@FXML private TextField txtSearch;
+	@FXML private Button btSearch;
 	
     @FXML
     protected void showAddProductSceen(ActionEvent event) throws IOException {
@@ -71,8 +78,23 @@ public class MenuScreenController implements Initializable{
     }
     
     @FXML
+    protected void showManagesPeapleScreen(ActionEvent event) throws IOException {
+    	mainApp.showManagesPeapleScreen();
+    }
+    
+    @FXML
     protected void lbExitHandler() throws IOException {
     	mainApp.showLoginScreen();
+    }
+    
+    @FXML
+    protected void searchAction() throws IOException {
+    	seach();
+    }
+    
+    @FXML
+    public void onEnter(ActionEvent ae){
+    	seach();
     }
 
     @FXML
@@ -94,7 +116,6 @@ public class MenuScreenController implements Initializable{
 		}
     	
     }
-    
     
     @FXML
     protected void maintenenceInstrument(ActionEvent event) throws IOException {
@@ -119,33 +140,113 @@ public class MenuScreenController implements Initializable{
 			}else {
 				JOptionPane.showMessageDialog(null, "Ops! Algo deu errado. =[", "Alerta!", 2);
 			}
-			
-			
 		}
     	
     }
-
+    
     /**
-     * Inicializa classe de controle
+     * Atualiza tableView com a busca.
      */
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
-		// set logo
-		File file = new File("src/images/system/logo.png");
-        Image image = new Image(file.toURI().toString());
-        logoImg.setImage(image);
-		
-		// configurando as colunas na tabela -----
-		selectRow.setCellValueFactory(new PropertyValueFactory<Instrument, SimpleBooleanProperty>("selected"));
-		idInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, Integer>("id"));
-		nameInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, String>("nome"));
-		brandInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, String>("marca"));
-		priceInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, BigDecimal>("valorLocacao"));
-		availableInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, String>("status"));
-		availableInstrumentId.setCellValueFactory(new PropertyValueFactory<Instrument, String>("statusId"));
+    protected void seach() {
+    	String search = txtSearch.getText();
+    	
+    	updateListSearch(search);
+    }
+    
+    /**
+     * Atualização da lista de instrumentos.
+     * @param search - String de busca.
+     */
+    protected void updateListSearch(String search) {
 
-		// Seta checkbox nas cols. Desabilita se instrumentos estiver indisponivel
+    	ids_selected = null;
+    			
+    	// Seta checkbox nas cols. Desabilita se instrumentos estiver indisponivel
+		selectRow.setCellFactory(column -> {
+	        return new TableCell<Instrument, SimpleBooleanProperty>() {
+	        	
+	            @Override
+	            public void updateItem(SimpleBooleanProperty item, boolean empty) {
+	                super.updateItem(item, empty);
+
+	                TableRow<Instrument> currentRow = getTableRow();
+	                CheckBox checkBox = new CheckBox();
+	                checkBox.setAlignment(Pos.CENTER);
+	                setAlignment(Pos.CENTER);
+	                
+	                // veridica se existe dados, se nao é uma linha vazia
+	                if (empty || item == null) { // se estiver vazio, seta a linha como nulla
+	                    setGraphic(null);
+	                } else { //se nao for vazio:
+	                	
+	                	//seta o checkbox na linha
+	                    setGraphic(checkBox);
+	                    
+	                }
+
+	                //add evento que muda o valor do tableCell para true ou false ao checar chekbox
+	                checkBox.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+	                	if(checkBox.isSelected()) {
+	                		item.setValue(false);
+	                	}else{
+	                		item.setValue(true);
+	                	}
+	                });
+	                
+	                if (currentRow.getItem() != null && !empty) { //verifica se o instrumento existe
+	                    if (currentRow.getItem().getStatusId() != 1) { //verifica se o status é diferente de disponivel
+	                    	//desabilita a tableView
+	                        this.setDisable(true);
+	                        setStyle(tableView.getStyle());
+	                    }
+	                } else {
+	                    setStyle(tableView.getStyle());
+	                }
+	            }
+
+	        };
+		});
+				
+		// evento de double click na linha
+		tableView.setRowFactory( tv -> {
+		    TableRow<Instrument> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		        	
+		        	Instrument rowData = row.getItem();
+		        	int id = rowData.getId();
+		        	
+		        	ArrayList<Integer> ids_selecteds = new ArrayList<Integer>();
+		    		
+		        	for (Instrument in : tableView.getItems()) {
+		        		if( in.getSelected().getValue()) { // se checkbox estiver checado/true entao insere valor no array 
+		        			ids_selecteds.add(in.getId());
+		        		}
+		    		}
+		        	
+		        	try {
+						mainApp.showProductDetailScreen(id, ids_selecteds);
+					} catch (IOException e) {
+
+						System.out.println(e.getMessage().toString());
+					}
+		        }
+		    });
+		    return row ;
+		});
+		
+		ObsLists ol = new ObsLists();
+		
+		try {
+			tableView.setItems(ol.getListInstrument(search));
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Erro ao recuperar lista de instrumentos", "Alerta!", 2);
+		}
+    }
+    
+    protected void updateListLoadScreen(String search) {
+    	
+    	// Seta checkbox nas cols. Desabilita se instrumentos estiver indisponivel
 		selectRow.setCellFactory(column -> {
 	        return new TableCell<Instrument, SimpleBooleanProperty>() {
 	        	
@@ -206,10 +307,6 @@ public class MenuScreenController implements Initializable{
 
 	        };
 		});
-		
-		ObsLists ol = new ObsLists();
-		
-		tableView.setItems(ol.getListInstrument());
 				
 		// evento de double click na linha
 		tableView.setRowFactory( tv -> {
@@ -238,6 +335,37 @@ public class MenuScreenController implements Initializable{
 		    });
 		    return row ;
 		});
+		
+		ObsLists ol = new ObsLists();
+		
+		try {
+			tableView.setItems(ol.getListInstrument(search));
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Erro ao recuperar lista de instrumentos", "Alerta!", 2);
+		}
+    }
+
+    /**
+     * Inicializa classe de controle
+     */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		// set logo
+		File file = new File("src/images/system/logo.png");
+        Image image = new Image(file.toURI().toString());
+        logoImg.setImage(image);
+		
+		// configurando as colunas na tabela -----
+		selectRow.setCellValueFactory(new PropertyValueFactory<Instrument, SimpleBooleanProperty>("selected"));
+		idInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, Integer>("id"));
+		nameInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, String>("nome"));
+		brandInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, String>("marca"));
+		priceInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, BigDecimal>("valorLocacao"));
+		availableInstrument.setCellValueFactory(new PropertyValueFactory<Instrument, String>("status"));
+		availableInstrumentId.setCellValueFactory(new PropertyValueFactory<Instrument, String>("statusId"));
+
+		updateListLoadScreen("");
 	}
 	
 }

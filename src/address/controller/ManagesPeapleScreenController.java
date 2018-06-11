@@ -9,11 +9,13 @@ import address.MainApp;
 import address.model.Client;
 import address.model.Employee;
 import address.model.Instrument;
+import address.model.Login;
 import address.model.Provider;
 import address.services.ObsLists;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -56,6 +58,7 @@ public class ManagesPeapleScreenController implements Initializable {
 	
 	// campos ----
 	@FXML private TextField txtSearch;
+	@FXML private Tab tabEmployee;
 	
     @FXML
     protected void goBackHandler(ActionEvent event) throws IOException {
@@ -116,6 +119,12 @@ public class ManagesPeapleScreenController implements Initializable {
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		if(Login.nivel == 0) {
+			tabEmployee.setDisable(true);
+		}
+		
+		System.out.println(Login.nameUser);
 		
 		// configura tabela de clientes
 		idClient.setCellValueFactory(new PropertyValueFactory<Client, Integer>("id"));

@@ -4,6 +4,7 @@ public class Employee extends Person{
 	
 	private String login, senha;
 	private int nivel;
+	private boolean logado;
 	
 	/*
 	 * Nível 0: Vendedor
@@ -27,7 +28,6 @@ public class Employee extends Person{
 		this.nivel = nivel;
 	}
 
-
 	//contrutor para listar funcionarios
 	public Employee(int id, String nome, String cpf, String email, String telefone) {
 		this.id = id;
@@ -37,6 +37,14 @@ public class Employee extends Person{
 		this.telefone = telefone;
 	}
 	
+	public boolean isLogado() {
+		return logado;
+	}
+
+	public void setLogado(boolean logado) {
+		this.logado = logado;
+	}
+
 	public String getLogin() {
 		return login;
 	}

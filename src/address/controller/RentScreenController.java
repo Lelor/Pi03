@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import address.MainApp;
 import address.model.Client;
 import address.model.Instrument;
+import address.model.Login;
 import address.model.Rent;
 import address.model.RentDAO;
 import address.services.ObsLists;
@@ -108,10 +109,8 @@ public class RentScreenController implements Initializable{
     		try {
     			
     			for (Instrument in : tableViewInstrument.getItems()) {
-    					
     				datesDev.add(in.getDataDevolucao().getValue());
     				idsInstruments.add(in.getId());
-    				
     			}
     			
     			try {
@@ -130,8 +129,7 @@ public class RentScreenController implements Initializable{
     			Rent rt = new Rent();
     			RentDAO rtDAO = new RentDAO();
     			
-    			//TODO : Informar id correto do funcionario quando houver login
-    			rt.setIdFuncionario(1);
+    			rt.setIdFuncionario(Login.idUser);
     			rt.setIdCliente(idClient);
     			rt.setIdInstrumentList(idsInstruments);
     			rt.setDataDevolucaoList(datesDev);
@@ -151,7 +149,6 @@ public class RentScreenController implements Initializable{
 			
 			JOptionPane.showMessageDialog(null, "Selecione um cliente", "Alerta!", 2);
 		}
-		
     }
     
     /**

@@ -144,4 +144,44 @@ public class EmployeeDAO extends PersonDAO{
 		return ep;
 	}
 	
+	
+	public Employee doLogin(String login, String senha) {
+		
+		sql = "SELECT * FROM funcionario " + 
+				"WHERE login = ? AND senha = ? AND ativo = 1";
+				
+		Employee ep = new Employee();
+		
+		try {
+			bd.getConnection();
+			bd.st = bd.con.prepareStatement(sql);
+			bd.st.setString(1, login);
+			bd.st.setString(2, senha);
+			
+			bd.rs = bd.st.executeQuery();
+			
+			if(bd.rs.next()) {
+				
+				// idFuncionario, nome, nivel
+				ep.setId(bd.rs.getInt("idFuncionario"));
+				ep.setNome(bd.rs.getString("nome"));
+				ep.setNivel(bd.rs.getInt("nivel"));
+				ep.setLogado(true);
+				
+			}else {
+				ep.setLogado(false);
+			}
+			
+			
+		} catch (SQLException  e) {
+			
+			System.out.println("Erro DAO: pegar dados " + e.toString());
+
+		}
+		finally {
+			bd.close();
+		}
+		
+		return ep;
+	}
 }

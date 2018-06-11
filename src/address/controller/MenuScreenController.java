@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import address.MainApp;
 import address.model.Instrument;
 import address.model.InstrumentDAO;
+import address.model.Login;
 import address.model.MaintenanceDAO;
 import address.services.ObsLists;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -21,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -61,6 +63,7 @@ public class MenuScreenController implements Initializable{
 	
 	@FXML private TextField txtSearch;
 	@FXML private Button btSearch;
+	@FXML private Label lblUser;
 	
     @FXML
     protected void showAddProductSceen(ActionEvent event) throws IOException {
@@ -350,6 +353,8 @@ public class MenuScreenController implements Initializable{
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		lblUser.setText(Login.nameUser);
 		
 		// set logo
 		File file = new File("src/images/system/logo.png");

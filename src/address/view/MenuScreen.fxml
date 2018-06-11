@@ -17,11 +17,11 @@
    <children>
       <VBox layoutY="-2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="full-container">
          <children>
-            <HBox prefHeight="76.0" prefWidth="740.0">
+            <HBox prefHeight="64.0" prefWidth="740.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="409.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="121.0" prefWidth="400.0">
                      <children>
-                        <ImageView fx:id="logoImg" fitHeight="46.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="logoImg" fitHeight="100.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../images/system/logo.png" />
                            </image>
@@ -30,10 +30,18 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="102.0" prefWidth="349.0">
                      <children>
-                        <Label styleClass="user" text="User " textFill="#38a9da">
+                        <Label text="Bem vindo, ">
+                           <font>
+                              <Font name="System Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblUser" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="user" text="User" textFill="#38a9da">
                            <font>
                               <Font name="Dubai Bold" size="18.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
                         </Label>
                         <Label text="|" textFill="WHITE">
                            <font>
@@ -44,12 +52,18 @@
                            <font>
                               <Font name="Dubai Bold" size="18.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
                         </Label>
                      </children>
                   </HBox>
                </children>
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="59.0" prefWidth="740.0">
+            <HBox alignment="TOP_CENTER" prefHeight="170.0" prefWidth="740.0">
                <children>
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="740.0" styleClass="wrap-search">
                      <children>
@@ -60,7 +74,7 @@
                </children>
             </HBox>
             <HBox />
-            <HBox prefHeight="247.0" prefWidth="740.0">
+            <HBox prefHeight="411.0" prefWidth="740.0">
                <children>
                   <TableView fx:id="tableView" accessibleRole="IMAGE_VIEW" editable="true" focusTraversable="false" prefHeight="242.0" prefWidth="740.0">
                     <columns>
@@ -100,7 +114,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="63.0" prefWidth="740.0" spacing="20.0">
+            <HBox alignment="BOTTOM_CENTER" prefHeight="49.0" prefWidth="740.0" spacing="20.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#rentInstrument" prefHeight="41.0" prefWidth="228.0" styleClass="bt-action" text=":: Realizar locação ::" textFill="WHITE">
                      <font>
@@ -108,15 +122,14 @@
                      </font>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#showReturnScreen" prefHeight="40.0" prefWidth="179.0" style="-fx-background-color: #02802e;" styleClass="bt-action-2" text="Ver locações" textFill="#b55a0e" />
-               </children>
-            </HBox>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="55.0" prefWidth="740.0" spacing="20.0">
-               <children>
                   <Button mnemonicParsing="false" onAction="#showManagesPeapleScreen" prefHeight="40.0" prefWidth="165.0" styleClass="bt" text="Gerenciar pessoas" />
-                  <Button layoutX="519.0" layoutY="544.0" mnemonicParsing="false" onAction="#showMaintenanceScreen" prefHeight="40.0" prefWidth="90.0" styleClass="bt" text="Manutenções" />
-                  <Button layoutX="647.0" layoutY="544.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="bt" text="Relatórios" />
+                  <Button mnemonicParsing="false" onAction="#showMaintenanceScreen" prefHeight="40.0" prefWidth="90.0" styleClass="bt" text="Manutenções" />
                </children>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
             </HBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="55.0" prefWidth="740.0" spacing="20.0" />
          </children>
          <opaqueInsets>
             <Insets />

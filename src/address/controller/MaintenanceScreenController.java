@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import address.MainApp;
 import address.model.Client;
 import address.model.Instrument;
+import address.model.Login;
 import address.model.Maintenance;
 import address.model.MaintenanceDAO;
 import address.services.ObsLists;
@@ -18,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -53,6 +55,7 @@ public class MaintenanceScreenController implements Initializable {
 	@FXML private TextField txtValor;
 	@FXML private TextField txtSearch;
 	@FXML private TextArea txaDesc;
+	@FXML private Tab tabEmployee;
 	
 	//botões
 	@FXML private Button btnUpdate;

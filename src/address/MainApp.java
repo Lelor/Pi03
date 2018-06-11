@@ -38,7 +38,7 @@ public class MainApp extends Application{
 		
 		initRootLayout();
 		
-		showMainMenu(0, null);
+		showLoginScreen();
 	}
 
 	public static void main(String[] args) {

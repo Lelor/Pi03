@@ -1,15 +1,10 @@
 package address.model;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 import address.services.BD;
-import address.services.Utilities;
-import javafx.util.converter.LocalDateStringConverter;
 
 public class RentDAO {
 	
@@ -179,7 +174,8 @@ public class RentDAO {
 		sql = "SELECT l.idLocacao, l.dataRealizacao, l.dataTermino, l.desconto, l.descricao, l.pago, " + 
 				"l.idFuncionario, l.idCliente, c.nome as nomeCliente, f.nome as nomeFuncionario " + 
 				"FROM locacao l, cliente c, funcionario f " + 
-				"WHERE l.idCliente = c.idCliente AND l.idFuncionario = f.idFuncionario AND l.ativo = ? AND c.nome LIKE ?";
+				"WHERE l.idCliente = c.idCliente AND l.idFuncionario = f.idFuncionario AND l.ativo = ? AND c.nome LIKE ? " + 
+				"ORDER BY l.dataRealizacao DESC";
 		
 		int i = 0;
 		int numRow = countNumRent(ativo, searchString);

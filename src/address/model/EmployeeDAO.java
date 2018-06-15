@@ -144,7 +144,12 @@ public class EmployeeDAO extends PersonDAO{
 		return ep;
 	}
 	
-	
+	/**
+	 * Realiza login do funcionário.
+	 * @param login - Usuário de acesso do funcionário.
+	 * @param senha - Senha de acesso do funcionário
+	 * @return - retorna um objeto Employee com informações do funcionário se os dados estiverem corretos ou vazio se não.
+	 */
 	public Employee doLogin(String login, String senha) {
 		
 		sql = "SELECT * FROM funcionario " + 

@@ -38,11 +38,15 @@ public class RentScreenController implements Initializable{
 	
 	private MainApp mainApp;
 	
+	//variaveis ----
+	private boolean pago;
+	private String descricao;
+	
+	private ArrayList<Integer> idsInstrumentsRent = new ArrayList<Integer>();
+	
     public void setMainApp(MainApp mainApp){
     	this.mainApp = mainApp;
     }
-	
-	private ArrayList<Integer> idsInstrumentsRent = new ArrayList<Integer>();
 	
 	public RentScreenController(ArrayList<Integer> idsInstrumentsRent) {
 		this.idsInstrumentsRent = idsInstrumentsRent;
@@ -70,10 +74,6 @@ public class RentScreenController implements Initializable{
 	@FXML private TextArea txtDescricao;
 	@FXML private CheckBox cbPago;
 	
-	//variaveis ----
-	private boolean pago;
-	private String descricao;
-	
     @FXML
     protected void goBackHandler(ActionEvent event) throws IOException {
     	mainApp.showMainMenu(0, idsInstrumentsRent);
@@ -81,16 +81,20 @@ public class RentScreenController implements Initializable{
     
     @FXML
     protected void searchAction() throws IOException {
-    	seach();
+    	search();
     }
     
     @FXML
     public void onEnter(ActionEvent ae){
-    	seach();
+    	search();
     }
     
     @FXML
     protected void doRent(ActionEvent event) throws IOException {
+    	rent();
+    }
+    
+    public void rent() {
     	
     	//variables ----
     	int idClient = 0;
@@ -203,7 +207,7 @@ public class RentScreenController implements Initializable{
     /**
      * Realiza busca.
      */
-    protected void seach() {
+    protected void search() {
     	String search = txtSearch.getText();
     	
     	updateListSearch(search);

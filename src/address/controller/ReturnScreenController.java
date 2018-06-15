@@ -96,49 +96,28 @@ public class ReturnScreenController implements Initializable{
     
     @FXML
     protected void searchAction() throws IOException {
-    	seach();
+    	search();
     }
     
     @FXML
     public void onEnterSearch(ActionEvent ae){
-    	seach();
+    	search();
     }
     
     @FXML
     protected void closeRent(ActionEvent event) throws IOException {
-    	
-    	RentDAO rtDAO = new RentDAO();
-    	
-    	try {
-    		Rent rtRow = rentViewActive.getSelectionModel().getSelectedItem();
-    		
-    		JOptionPane.showMessageDialog(null, rtDAO.updateRent(rtRow.getIdLocacao()), "Alerta!", 2);
-    		
-     		ObsLists obList = new ObsLists();
-     		
-     		// preenche table view de locações ativas se houver
-     		try {
-     			rentViewActive.setItems(obList.getListRent(true, ""));
-    		} catch (Exception e) {
-    			System.out.println(e.toString());
-    		}
-     		// preenche table view de locações inativas se houver
-     		try {
-     	 		rentViewDesactive.setItems(obList.getListRent(false, ""));
-    		} catch (Exception e) {
-    		}
-     		
-    		
-		} catch (Exception e) {
-			
-			JOptionPane.showMessageDialog(null, "Selecione uma locação!", "Alerta!", 2);
-			
-		}
-    		
+    	closeRents();
     }
     
     @FXML
     protected void doReturn(ActionEvent event) throws IOException {
+    	doReturn();
+    }
+    
+    /**
+     * Realiza devolução do instrumento.
+     */
+    public void doReturn() {
     	
     	Rent rt = new Rent();
     	RentDAO rtDAO = new RentDAO();
@@ -195,7 +174,40 @@ public class ReturnScreenController implements Initializable{
 			
 			JOptionPane.showMessageDialog(null, "Selecione uma locação!", "Alerta!", 2);
 		}
+    }
+    
+    /**
+     * Fecha locações onde todos os instrumentos foram devolvidos.
+     */
+    public void closeRents() {
     	
+    	RentDAO rtDAO = new RentDAO();
+    	
+    	try {
+    		Rent rtRow = rentViewActive.getSelectionModel().getSelectedItem();
+    		
+    		JOptionPane.showMessageDialog(null, rtDAO.updateRent(rtRow.getIdLocacao()), "Alerta!", 2);
+    		
+     		ObsLists obList = new ObsLists();
+     		
+     		// preenche table view de locações ativas se houver
+     		try {
+     			rentViewActive.setItems(obList.getListRent(true, ""));
+    		} catch (Exception e) {
+    			System.out.println(e.toString());
+    		}
+     		// preenche table view de locações inativas se houver
+     		try {
+     	 		rentViewDesactive.setItems(obList.getListRent(false, ""));
+    		} catch (Exception e) {
+    		}
+     		
+    		
+		} catch (Exception e) {
+			
+			JOptionPane.showMessageDialog(null, "Selecione uma locação!", "Alerta!", 2);
+			
+		}
     }
     
     /**
@@ -329,7 +341,7 @@ public class ReturnScreenController implements Initializable{
     /**
      * Realiza busca.
      */
-    protected void seach() {
+    protected void search() {
     	String search = txtSearch.getText();
     	
     	updateListSearch(search);

@@ -141,7 +141,7 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#restFields" prefHeight="25.0" prefWidth="96.0" styleClass="bt" text="Limpar">
+                        <Button mnemonicParsing="false" onAction="#btClearFields" prefHeight="25.0" prefWidth="96.0" styleClass="bt" text="Limpar">
                            <font>
                               <Font name="Dubai Bold" size="14.0" />
                            </font>

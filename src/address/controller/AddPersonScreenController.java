@@ -68,11 +68,18 @@ public class AddPersonScreenController implements Initializable{
     
     @FXML
     protected void btnClearFields(ActionEvent event) throws IOException {
-    	ClearFieds();
+    	clearFieds();
     }
     
     @FXML
     protected void btnRegister(ActionEvent event) throws IOException {
+    	registerPerson();
+    }
+    
+    /**
+     * Cadastra instrumento.
+     */
+    public void registerPerson() {
     	
     	if( txtNome.getText().isEmpty() || txtDocument.getText().isEmpty() || txtTel.getText().isEmpty() 
     			|| txtEmail.getText().isEmpty() || txtCidade.getText().isEmpty() || txaEndereco.getText().isEmpty() ) {
@@ -149,7 +156,7 @@ public class AddPersonScreenController implements Initializable{
 							break;
 					}
 					
-					ClearFieds();
+					clearFieds();
 					
 					
 				} catch (Exception e) {
@@ -162,13 +169,12 @@ public class AddPersonScreenController implements Initializable{
 				
 			}
     	}
-    	
     }
     
     /**
      * Limpa todos os campos do formulário.
      */
-    public void ClearFieds() {
+    public void clearFieds() {
         txtNome.setText("");
         txtDocument.setText("");
         txtTel.setText("");
@@ -191,17 +197,17 @@ public class AddPersonScreenController implements Initializable{
 
 		switch (type) {
 			case 1:
-				paneAccess.setDisable(true);
+				paneAccess.setVisible(false);
 				lblTitulo.setText("Cadastrar Cliente");
 				lblDocument.setText("CPF:");
 				break;
 			case 2:
-				paneAccess.setDisable(false);
+				paneAccess.setVisible(true);
 				lblTitulo.setText("Cadastrar Funcionário");
 				lblDocument.setText("CPF:");
 				break;
 			case 3:
-				paneAccess.setDisable(true);
+				paneAccess.setVisible(false);
 				lblTitulo.setText("Cadastrar Fornecedor");
 				lblDocument.setText("CNPJ:");
 				break;

@@ -40,8 +40,18 @@ public class ProductDetailScreenController implements Initializable {
     }
 	
 	//constante ID do instruemnto -----
-	final int ID;
-	ArrayList<Integer> ids_selecteds = new ArrayList<Integer>(); // ids selecionados para manter o estado
+	private final int ID;
+	private ArrayList<Integer> ids_selecteds = new ArrayList<Integer>(); // ids selecionados para manter o estado
+	
+	// variaveis  --------
+	private int numSerie;
+	private String nome, cor, fornecedor, ano, tipo, marca;
+	private BigDecimal valorLocacao, valorCompra;
+	private File fileImage;
+	private Path from, to;
+	
+	private String rootPathImage = "src/images/instruments/";
+	private String originalImgName = null, imgName = null; // pega o valor no metodo de inicialização
 	
 	// construtor recebe id do instrumento ----
 	public ProductDetailScreenController(int idInstrument, ArrayList<Integer> ids_selecteds) {
@@ -63,17 +73,6 @@ public class ProductDetailScreenController implements Initializable {
 	@FXML private Label lblStatus;
 	@FXML private Button btSelect;
 	
-	// variaveis  --------
-	int numSerie;
-	private String nome, cor, fornecedor, ano, tipo, marca;
-	private BigDecimal valorLocacao, valorCompra;
-	private File fileImage;
-	private Path from, to;
-	
-	String rootPathImage = "src/images/instruments/";
-	
-	private String originalImgName = null, imgName = null; // pega o valor no metodo de inicialização
-	
     @FXML
     protected void goBackHandler(ActionEvent event) throws IOException {
     	mainApp.showMainMenu(0, ids_selecteds);
@@ -87,7 +86,27 @@ public class ProductDetailScreenController implements Initializable {
     @FXML
     protected void excludeProduct(ActionEvent event) throws IOException {
     	
-		// exclui instrumento
+    	excludeInstrument();
+    }
+    
+    @FXML
+    protected void getImage(ActionEvent event) throws IOException {
+    	
+    	setNewImage();
+    }
+    
+    @FXML
+    protected void updateProduct(ActionEvent event) throws IOException {
+
+    	updateInstrument();
+    }
+    
+    /**
+     * Exclui instrumento.
+     * @throws IOException
+     */
+    public void excludeInstrument() throws IOException {
+    	// exclui instrumento
 		Instrument in = new Instrument();
 		in.setId(ID);
 		
@@ -103,8 +122,11 @@ public class ProductDetailScreenController implements Initializable {
 		}
     }
     
-    @FXML
-    protected void getImage(ActionEvent event) throws IOException {
+    /**
+     * Atribui nova iamgem do instrumento.
+     * @throws IOException
+     */
+    public void setNewImage() throws IOException {
     	
     	FileChooser fileChooser = new FileChooser();
     	
@@ -153,74 +175,75 @@ public class ProductDetailScreenController implements Initializable {
             imgName = "shape.png";
 
 		}
-
     }
     
-    @FXML
-    protected void updateProduct(ActionEvent event) throws IOException {
+    /**
+     * Atualiza produto.
+     */
+    public void updateInstrument() {
 
     	if (txtNumSerie.getText() == null || txtNome.getText() == null || cbCor.getValue() == null || cbFornecedor.getValue() == null || 
         		txtAno.getText() == null || cbTipo.getValue() == null || cbMarca.getValue() == null || txtValorLocacao.getText() == null || 
         		txtValorCompra.getText() == null)
-        	{
-        		JOptionPane.showMessageDialog(null, "Preencha todos os campos, por favor", "Erro", 0);
+    	{
+    		JOptionPane.showMessageDialog(null, "Preencha todos os campos, por favor", "Erro", 0);
+    		
+    	} else {
+    		
+    		// recupera valores --------
+        	numSerie	= Integer.parseInt( txtNumSerie.getText() );
+        	nome 		= txtNome.getText();
+        	cor 		= cbCor.getValue();
+        	fornecedor 	= cbFornecedor.getValue();
+        	ano 		= txtAno.getText();
+        	tipo 		= cbTipo.getValue();
+        	marca 		= cbMarca.getValue();
+        	valorLocacao= new BigDecimal( txtValorLocacao.getText() );
+        	valorCompra = new BigDecimal( txtValorCompra.getText() );
+        	
+        	try {
         		
-        	} else {
+        		//se a imagem da imgView for diferente da original e
+        		//diferente di guitar_shape, deleta arquivo original e sobe outro
+        		if(imgName != originalImgName && imgName != "shape.png") {
+        			try {
+        				
+        				//apaga arquivo
+        				Path pathOrImg = Paths.get(rootPathImage + originalImgName);
+        			    Files.delete(pathOrImg);
+        			    
+        			    // move imagem
+                		Files.copy(from, to);
+        			    
+        			} catch (Exception e) {
+        			    System.out.println("Nao apagaou: " + e.toString());
+        			}
+        		}
         		
-        		// recupera valores --------
-            	numSerie	= Integer.parseInt( txtNumSerie.getText() );
-            	nome 		= txtNome.getText();
-            	cor 		= cbCor.getValue();
-            	fornecedor 	= cbFornecedor.getValue();
-            	ano 		= txtAno.getText();
-            	tipo 		= cbTipo.getValue();
-            	marca 		= cbMarca.getValue();
-            	valorLocacao= new BigDecimal( txtValorLocacao.getText() );
-            	valorCompra = new BigDecimal( txtValorCompra.getText() );
-            	
-            	try {
-            		
-            		//se a imagem da imgView for diferente da original e
-            		//diferente di guitar_shape, deleta arquivo original e sobe outro
-            		if(imgName != originalImgName && imgName != "shape.png") {
-            			try {
-            				
-            				//apaga arquivo
-            				Path pathOrImg = Paths.get(rootPathImage + originalImgName);
-            			    Files.delete(pathOrImg);
-            			    
-            			    // move imagem
-                    		Files.copy(from, to);
-            			    
-            			} catch (Exception e) {
-            			    System.out.println("Nao apagaou: " + e.toString());
-            			}
-            		}
-            		
-            		// atualiza instrumento
-            		Instrument in = new Instrument();
-            		in.setNome(nome);
-            		in.setvalorCompra(valorCompra);
-            		in.setValorLocacao(valorLocacao);
-            		in.setAno(ano);
-            		in.setFoto(imgName);
-            		in.setNomeFornecedor(fornecedor);
-            		in.setCor(cor);
-            		in.setTipo(tipo);
-            		in.setMarca(marca);
-            		in.setId(ID);
-            		
-            		InstrumentDAO inDAO = new InstrumentDAO();
-            		
-            		JOptionPane.showMessageDialog(null, inDAO.updateInstrument(in), "Alerta", 1);
-            		
-    			} catch (Exception e) {
-    				
-    				JOptionPane.showMessageDialog(null, "Houve algum erro! =[", "Erro", 2);
-    				System.out.println(e.toString());
-    			}
+        		// atualiza instrumento
+        		Instrument in = new Instrument();
+        		in.setNome(nome);
+        		in.setvalorCompra(valorCompra);
+        		in.setValorLocacao(valorLocacao);
+        		in.setAno(ano);
+        		in.setFoto(imgName);
+        		in.setNomeFornecedor(fornecedor);
+        		in.setCor(cor);
+        		in.setTipo(tipo);
+        		in.setMarca(marca);
+        		in.setId(ID);
         		
-        	}
+        		InstrumentDAO inDAO = new InstrumentDAO();
+        		
+        		JOptionPane.showMessageDialog(null, inDAO.updateInstrument(in), "Alerta", 1);
+        		
+			} catch (Exception e) {
+				
+				JOptionPane.showMessageDialog(null, "Houve algum erro! =[", "Erro", 2);
+				System.out.println(e.toString());
+			}
+    		
+    	}
     	
     }
     

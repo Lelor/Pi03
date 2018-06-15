@@ -42,9 +42,9 @@ public class MenuScreenController implements Initializable{
     	this.mainApp = mainApp;
     }
 	
-	int id_slc_view;
-	ArrayList<Integer> ids_selected = new ArrayList<Integer>();
-	ArrayList<Integer> ids_selected_search = new ArrayList<Integer>();
+	private int id_slc_view;
+	private ArrayList<Integer> ids_selected = new ArrayList<Integer>();
+	private ArrayList<Integer> ids_selected_search = new ArrayList<Integer>();
 	
 	public MenuScreenController(int id_slc_view, ArrayList<Integer> ids_selected) {
 		this.id_slc_view = id_slc_view;
@@ -92,12 +92,12 @@ public class MenuScreenController implements Initializable{
     
     @FXML
     protected void searchAction() throws IOException {
-    	seach();
+    	search();
     }
     
     @FXML
     public void onEnter(ActionEvent ae){
-    	seach();
+    	search();
     }
 
     @FXML
@@ -150,7 +150,7 @@ public class MenuScreenController implements Initializable{
     /**
      * Atualiza tableView com a busca.
      */
-    protected void seach() {
+    protected void search() {
     	String search = txtSearch.getText();
     	
     	updateListSearch(search);
@@ -247,6 +247,10 @@ public class MenuScreenController implements Initializable{
 		}
     }
     
+    /**
+     * Atualiza lista ao abrir a tela.
+     * @param search - variavel de busca.
+     */
     protected void updateListLoadScreen(String search) {
     	
     	// Seta checkbox nas cols. Desabilita se instrumentos estiver indisponivel

@@ -73,6 +73,20 @@ public class PersonDetailScreenController implements Initializable{
     
     @FXML
     protected void excludePerson(ActionEvent event) throws IOException {
+		
+    	excludePerson();
+    }
+    
+    @FXML
+    protected void btnUpdate(ActionEvent event) throws IOException {
+    	updateList();
+    }
+    
+    /**
+     * Exclui pessoa.
+     * @throws IOException
+     */
+    public void excludePerson() throws IOException {
     	
     	switch (type) {
 			case 1:
@@ -90,7 +104,7 @@ public class PersonDetailScreenController implements Initializable{
 				
 				break;
 			case 2:
-
+	
 				EmployeeDAO epDAO = new EmployeeDAO();
 				
 				int decision2 = epDAO.excludePerson(id, type);
@@ -104,7 +118,7 @@ public class PersonDetailScreenController implements Initializable{
 				
 				break;
 			case 3:
-
+	
 				ProviderDAO prDAO = new ProviderDAO();
 				
 				int decision3 = prDAO.excludePerson(id, type);
@@ -120,13 +134,12 @@ public class PersonDetailScreenController implements Initializable{
 			default:
 				break;
 		}
-		
-		
     }
     
-    
-    @FXML
-    protected void btnUpdate(ActionEvent event) throws IOException {
+    /**
+     * Atualiza lista de pessoas.
+     */
+    public void updateList() {
     	
     	if( txtNome.getText().isEmpty() || txtDocument.getText().isEmpty() || txtTel.getText().isEmpty() 
     			|| txtEmail.getText().isEmpty() || txtCidade.getText().isEmpty() || txaEndereco.getText().isEmpty() ) {
@@ -216,7 +229,6 @@ public class PersonDetailScreenController implements Initializable{
 				
 			}
     	}
-    	
     }
     
 	@Override

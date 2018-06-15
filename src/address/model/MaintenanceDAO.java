@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import address.services.BD;
-import address.services.Dependences;
 
 public class MaintenanceDAO {
 	

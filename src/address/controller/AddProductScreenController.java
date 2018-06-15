@@ -32,6 +32,13 @@ public class AddProductScreenController implements Initializable {
 	
 	private MainApp mainApp;
 	
+	// variaveis  --------
+	private int numSerie;
+	private String nome, cor, fornecedor, ano, tipo, marca, imgName = "shape.png";
+	private BigDecimal valorLocacao, valorCompra;
+	private File fileImage;
+	private Path from, to;
+	
     public void setMainApp(MainApp mainApp){
     	this.mainApp = mainApp;
     }
@@ -48,15 +55,94 @@ public class AddProductScreenController implements Initializable {
 	@FXML private ComboBox<String> cbFornecedor;
 	@FXML private ImageView imgInstrument;
 	
-	// variaveis  --------
-	int numSerie;
-	private String nome, cor, fornecedor, ano, tipo, marca, imgName = "shape.png";
-	BigDecimal valorLocacao, valorCompra;
-	File fileImage;
-	Path from, to;
-	
     @FXML
     protected void getImage(ActionEvent event) throws IOException {
+    	
+    	setImage();
+    }
+    
+    @FXML
+    protected void registerProduct(ActionEvent event) throws IOException {
+    	
+    	registerInstrument();
+    }
+    
+    @FXML
+    protected void goBackHandler(ActionEvent event) throws IOException {
+    	mainApp.showMainMenu(0, null);
+    }
+    
+    @FXML
+    protected void btClearFields(ActionEvent event) throws IOException {
+    	clearFields();
+    }
+    
+    /**
+     * Cadastra instrumento.
+     */
+    public void registerInstrument() {
+    	
+    	if (txtNumSerie.getText() == null || txtNome.getText() == null || cbCor.getValue() == null || cbFornecedor.getValue() == null || 
+    		txtAno.getText() == null || cbTipo.getValue() == null || cbMarca.getValue() == null || txtValorLocacao.getText() == null || 
+    		txtValorCompra.getText() == null)
+    	{
+    		JOptionPane.showMessageDialog(null, "Preencha todos os campos, por favor", "Erro", 0);
+    		
+    	} else {
+    		
+    		// recupera valores --------
+        	numSerie	= Integer.parseInt( txtNumSerie.getText() );
+        	nome 		= txtNome.getText();
+        	cor 		= cbCor.getValue();
+        	fornecedor 	= cbFornecedor.getValue();
+        	ano 		= txtAno.getText();
+        	tipo 		= cbTipo.getValue();
+        	marca 		= cbMarca.getValue();
+        	valorLocacao= new BigDecimal( txtValorLocacao.getText() );
+        	valorCompra = new BigDecimal( txtValorCompra.getText() );
+        	
+        	try {
+        		
+        		if(imgName != "shape.png") {
+        			
+        			// move imagem
+            		Files.copy(from, to);
+        		}
+        		
+        		// cadastra instrumento
+        		Instrument in = new Instrument();
+        		in.setNumSerie(numSerie);
+        		in.setNome(nome);
+        		in.setvalorCompra(valorCompra);
+        		in.setValorLocacao(valorLocacao);
+        		in.setAno(ano);
+        		in.setFoto(imgName);
+        		in.setNomeFornecedor(fornecedor);
+        		in.setCor(cor);
+        		in.setTipo(tipo);
+        		in.setMarca(marca);
+        		
+        		InstrumentDAO inDAO = new InstrumentDAO();
+        		
+        		JOptionPane.showMessageDialog(null, inDAO.insertInstrument(in), "Sucesso", 1);
+        		
+        		//resta campos
+        		clearFields();
+
+        		
+			} catch (Exception e) {
+				
+				JOptionPane.showMessageDialog(null, "Houve algum erro! =[");
+				System.out.println(e.toString());
+			}
+    	}
+    }
+    
+    /**
+     * Pega imagem do computador.
+     * @throws IOException
+     */
+    public void setImage() throws IOException {
     	
     	FileChooser fileChooser = new FileChooser();
     	
@@ -105,80 +191,12 @@ public class AddProductScreenController implements Initializable {
             imgName = "shape.png";
 
 		}
-
     }
     
-    @FXML
-    protected void registerProduct(ActionEvent event) throws IOException {
-    
-    	if (txtNumSerie.getText() == null || txtNome.getText() == null || cbCor.getValue() == null || cbFornecedor.getValue() == null || 
-    		txtAno.getText() == null || cbTipo.getValue() == null || cbMarca.getValue() == null || txtValorLocacao.getText() == null || 
-    		txtValorCompra.getText() == null)
-    	{
-    		JOptionPane.showMessageDialog(null, "Preencha todos os campos, por favor", "Erro", 0);
-    		
-    	} else {
-    		
-    		// recupera valores --------
-        	numSerie	= Integer.parseInt( txtNumSerie.getText() );
-        	nome 		= txtNome.getText();
-        	cor 		= cbCor.getValue();
-        	fornecedor 	= cbFornecedor.getValue();
-        	ano 		= txtAno.getText();
-        	tipo 		= cbTipo.getValue();
-        	marca 		= cbMarca.getValue();
-        	valorLocacao= new BigDecimal( txtValorLocacao.getText() );
-        	valorCompra = new BigDecimal( txtValorCompra.getText() );
-        	
-        	try {
-        		
-        		if(imgName != "shape.png") {
-        			
-        			// move imagem
-            		Files.copy(from, to);
-        		}
-        		
-        		// cadastra instrumento
-        		Instrument in = new Instrument();
-        		in.setNumSerie(numSerie);
-        		in.setNome(nome);
-        		in.setvalorCompra(valorCompra);
-        		in.setValorLocacao(valorLocacao);
-        		in.setAno(ano);
-        		in.setFoto(imgName);
-        		in.setNomeFornecedor(fornecedor);
-        		in.setCor(cor);
-        		in.setTipo(tipo);
-        		in.setMarca(marca);
-        		
-        		InstrumentDAO inDAO = new InstrumentDAO();
-        		
-        		JOptionPane.showMessageDialog(null, inDAO.insertInstrument(in), "Sucesso", 1);
-        		
-        		//resta campos
-        		restFields();
-
-        		
-			} catch (Exception e) {
-				
-				JOptionPane.showMessageDialog(null, "Houve algum erro! =[");
-				System.out.println(e.toString());
-			}
-    		
-    	}
-    }
-    
-    @FXML
-    protected void goBackHandler(ActionEvent event) throws IOException {
-    	mainApp.showMainMenu(0, null);
-    }
-    
-    @FXML
-    protected void btRestFields(ActionEvent event) throws IOException {
-    	restFields();
-    }
-    
-    public void restFields() {
+    /**
+     * Limpa campos.
+     */
+    public void clearFields() {
     	// reseta campos
 		txtNome.clear();
 		txtNumSerie.clear();

@@ -165,7 +165,7 @@
                               <VBox alignment="BOTTOM_CENTER" prefHeight="128.0" prefWidth="322.0">
                                  <children>
                                     <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#updateData" prefHeight="41.0" prefWidth="300.0" styleClass="bt-action-2" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" text="Atualizar" />
-                                    <Button fx:id="btnClose" mnemonicParsing="false" onAction="#closeMaintenance" prefHeight="41.0" prefWidth="300.0" styleClass="bt-action" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" text=":: Ataulizar e concluir ::">
+                                    <Button fx:id="btnClose" mnemonicParsing="false" onAction="#closeMaintenance" prefHeight="41.0" prefWidth="300.0" styleClass="bt-action" stylesheets="file:/C:/Users/Zini/fatec-workspace/Pi03/src/address/style/style.css" text=":: Atualizar e concluir ::">
                                        <VBox.margin>
                                           <Insets top="15.0" />
                                        </VBox.margin>

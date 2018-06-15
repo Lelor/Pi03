@@ -67,12 +67,12 @@ public class ManagesPeapleScreenController implements Initializable {
     
     @FXML
     protected void searchAction() throws IOException {
-    	seach();
+    	search();
     }
     
     @FXML
     public void onEnter(ActionEvent ae){
-    	seach();
+    	search();
     }
     
     @FXML
@@ -93,7 +93,7 @@ public class ManagesPeapleScreenController implements Initializable {
     /**
      * Realiza busca.
      */
-    protected void seach() {
+    protected void search() {
     	String search = txtSearch.getText();
     	
     	updateLists(search);

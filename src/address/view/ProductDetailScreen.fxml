@@ -126,7 +126,7 @@
                   </HBox>
                   <VBox prefHeight="425.0" prefWidth="301.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="451.0" prefWidth="284.0">
+                        <VBox alignment="CENTER" prefHeight="451.0" prefWidth="284.0" styleClass="paneImage">
                            <children>
                               <ImageView fx:id="imgInstrument" fitHeight="402.0" fitWidth="284.0" pickOnBounds="true" preserveRatio="true" />
                            </children>

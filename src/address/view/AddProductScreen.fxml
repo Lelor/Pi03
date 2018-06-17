@@ -127,7 +127,7 @@
                   <VBox alignment="CENTER" prefHeight="443.0" prefWidth="299.0">
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" />
-                        <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="286.0">
+                        <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="286.0" styleClass="paneImage">
                            <children>
                               <ImageView fx:id="imgInstrument" fitHeight="402.0" fitWidth="284.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
